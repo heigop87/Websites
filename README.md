@@ -31,11 +31,18 @@ automatically.
 
 ## Structure
 
+All files sit at the repository root so GitHub's drag-and-drop upload (which
+flattens folders) works without breaking image paths:
+
 ```
 index.html        The show window (single file: markup + styles + logic)
 translations.js   UI copy for en · es · fr · de · it · nl
-designs/          Home A/B/C, catalog, listing previews + YachtWay logo
-wireframe/        Earlier low-fi wireframe of the same flow (reference)
+home-a.png        Design A — Clean & luxe (home preview)
+home-b.png        Design B — Bold & editorial (home preview)
+home-c.png        Design C — Classic brokerage (home preview)
+catalog.png       Boats-for-Sale preview
+listing.png       Listing-page preview
+yachtway-logo.png Logo used in the header + PDF brief
 ```
 
 ## Languages
