@@ -162,6 +162,9 @@ img{display:block;max-width:100%;}
 
 .usebar{position:sticky;bottom:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
   padding:14px 22px;background:#fff;border-top:1px solid var(--line);box-shadow:0 -6px 20px -10px rgba(10,13,18,.18);}
+.app-footer{display:flex;flex-direction:column;align-items:center;gap:12px;padding:40px 22px;background:var(--ink);text-align:center;}
+.app-footer .af-logo{height:30px;width:auto;filter:brightness(0) invert(1);opacity:.92;}
+.app-footer .af-text{font-family:var(--body);font-size:13px;font-weight:500;letter-spacing:.04em;color:rgba(255,255,255,.62);}
 .usebar .ut{font-size:14px;color:var(--ink-2);}
 .usebar .ut b{color:var(--ink);font-weight:700;}
 
@@ -430,7 +433,7 @@ img{display:block;max-width:100%;}
         </div>
       </div>
     </div>
-    <p class="scrollnote" data-i18n="scrollnote">All three share the same Listings and Listing-detail pages; only the home page look changes.</p>
+    <p class="scrollnote" data-i18n="scrollnote">A, B and C share the same Listings page and two Listing-page styles..</p>
   </div>
 </section>
 
@@ -606,11 +609,17 @@ img{display:block;max-width:100%;}
 <!-- back to top -->
 <button class="to-top" id="toTop" aria-label="Back to top"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V6M12 6l-6 6M12 6l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 
+<!-- app footer -->
+<footer class="app-footer">
+  <img class="af-logo" src="yachtway-logo.png" alt="YachtWay">
+  <span class="af-text" data-i18n="powered_by">All websites Powered by YachtWay</span>
+</footer>
+
 <!-- print-only brief -->
 <div id="brief"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="translations.js?v=3"></script>
+<script src="translations.js?v=4"></script>
 <script>
 (function(){
   const $=(s,r=document)=>r.querySelector(s);
@@ -628,7 +637,7 @@ img{display:block;max-width:100%;}
   let T = (window.I18N&&window.I18N[lang]) || window.I18N.en;
   let NAMES = {};
   function buildNames(){ NAMES={a:T.word_design+' A · '+T.name_a, b:T.word_design+' B · '+T.name_b, c:T.word_design+' C · '+T.name_c}; }
-  function tr(k){ return (T&&T[k]!=null)?T[k]:window.I18N.en[k]; }
+  function tr(k){ var v=(T&&T[k]!=null)?T[k]:(window.I18N.en[k]); return v!=null?v:''; }
   function applyI18n(){
     T=(window.I18N&&window.I18N[lang])||window.I18N.en;
     document.documentElement.lang=lang;
