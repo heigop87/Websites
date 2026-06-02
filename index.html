@@ -218,6 +218,10 @@ img{display:block;max-width:100%;}
 .opt.on{border-color:var(--brand);background:var(--brand-50);}
 .opt .box{flex:none;width:20px;height:20px;border-radius:6px;border:1.5px solid var(--line);display:grid;place-items:center;color:#fff;font-size:12px;margin-top:1px;transition:.15s;}
 .opt.on .box{background:var(--brand);border-color:var(--brand);}
+/* language card = single select → radio style */
+.qcard[data-lang] .opt .box{border-radius:50%;font-size:0;background:#fff;}
+.qcard[data-lang] .opt.on .box{background:#fff;border-color:var(--brand);position:relative;}
+.qcard[data-lang] .opt.on .box::after{content:"";position:absolute;left:50%;top:50%;width:10px;height:10px;border-radius:50%;background:var(--brand);transform:translate(-50%,-50%);}
 .opt .free.paid{color:var(--ink);background:var(--line-2);}
 .opt.on .free.paid{background:#fff;color:var(--brand-700);}
 .cur-seg{display:inline-flex;align-items:center;gap:4px;background:#fff;border:1px solid var(--line);padding:4px;border-radius:999px;}
@@ -299,6 +303,8 @@ img{display:block;max-width:100%;}
 .finish .tick{width:56px;height:56px;border-radius:50%;background:var(--brand-50);color:var(--brand);display:grid;place-items:center;font-size:26px;margin:0 auto 14px;}
 .finish h2{font-family:var(--disp);font-weight:700;font-size:24px;margin:0 0 6px;}
 .finish p{color:var(--ink-2);margin:0 auto 20px;max-width:46ch;font-size:14px;line-height:1.5;}
+.finish-next{margin:20px auto 0!important;max-width:42ch;background:var(--brand-50);color:var(--brand-700)!important;border:1px solid #e4d8fb;border-radius:12px;padding:12px 16px;font-size:13.5px!important;line-height:1.5;}
+.finish-next b{color:var(--brand-700);}
 
 /* ===================== PRINT BRIEF ===================== */
 #brief{display:none;}
@@ -405,21 +411,21 @@ img{display:block;max-width:100%;}
       <div class="pick-item" data-pick="a">
         <div class="pick-head"><span class="badge">A</span><span class="pname" data-i18n="name_a">Bold &amp; editorial</span></div>
         <div class="pcard">
-          <div class="thumb thumb-live"><iframe data-thumb="a" src="design-a.html" scrolling="no" tabindex="-1" title="Design A preview"></iframe><span class="live-chip" data-i18n="live_chip">Live &amp; interactive</span></div>
+          <div class="thumb thumb-live"><iframe data-thumb="a" src="design-a.html?v=3" scrolling="no" tabindex="-1" title="Design A preview"></iframe><span class="live-chip" data-i18n="live_chip">Live &amp; interactive</span></div>
           <div class="pc-body"><p data-i18n="desc_a">Dark, dramatic and confident. Impossible to ignore.</p><span class="rev" data-i18n="review_this">Review this →</span></div>
         </div>
       </div>
       <div class="pick-item" data-pick="b">
         <div class="pick-head"><span class="badge">B</span><span class="pname" data-i18n="name_b">Clean &amp; modern</span></div>
         <div class="pcard">
-          <div class="thumb thumb-live"><iframe data-thumb="b" src="design-b.html" scrolling="no" tabindex="-1" title="Design B preview"></iframe><span class="live-chip" data-i18n="live_chip">Live &amp; interactive</span></div>
+          <div class="thumb thumb-live"><iframe data-thumb="b" src="design-b.html?v=3" scrolling="no" tabindex="-1" title="Design B preview"></iframe><span class="live-chip" data-i18n="live_chip">Live &amp; interactive</span></div>
           <div class="pc-body"><p data-i18n="desc_b">Crisp, structured and modern. Calm and confident.</p><span class="rev" data-i18n="review_this">Review this →</span></div>
         </div>
       </div>
       <div class="pick-item" data-pick="c">
         <div class="pick-head"><span class="badge">C</span><span class="pname" data-i18n="name_c">Elegant &amp; editorial</span></div>
         <div class="pcard">
-          <div class="thumb thumb-live"><iframe data-thumb="c" src="design-c.html" scrolling="no" tabindex="-1" title="Design C preview"></iframe><span class="live-chip" data-i18n="live_chip">Live &amp; interactive</span></div>
+          <div class="thumb thumb-live"><iframe data-thumb="c" src="design-c.html?v=3" scrolling="no" tabindex="-1" title="Design C preview"></iframe><span class="live-chip" data-i18n="live_chip">Live &amp; interactive</span></div>
           <div class="pc-body"><p data-i18n="desc_c">Warm and editorial. Magazine storytelling that sells.</p><span class="rev" data-i18n="review_this">Review this →</span></div>
         </div>
       </div>
@@ -533,6 +539,7 @@ img{display:block;max-width:100%;}
       <div class="qcard" data-q data-multi data-lang><div class="qh"><div class="qnum">11</div><div class="qbody"><h3 data-i18n="q11_h">Which language should your site speak?</h3><p class="q" data-i18n="q11_q">Pick one secondary language. We translate the whole site into it.</p>
         <div class="included"><span class="ic">✓</span><span data-i18n-html="included_lang"><b>Every site launches in English.</b> Choose one secondary language to add.</span></div>
         <div class="optgrid">
+          <button type="button" class="opt on" data-opt="" data-none="1"><span class="box"></span><span><span class="ot" data-i18n="lang_none">English only</span><span class="od" data-i18n="lang_none_d">No translation</span></span></button>
           <button type="button" class="opt" data-opt="Español"><span class="box">✓</span><span><span class="ot">Español</span><span class="od">Spanish</span></span></button>
           <button type="button" class="opt" data-opt="Français"><span class="box">✓</span><span><span class="ot">Français</span><span class="od">French</span></span></button>
           <button type="button" class="opt" data-opt="Deutsch"><span class="box">✓</span><span><span class="ot">Deutsch</span><span class="od">German</span></span></button>
@@ -549,9 +556,9 @@ img{display:block;max-width:100%;}
       <h2 data-i18n="finish_h">That is everything</h2>
       <p data-i18n="finish_p">Download your brief as a PDF and email it to your account manager. It includes your chosen design, notes and answers.</p>
       <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-        <button class="btn ghost lg" id="backReview" data-i18n="back_review">← Back to the designs</button>
         <button class="btn primary lg" id="downloadBtn"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex:none"><path d="M12 3v11m0 0l-4.5-4.5M12 14l4.5-4.5M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-i18n="download_btn">Download brief (PDF)</span></button>
       </div>
+      <p class="finish-next" data-i18n-html="finish_next"><b>Next step:</b> email your downloaded brief to your YachtWay account manager to get started.</p>
     </div>
   </div>
 </section>
@@ -608,7 +615,7 @@ img{display:block;max-width:100%;}
 (function(){
   const $=(s,r=document)=>r.querySelector(s);
   const $$=(s,r=document)=>[...r.querySelectorAll(s)];
-  const DESIGN_HTML={a:'design-a.html',b:'design-b.html',c:'design-c.html'};
+  const DESIGN_HTML={a:'design-a.html?v=3',b:'design-b.html?v=3',c:'design-c.html?v=3'};
   const SRC={
     catalog:'catalog.jpg', listing:'listing.jpg', listingB:'listing-b.jpg'
   };
@@ -739,7 +746,7 @@ img{display:block;max-width:100%;}
   const homeBtn=$('#homeBtn');
   if(homeBtn){ homeBtn.addEventListener('click',()=>stage('pick')); homeBtn.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();stage('pick');}}); }
   $('#useBottom').addEventListener('click',()=>goConfig());
-  $('#backReview').addEventListener('click',()=>stage('review'));
+  const bk=$('#backReview'); if(bk) bk.addEventListener('click',()=>stage('review'));
   function goConfig(){$('#chosenTag').textContent='✓ '+NAMES[ver];if(brand&&brand.name&&!$('#f_company').value){$('#f_company').value=brand.name;if(typeof updateProgress==='function')updateProgress();}stage('config');}
 
   /* ---- notes (in config) ---- */
@@ -882,10 +889,10 @@ img{display:block;max-width:100%;}
             const cv=await html2canvas(target,{useCORS:true,backgroundColor:'#ffffff',scale:1,logging:false,width:1280,windowWidth:1280,height:860,windowHeight:860});
             finish(cv.toDataURL('image/jpeg',0.85));
           }catch(e){ finish(null); }
-        },1000);
+        },1700);
       });
       document.body.appendChild(ifr);
-      setTimeout(()=>finish(null),7000);
+      setTimeout(()=>finish(null),10000);
     });
   }
   $('#downloadBtn').addEventListener('click',async()=>{
@@ -907,7 +914,7 @@ img{display:block;max-width:100%;}
       cell('Brands',getBrands().join(', ')||'-'),
       cell('Live listings (YachtWay feed)',yn(cards[1])),
       cell('Team page',yn(cards[2])+(yn(cards[2])==='Yes'?` · ${team} members`:'')),
-      cell('Languages','English'+($('.qcard[data-lang] .opt.on')?' + '+$('.qcard[data-lang] .opt.on').dataset.opt:' only')),
+      cell('Languages',(()=>{const o=$('.qcard[data-lang] .opt.on');return (o&&o.dataset.opt)?'English + '+o.dataset.opt:'English only';})()),
       cell('WhatsApp button',yn(cards[3])==='Yes'?`Yes (+ ${SYM[cur]}19/mo)`:yn(cards[3])),
       `<div class="b-row full"><span class="k">Extra pages</span><span class="v">${getExtraPages().join(', ')||'-'}</span></div>`,
     ].join('');
