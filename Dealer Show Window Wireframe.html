@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dealer Show Window — Wireframe</title>
+<link rel="stylesheet" href="wireframe.css">
+</head>
+<body class="sketch">
+
+<svg class="filters" aria-hidden="true"><defs>
+  <filter id="rough">
+    <feTurbulence type="fractalNoise" baseFrequency="0.014" numOctaves="2" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="2.2"/>
+  </filter>
+</defs></svg>
+
+<!-- ============================ CHROME ============================ -->
+<header class="chrome">
+  <div class="chrome-top">
+    <div class="brand">
+      <span class="seal">⌂</span>
+      <span>Dealer Website · Show Window</span>
+      <span class="wf-pill">WIREFRAME</span>
+    </div>
+    <div class="crumbs">
+      <span class="c on" data-crumb="pick"><span class="d">1</span>Pick a design</span>
+      <span class="sep">→</span>
+      <span class="c" data-crumb="review"><span class="d">2</span>Review</span>
+      <span class="sep">→</span>
+      <span class="c" data-crumb="config"><span class="d">3</span>Tell us a few things</span>
+    </div>
+    <div class="opts">
+      <div class="grp"><span class="lab">Line</span>
+        <div class="seg">
+          <button data-line="sketch" class="on">Sketchy</button>
+          <button data-line="clean">Clean</button>
+        </div>
+      </div>
+      <div class="grp"><span class="lab">Accent</span>
+        <button class="sw on" data-accent="blue" style="background:#2f6df0"></button>
+        <button class="sw" data-accent="purple" style="background:#7F56D9"></button>
+        <button class="sw" data-accent="green" style="background:#1b9e5a"></button>
+        <button class="sw" data-accent="ink" style="background:#2b2b2b"></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="canvas">
+
+<!-- ============================ STAGE 1 · PICK ============================ -->
+<section id="pick" class="stage on">
+  <div class="pick-wrap">
+    <div class="eyebrow">Your website · three looks</div>
+    <h1>Pick the look you like best</h1>
+    <p class="sub">Tap a design to take a proper look — you'll see the home page, the catalog, and a yacht listing. You can switch or come back any time.</p>
+
+    <div class="pick-grid">
+
+      <!-- A -->
+      <div class="pick-card" data-pick="A">
+        <div class="browser">
+          <div class="topbar"><div class="dots"><i></i><i></i><i></i></div><div class="urlpill">your-name.yachtway.site</div></div>
+          <div class="screen" style="max-height:210px">
+            <div style="background:#2b2b2b;color:#eee;padding:18px;min-height:130px;position:relative">
+              <div class="bar t" style="height:18px;width:70%;background:#e8e8e8;font-style:italic"></div>
+              <div class="bar t" style="height:18px;width:50%;background:#e8e8e8;margin-top:6px"></div>
+              <div class="btn sm" style="margin-top:14px;background:#fff;color:#2b2b2b">Check our models</div>
+            </div>
+            <div class="ph dark" style="min-height:70px;border-radius:0"></div>
+          </div>
+        </div>
+        <div class="ttl"><span class="badge">A</span><div><h3>Bold &amp; editorial</h3><p>Dark, dramatic, big type</p></div></div>
+        <span class="btn accent go">Review this →</span>
+      </div>
+
+      <!-- B -->
+      <div class="pick-card" data-pick="B">
+        <div class="browser">
+          <div class="topbar"><div class="dots"><i></i><i></i><i></i></div><div class="urlpill">your-name.yachtway.site</div></div>
+          <div class="screen" style="max-height:210px">
+            <div class="ph" style="min-height:120px;border-radius:0"><span class="ph-tag">Full-bleed hero</span>
+              <div style="position:absolute;left:50%;top:55%;transform:translateX(-50%);text-align:center;width:74%">
+                <div class="bar t w80" style="margin:0 auto;background:#fff"></div>
+                <div class="row" style="gap:6px;justify-content:center;margin-top:10px"><span class="btn sm" style="background:#fff">View models</span></div>
+              </div>
+            </div>
+            <div class="pad" style="text-align:center"><div class="bar t w40" style="margin:0 auto"></div><div class="row mt-s" style="gap:8px"><div class="ph" style="flex:1;min-height:36px"></div><div class="ph" style="flex:1;min-height:36px"></div></div></div>
+          </div>
+        </div>
+        <div class="ttl"><span class="badge">B</span><div><h3>Clean &amp; luxe</h3><p>Airy, light, lots of space</p></div></div>
+        <span class="btn accent go">Review this →</span>
+      </div>
+
+      <!-- C -->
+      <div class="pick-card" data-pick="C">
+        <div class="browser">
+          <div class="topbar"><div class="dots"><i></i><i></i><i></i></div><div class="urlpill">your-name.yachtway.site</div></div>
+          <div class="screen" style="max-height:210px">
+            <div class="site-topnav" style="padding:8px 12px"><div class="brandrow"><div class="logo-dot" style="width:18px;height:18px"></div></div><div class="row" style="gap:6px"><div class="bar" style="width:24px"></div><div class="bar" style="width:24px"></div><div class="bar" style="width:24px"></div></div></div>
+            <div class="ph dark" style="min-height:90px;border-radius:0"><span class="ph-tag">Hero + events</span></div>
+            <div class="pad" style="padding:10px"><div class="row" style="gap:6px"><div class="ph" style="flex:1;min-height:34px"></div><div class="ph" style="flex:1;min-height:34px"></div><div class="ph" style="flex:1;min-height:34px"></div></div></div>
+          </div>
+        </div>
+        <div class="ttl"><span class="badge">C</span><div><h3>Classic brokerage</h3><p>Events, brands, locations</p></div></div>
+        <span class="btn accent go">Review this →</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================ STAGE 2 · REVIEW ============================ -->
+<section id="review" class="stage">
+
+  <!-- show-window toolbar -->
+  <div class="rv-bar">
+    <button class="back" id="backBtn">← Back to designs</button>
+    <span class="now">Viewing <b id="nowName">Design A — Bold editorial</b></span>
+    <span class="spacer"></span>
+    <div class="ver-seg">
+      <span class="vlab">Switch design</span>
+      <button data-ver="A" class="on">A</button>
+      <button data-ver="B">B</button>
+      <button data-ver="C">C</button>
+    </div>
+    <button class="btn accent" id="useTop">♥ Use this design</button>
+  </div>
+
+  <!-- the live-looking site -->
+  <div class="site-frame">
+    <div class="url"><div class="dots"><i></i><i></i><i></i></div><span id="urlText">your-name.yachtway.site</span></div>
+
+    <div class="site-body" id="siteBody">
+      <!-- site's own nav: switches pages -->
+      <div class="site-topnav">
+        <div class="brandrow"><div class="logo-dot"></div><div class="bar t" style="width:64px;margin:0"></div></div>
+        <nav>
+          <button data-page="home" class="on">Home</button>
+          <button data-page="catalog">Catalog</button>
+          <button data-page="listing">A listing</button>
+        </nav>
+        <span class="btn sm">Contact</span>
+      </div>
+
+      <!-- ===== PAGE: HOME (changes with version) ===== -->
+      <div class="site-page on" data-page="home">
+
+        <!-- Home A — bold editorial -->
+        <div class="home-variant on" data-v="A">
+          <div style="background:#2b2b2b;color:#eee;position:relative;padding:46px 30px">
+            <div class="ph dark" style="position:absolute;inset:0;opacity:.35;border:0;border-radius:0"></div>
+            <div style="position:relative">
+              <div class="bar t" style="height:30px;width:60%;background:#e8e8e8;font-style:italic"></div>
+              <div class="bar t" style="height:30px;width:44%;background:#e8e8e8;margin-top:9px"></div>
+              <div class="bar t" style="height:30px;width:52%;background:#e8e8e8;margin-top:9px"></div>
+              <div class="btn sm" style="margin-top:18px;background:#fff;color:#2b2b2b">Check our models</div>
+            </div>
+          </div>
+          <div class="pad-l">
+            <h2 class="sec" style="font-style:italic;font-size:20px">YACHTS FOR SALE</h2>
+            <div class="wbox mt-s" style="overflow:hidden"><div class="ph dark" style="min-height:140px;border-radius:0"><span class="ph-tag">Full-bleed listing · price overlaid</span></div></div>
+            <div class="wbox mt-s" style="overflow:hidden"><div class="ph dark" style="min-height:140px;border-radius:0"><span class="ph-tag">Stacked edge-to-edge</span></div></div>
+            <h2 class="sec mt" style="font-style:italic;font-size:20px">YACHT MODEL RANGE</h2>
+            <div class="grid mt-s" style="grid-template-columns:1fr 1fr">
+              <div class="wbox pad"><div class="ph" style="min-height:64px"></div><div class="bar w60" style="margin:9px auto 0"></div></div>
+              <div class="wbox pad"><div class="ph" style="min-height:64px"></div><div class="bar w60" style="margin:9px auto 0"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Home B — clean luxe -->
+        <div class="home-variant" data-v="B">
+          <div class="ph" style="min-height:240px;border-radius:0"><span class="ph-tag">Full-bleed hero photo</span>
+            <div style="position:absolute;left:50%;top:54%;transform:translateX(-50%);text-align:center;width:64%">
+              <div class="bar t w70" style="margin:0 auto;background:#fff;height:18px"></div>
+              <div class="bar w50" style="margin:9px auto 14px;background:#eee"></div>
+              <div class="row" style="gap:8px;justify-content:center"><span class="btn sm" style="background:#fff">View models</span><span class="btn sm" style="background:transparent;color:#fff;border-color:#fff">Get brochure</span></div>
+            </div>
+          </div>
+          <div class="pad-l" style="text-align:center">
+            <h2 class="sec" style="font-weight:600;font-size:20px">Yachts for Sale</h2>
+            <div class="row mt-s" style="gap:14px"><div class="wbox" style="flex:1;overflow:hidden"><div class="ph" style="min-height:110px"></div></div><div class="wbox" style="flex:1;overflow:hidden"><div class="ph" style="min-height:110px"></div></div></div>
+            <h2 class="sec mt" style="font-weight:600;font-size:20px">Our Models</h2>
+            <div class="row mt-s" style="gap:12px"><div class="ph" style="flex:1;min-height:64px"></div><div class="ph" style="flex:1;min-height:64px"></div><div class="ph" style="flex:1;min-height:64px"></div><div class="ph" style="flex:1;min-height:64px"></div></div>
+          </div>
+          <div class="ph dark" style="min-height:150px;border-radius:0"><span class="ph-tag">Dark feature band — “Yacht Management”</span></div>
+        </div>
+
+        <!-- Home C — classic brokerage -->
+        <div class="home-variant" data-v="C">
+          <div class="ph dark" style="min-height:190px;border-radius:0"><span class="ph-tag">Hero</span>
+            <div class="wbox" style="position:absolute;right:18px;top:18px;width:168px;padding:12px;background:#fff"><div class="cap">Upcoming events</div><div class="row mt-s" style="gap:9px;align-items:center"><div class="wbox accentfill" style="width:34px;height:34px"></div><div style="flex:1"><div class="bar w90"></div><div class="bar w60"></div></div></div></div>
+          </div>
+          <div class="pad-l">
+            <div class="between"><h2 class="sec" style="font-size:20px">YACHTS FOR SALE</h2><span class="btn sm">View catalog</span></div>
+            <div class="row mt-s" style="gap:12px">
+              <div class="wbox" style="flex:1;overflow:hidden"><div class="ph" style="min-height:80px"></div><div class="pad" style="padding:9px"><div class="bar w80"></div><div class="bar w40"></div></div></div>
+              <div class="wbox" style="flex:1;overflow:hidden"><div class="ph" style="min-height:80px"></div><div class="pad" style="padding:9px"><div class="bar w80"></div><div class="bar w40"></div></div></div>
+              <div class="wbox" style="flex:1;overflow:hidden"><div class="ph" style="min-height:80px"></div><div class="pad" style="padding:9px"><div class="bar w80"></div><div class="bar w40"></div></div></div>
+            </div>
+            <h2 class="sec mt" style="font-size:20px">UPCOMING EVENTS &amp; EXPERIENCES</h2>
+            <div class="row mt-s" style="gap:12px"><div class="ph" style="flex:1;min-height:60px"></div><div class="ph" style="flex:1;min-height:60px"></div><div class="ph" style="flex:1;min-height:60px"></div></div>
+            <h2 class="sec mt" style="font-size:20px">THE BUILDERS WE REPRESENT</h2>
+            <div class="grid mt-s" style="grid-template-columns:repeat(4,1fr)"><div class="ph" style="min-height:44px"></div><div class="ph" style="min-height:44px"></div><div class="ph" style="min-height:44px"></div><div class="ph" style="min-height:44px"></div></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ===== PAGE: CATALOG (same for all 3) ===== -->
+      <div class="site-page" data-page="catalog">
+        <div class="pad-l">
+          <div class="between"><h2 class="sec" style="font-size:22px">YACHTS FOR SALE</h2><span class="tag ghost">same on every design</span></div>
+          <div class="row mt" style="gap:8px;flex-wrap:wrap">
+            <span class="field" style="width:auto">Make or Model ▾</span>
+            <span class="field" style="width:auto">Condition ▾</span>
+            <span class="field" style="width:auto">Brand ▾</span>
+            <span class="field" style="width:auto">Length ▾</span>
+            <span class="field" style="width:auto">Price ▾</span>
+            <span class="field" style="width:auto">Location ▾</span>
+          </div>
+          <div class="between mt"><span class="small muted">All vessels: 82</span><span class="small muted">Sort by: Recently listed ▾</span></div>
+          <div class="grid mt" style="grid-template-columns:repeat(3,1fr)">
+            <div class="wbox" style="overflow:hidden"><div class="ph" style="min-height:96px"></div><div class="pad" style="padding:11px"><div class="bar t w90"></div><div class="bar w50"></div><div class="bar t w60 mt-s"></div></div></div>
+            <div class="wbox" style="overflow:hidden"><div class="ph" style="min-height:96px"></div><div class="pad" style="padding:11px"><div class="bar t w90"></div><div class="bar w50"></div><div class="bar t w60 mt-s"></div></div></div>
+            <div class="wbox" style="overflow:hidden"><div class="ph" style="min-height:96px"></div><div class="pad" style="padding:11px"><div class="bar t w90"></div><div class="bar w50"></div><div class="bar t w60 mt-s"></div></div></div>
+            <div class="wbox" style="overflow:hidden"><div class="ph" style="min-height:96px"></div><div class="pad" style="padding:11px"><div class="bar t w90"></div><div class="bar w50"></div><div class="bar t w60 mt-s"></div></div></div>
+            <div class="wbox" style="overflow:hidden"><div class="ph" style="min-height:96px"></div><div class="pad" style="padding:11px"><div class="bar t w90"></div><div class="bar w50"></div><div class="bar t w60 mt-s"></div></div></div>
+            <div class="wbox" style="overflow:hidden"><div class="ph" style="min-height:96px"></div><div class="pad" style="padding:11px"><div class="bar t w90"></div><div class="bar w50"></div><div class="bar t w60 mt-s"></div></div></div>
+          </div>
+          <div class="row mt" style="gap:8px;justify-content:center;align-items:center">
+            <span class="small muted">← Back</span>
+            <span class="chip on">1</span><span class="chip">2</span><span class="chip">3</span><span class="chip">4</span><span class="chip">5</span>
+            <span class="small muted">Next →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== PAGE: LISTING (same for all 3) ===== -->
+      <div class="site-page" data-page="listing">
+        <div class="pad-l">
+          <div class="between mb"><span class="cap">Yacht detail</span><span class="tag ghost">same on every design</span></div>
+          <div class="row" style="gap:10px">
+            <div class="ph" style="flex:2;min-height:160px"><span class="ph-tag">Main photo</span></div>
+            <div class="col" style="flex:1;gap:10px"><div class="ph" style="min-height:75px"></div><div class="ph" style="min-height:75px"></div></div>
+          </div>
+          <div class="row mt" style="gap:22px;align-items:flex-start">
+            <div style="flex:2;min-width:0">
+              <div class="bar t w70" style="height:18px"></div>
+              <div class="row mt-s" style="gap:10px"><span class="bar t w30" style="height:16px"></span><span class="tag">Price reduced</span></div>
+              <div class="row mt" style="gap:8px;flex-wrap:wrap"><span class="chip">Length</span><span class="chip">Year</span><span class="chip">Beam</span><span class="chip">Cabins</span><span class="chip">Engine hrs</span></div>
+              <h2 class="sec mt">Vessel description</h2>
+              <div class="bars mt-s"><div class="bar w90"></div><div class="bar w80"></div><div class="bar w90"></div><div class="bar w50"></div></div>
+              <h2 class="sec mt">Range calculator</h2>
+              <div class="ph mt-s" style="min-height:90px"><span class="ph-tag">Map</span></div>
+              <h2 class="sec mt">3D tour</h2>
+              <div class="ph mt-s" style="min-height:80px"><span class="ph-tag">Matterport</span></div>
+              <h2 class="sec mt">Loan calculator</h2>
+              <div class="wbox pad mt-s"><div class="bar w90"></div><div class="bar w60"></div><div class="row mt-s" style="gap:8px"><span class="chip">15 yr</span><span class="chip on">20 yr</span><span class="chip">30 yr</span></div></div>
+            </div>
+            <aside style="flex:1;min-width:0">
+              <div class="wbox pad">
+                <div class="cap">Interested?</div>
+                <div class="field mt-s">Name</div>
+                <div class="field mt-s">Email</div>
+                <div class="field mt-s">Phone</div>
+                <div class="field mt-s" style="height:54px;align-items:flex-start;padding-top:8px">Message</div>
+                <div class="btn accent mt" style="width:100%;justify-content:center">Request information</div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-hint">↓ scroll — it's a real site</div>
+    </div>
+  </div>
+
+  <!-- choose action -->
+  <div class="use-cta">
+    <span class="txt">Happy with <b id="ctaName">Design A</b>? Pick it and we'll set up your site.</span>
+    <button class="btn accent lg" id="useBottom">♥ Use this design →</button>
+  </div>
+</section>
+
+<!-- ============================ STAGE 3 · CONFIG ============================ -->
+<section id="config" class="stage">
+  <div class="config-wrap">
+    <div class="panel-head">
+      <h1>Nice choice — <span id="cfgName">Design A</span></h1>
+      <p class="lead">Last bit. A few simple questions so we can build it. Answer what you can; your account manager handles the rest.</p>
+    </div>
+
+    <div class="progress mt">
+      <span class="small" style="font-family:var(--ui);font-weight:600">Almost done</span>
+      <div class="track"><div class="fill-bar" style="width:80%"></div></div>
+      <span class="pct">8 quick questions</span>
+    </div>
+
+    <div class="q-list">
+      <div class="q-card"><div class="qhead"><div class="qnum">1</div><div class="qbody"><h3>Your company name</h3><p class="q">What should we put on the site?</p><div class="field">e.g. Vortex Yachts</div></div></div></div>
+
+      <div class="q-card"><div class="qhead"><div class="qnum">2</div><div class="qbody"><h3>Who's our main contact?</h3><p class="q">The person we'll work with.</p><div class="field">Contact person's name</div></div></div></div>
+
+      <div class="q-card"><div class="qhead"><div class="qnum">3</div><div class="qbody"><h3>When do you want it live?</h3><p class="q">Pick a date at least 30 days out.</p><div class="field">📅  Earliest: 1 Jul 2026</div></div></div></div>
+
+      <div class="q-card"><div class="qhead"><div class="qnum">4</div><div class="qbody"><h3>Are you an authorised dealer?</h3><p class="q">Do you officially represent brands?</p><div class="choice"><span class="chip on">Yes</span><span class="chip">No</span></div><div class="followup"><span class="cap">Which brands?</span><div class="choice"><span class="chip">Azimut ✕</span><span class="chip">Wally ✕</span><span class="field" style="width:auto;height:30px">+ Add brand</span></div></div></div></div></div>
+
+      <div class="q-card"><div class="qhead"><div class="qnum">5</div><div class="qbody"><h3>Show live listings on your site?</h3><p class="q">Yachts for sale, kept up to date for you.</p><div class="choice"><span class="chip on">Yes</span><span class="chip">No</span></div><div class="followup"><div class="callout" style="padding:10px 12px"><span class="ic">⟳</span><span class="small">We connect the <b>YachtWay feed</b> — listings update automatically.</span></div></div></div></div></div>
+
+      <div class="q-card"><div class="qhead"><div class="qnum">6</div><div class="qbody"><h3>Want a Team page?</h3><p class="q">Introduce your people.</p><div class="choice"><span class="chip on">Yes</span><span class="chip">No</span></div><div class="followup"><span class="cap">How many team members?</span><div class="row" style="gap:8px;align-items:center"><span class="chip">–</span><span class="field" style="width:48px;justify-content:center">6</span><span class="chip">+</span></div></div></div></div></div>
+
+      <div class="q-card"><div class="qhead"><div class="qnum">7</div><div class="qbody"><h3>Want a Services page?</h3><p class="q">List what you offer.</p><div class="choice"><span class="chip on">Yes</span><span class="chip">No</span></div><div class="followup"><span class="cap">Which services?</span><div class="choice"><span class="chip">Management ✕</span><span class="chip">Charter ✕</span><span class="field" style="width:auto;height:30px">+ Add</span></div></div></div></div></div>
+
+      <div class="q-card"><div class="qhead"><div class="qnum">8</div><div class="qbody"><h3>Do you have photos &amp; video of your boats?</h3><p class="q">High-quality media we can use.</p><div class="choice"><span class="chip">Yes</span><span class="chip on">No</span></div><div class="followup"><div class="callout accentfill" style="background:var(--accent);color:#fff;padding:10px 12px"><span class="ic">⌖</span><span class="small" style="color:#fff">No problem — <b>book a YachtWay Studio shoot</b> and we'll capture it.</span></div></div></div></div></div>
+    </div>
+
+    <div class="use-cta mt" style="justify-content:center;text-align:center;flex-direction:column">
+      <span class="txt">That's everything. Download your brief (PDF) and email it to your account manager yourself.</span>
+      <div class="row" style="gap:10px;justify-content:center;flex-wrap:wrap">
+        <span class="btn accent lg">⬇ Download brief (PDF)</span>
+      </div>
+      <button class="back" id="backReview" style="margin-top:4px">← Back to the designs</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script src="wireframe.js"></script>
+</body>
+</html>

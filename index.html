@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dealer Show Window</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --brand:#4B0EA3; --brand-700:#2B0075; --brand-50:#F1ECFA;
+  --ink:#22222D; --ink-2:#575760; --faint:#A6A6AB;
+  --line:#E6E6EA; --line-2:#F1F1F2; --bg:#F6F6F7; --card:#fff;
+  --ok:#297B00; --ok-bg:#ECFDF3;
+  --disp:'Poppins',system-ui,sans-serif; --body:'Figtree',system-ui,sans-serif;
+  --r:14px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;}
+body{font-family:var(--body);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;}
+button{font-family:inherit;cursor:pointer;}
+img{display:block;max-width:100%;}
+
+/* ===================== APP BAR ===================== */
+.appbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:18px;
+  height:60px;padding:0 22px;background:#fff;border-bottom:1px solid var(--line);}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-weight:600;font-size:15px;white-space:nowrap;}
+.brand .seal{width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:700;}
+.logo-img{height:23px;width:auto;display:block;}
+.brand-tag{font-family:var(--body);font-weight:500;font-size:12px;letter-spacing:.02em;color:var(--ink-2);border-left:1px solid var(--line);padding-left:11px;}
+.hero-logo{height:44px;width:auto;margin:0 auto 24px;}
+.crumbs{display:flex;align-items:center;gap:9px;font-size:13px;margin-left:6px;}
+.crumbs .c{display:flex;align-items:center;gap:7px;color:var(--faint);font-weight:600;}
+.crumbs .c .d{width:20px;height:20px;border-radius:50%;background:var(--line-2);color:var(--faint);display:grid;place-items:center;font-size:11px;font-weight:700;}
+.crumbs .c.on{color:var(--ink);}
+.crumbs .c.on .d{background:var(--brand);color:#fff;}
+.crumbs .c.done .d{background:var(--brand);color:#fff;}
+.crumbs .sep{color:var(--line);}
+.appbar .right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+.help{font-size:13px;color:var(--ink-2);font-weight:500;}
+@media(max-width:720px){.crumbs .c span{display:none;}.help{display:none;}}
+
+/* ===================== BUTTONS ===================== */
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--body);font-weight:600;font-size:14px;
+  padding:11px 18px;border-radius:10px;border:1.5px solid transparent;transition:.15s;white-space:nowrap;}
+.btn:hover{transform:translateY(-1px);}
+.btn.primary{background:var(--brand);color:#fff;}
+.btn.primary:hover{background:var(--brand-700);}
+.btn.ghost{background:#fff;border-color:var(--line);color:var(--ink);}
+.btn.ghost:hover{border-color:var(--ink);}
+.btn.dark{background:var(--ink);color:#fff;}
+.btn.lg{padding:14px 26px;font-size:15px;}
+.btn.sm{padding:8px 13px;font-size:13px;}
+.btn.link{background:none;border:0;color:var(--ink-2);padding:8px 4px;font-weight:600;}
+.btn.link:hover{color:var(--brand);transform:none;}
+
+/* ===================== STAGES ===================== */
+.stage{display:none;}
+.stage.on{display:block;}
+
+/* ===================== PICK ===================== */
+.pick{max-width:1180px;margin:0 auto;padding:56px 24px 90px;text-align:center;}
+.pick .eyebrow{font-family:var(--body);font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--brand);}
+.pick h1{font-family:var(--disp);font-weight:700;font-size:clamp(28px,4vw,42px);letter-spacing:-.02em;margin:12px 0 8px;}
+.pick .sub{font-size:16px;color:var(--ink-2);max-width:50ch;margin:0 auto;line-height:1.55;}
+.pick-h2{font-family:var(--disp);font-weight:600;font-size:clamp(18px,2.2vw,24px);letter-spacing:-.01em;margin:42px 0 0;}
+.pick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:24px;}
+@media(max-width:880px){.pick-grid{display:flex;overflow-x:auto;gap:16px;scroll-snap-type:x mandatory;margin:40px -20px 0;padding:4px 20px 14px;-webkit-overflow-scrolling:touch;}.pick-item{flex:0 0 82%;scroll-snap-align:center;}}
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;text-align:left;
+  cursor:pointer;transition:.18s;display:flex;flex-direction:column;box-shadow:0 1px 3px rgba(10,13,18,.04);}
+.pcard:hover{transform:translateY(-6px);box-shadow:0 18px 40px -12px rgba(10,13,18,.22);border-color:var(--brand);}
+.pcard .thumb{height:230px;overflow:hidden;position:relative;background:#111;}
+.pcard .thumb img{width:100%;height:auto;object-fit:cover;object-position:top;transition:transform 40s ease;}
+.pcard:hover .thumb img{transform:translateY(calc(-100% + 230px));}
+.pick-item{cursor:pointer;}
+.pick-head{display:flex;align-items:center;gap:11px;margin:0 0 12px;padding-left:2px;}
+.pick-head .badge{width:40px;height:40px;border-radius:50%;background:var(--brand);color:#fff;
+  font-family:var(--disp);font-weight:700;font-size:19px;display:grid;place-items:center;flex:none;}
+.pick-head .pname{font-family:var(--disp);font-weight:600;font-size:19px;color:var(--ink);}
+.pcard .pc-body{padding:14px 20px 22px;}
+.pcard .pc-body h3{font-family:var(--disp);font-weight:600;font-size:19px;margin:0 0 4px;}
+.pcard .pc-body p{margin:0 0 16px;font-size:13.5px;color:var(--ink-2);}
+.pcard .rev{display:inline-flex;align-items:center;gap:7px;color:var(--brand);font-weight:700;font-size:14px;}
+.scrollnote{margin-top:16px;font-size:13px;color:var(--faint);}
+
+/* ===================== REVIEW ===================== */
+.rvbar{position:sticky;top:60px;z-index:40;display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  padding:12px 22px;background:#fff;border-bottom:1px solid var(--line);}
+.rvbar .back{display:inline-flex;align-items:center;gap:7px;font-weight:600;font-size:14px;color:var(--ink);background:none;border:0;}
+.rvbar .back:hover{color:var(--brand);}
+.rvbar .div{width:1px;height:26px;background:var(--line);}
+.pagetabs{display:flex;gap:4px;background:var(--bg);padding:4px;border-radius:10px;}
+.pagetabs button{font-weight:600;font-size:13px;color:var(--ink-2);background:none;border:0;padding:8px 14px;border-radius:7px;}
+.pagetabs button.on{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08);}
+.rvbar .spacer{flex:1;}
+.verseg{display:flex;align-items:center;gap:4px;background:var(--bg);padding:4px;border-radius:999px;}
+.verseg .vl{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);padding:0 6px 0 9px;}
+.verseg button{width:30px;height:30px;border-radius:50%;border:0;background:none;font-family:var(--disp);font-weight:700;font-size:14px;color:var(--ink-2);}
+.verseg button.on{background:var(--brand);color:#fff;}
+@media(max-width:720px){.verseg .vl{display:none;}.rvbar{gap:10px;}}
+
+.viewport{padding:30px 22px 70px;}
+.frame{max-width:1180px;margin:0 auto;background:#fff;border-radius:var(--r);overflow:hidden;
+  box-shadow:0 24px 60px -20px rgba(10,13,18,.3);border:1px solid var(--line);}
+.frame .fbar{display:flex;align-items:center;gap:8px;padding:11px 16px;background:#fff;border-bottom:1px solid var(--line-2);}
+.frame .fbar .dots{display:flex;gap:6px;}
+.frame .fbar .dots i{width:11px;height:11px;border-radius:50%;background:#E4E4E8;}
+.frame .fbar .url{flex:1;background:var(--bg);border-radius:999px;font-size:12px;color:var(--ink-2);padding:6px 14px;text-align:center;}
+.frame .shot{width:100%;height:auto;}
+.shotwrap{position:relative;min-height:200px;}
+.loadcue{position:absolute;inset:0;display:grid;place-items:center;color:var(--faint);font-size:14px;}
+
+/* notes dock */
+.notes-dock{position:fixed;right:22px;bottom:22px;z-index:55;width:320px;max-width:calc(100vw - 44px);
+  background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 20px 50px -16px rgba(10,13,18,.3);overflow:hidden;
+  transform:translateY(calc(100% + 30px));transition:transform .25s;}
+.notes-dock.open{transform:none;}
+.notes-dock .nd-head{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid var(--line-2);}
+.notes-dock .nd-head b{font-family:var(--disp);font-size:14px;}
+.notes-dock textarea{width:100%;border:0;resize:none;min-height:120px;padding:14px;font-family:var(--body);font-size:14px;color:var(--ink);outline:none;}
+.notes-fab{position:fixed;right:22px;bottom:22px;z-index:54;display:inline-flex;align-items:center;gap:8px;
+  background:var(--ink);color:#fff;font-weight:600;font-size:14px;padding:12px 18px;border:0;border-radius:999px;box-shadow:0 12px 30px -8px rgba(10,13,18,.4);}
+.notes-fab .dot{width:8px;height:8px;border-radius:50%;background:var(--brand);display:none;}
+.notes-fab.has .dot{display:block;}
+
+.usebar{position:sticky;bottom:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  padding:14px 22px;background:#fff;border-top:1px solid var(--line);box-shadow:0 -6px 20px -10px rgba(10,13,18,.18);}
+.usebar .ut{font-size:14px;color:var(--ink-2);}
+.usebar .ut b{color:var(--ink);font-weight:700;}
+
+/* ===================== CONFIG ===================== */
+.config{max-width:780px;margin:0 auto;padding:40px 24px 110px;}
+.config .chead{margin-bottom:6px;}
+.config h1{font-family:var(--disp);font-weight:700;font-size:clamp(26px,3.4vw,36px);letter-spacing:-.02em;margin:0 0 6px;}
+.config .lead{font-size:15px;color:var(--ink-2);line-height:1.55;margin:0;max-width:60ch;}
+.chosen-tag{display:inline-flex;align-items:center;gap:8px;background:var(--brand-50);color:var(--brand-700);font-weight:700;font-size:13px;padding:7px 14px;border-radius:999px;}
+.qbar{display:flex;align-items:center;gap:10px;margin:22px 0 26px;}
+.qbar .track{flex:1;height:8px;background:var(--line-2);border-radius:999px;overflow:hidden;}
+.qbar .fill{height:100%;width:0;background:var(--brand);border-radius:999px;transition:width .3s;}
+.qbar .pc{font-size:12px;font-weight:700;color:var(--brand);}
+
+.qcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:16px;}
+.qcard .qh{display:flex;gap:14px;align-items:flex-start;}
+.qnum{flex:none;width:30px;height:30px;border-radius:50%;background:var(--bg);color:var(--ink);font-family:var(--disp);font-weight:700;font-size:14px;display:grid;place-items:center;}
+.qcard.answered .qnum{background:var(--brand);color:#fff;}
+.qcard h3{font-family:var(--disp);font-weight:600;font-size:16px;margin:2px 0 3px;}
+.qcard .q{font-size:13px;color:var(--ink-2);margin:0 0 13px;}
+.qbody{flex:1;}
+.field{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;font-family:var(--body);font-size:14px;color:var(--ink);outline:none;background:#fff;}
+.field:focus{border-color:var(--brand);box-shadow:0 0 0 4px rgba(127,86,217,.16);}
+.yn{display:flex;gap:8px;}
+.yn button{padding:9px 20px;border:1.5px solid var(--line);border-radius:999px;background:#fff;font-weight:600;font-size:13px;color:var(--ink-2);}
+.yn button.on{background:var(--brand);color:#fff;border-color:var(--brand);}
+.follow{margin-top:14px;padding-top:14px;border-top:1px dashed var(--line);display:none;}
+.follow.show{display:block;}
+.flab{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);display:block;margin-bottom:8px;}
+.chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--brand-50);color:var(--brand-700);font-weight:600;font-size:13px;padding:7px 12px;border-radius:999px;}
+.chip b{cursor:pointer;opacity:.6;}.chip b:hover{opacity:1;}
+.addwrap{display:flex;gap:8px;}
+.addwrap .field{flex:1;}
+.stepper{display:inline-flex;align-items:center;gap:0;border:1.5px solid var(--line);border-radius:10px;overflow:hidden;}
+.stepper button{width:40px;height:40px;border:0;background:#fff;font-size:18px;color:var(--ink);}
+.stepper .num{width:54px;text-align:center;font-weight:700;font-family:var(--disp);}
+.note-cb{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-2);background:var(--brand-50);padding:11px 14px;border-radius:10px;margin-top:4px;}
+.note-cb .ic{width:24px;height:24px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-size:13px;flex:none;}
+
+/* multi-select page options */
+.optgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+@media(max-width:560px){.optgrid{grid-template-columns:1fr;}}
+.opt{display:flex;align-items:flex-start;gap:11px;text-align:left;padding:13px 14px;border:1.5px solid var(--line);border-radius:12px;background:#fff;transition:.15s;}
+.opt:hover{border-color:var(--brand);}
+.opt.on{border-color:var(--brand);background:var(--brand-50);}
+.opt .box{flex:none;width:20px;height:20px;border-radius:6px;border:1.5px solid var(--line);display:grid;place-items:center;color:#fff;font-size:12px;margin-top:1px;transition:.15s;}
+.opt.on .box{background:var(--brand);border-color:var(--brand);}
+.opt .free.paid{color:var(--ink);background:var(--line-2);}
+.opt.on .free.paid{background:#fff;color:var(--brand-700);}
+.cur-seg{display:inline-flex;align-items:center;gap:4px;background:#fff;border:1px solid var(--line);padding:4px;border-radius:999px;}
+.cur-seg .cl{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);padding:0 8px 0 10px;}
+.cur-seg button{border:0;background:none;font-family:var(--body);font-weight:700;font-size:13px;color:var(--ink-2);padding:6px 13px;border-radius:999px;}
+.cur-seg button.on{background:var(--brand);color:#fff;}
+.base-price{display:block;background:var(--brand-50);border:1px solid #e4d8fb;border-radius:12px;padding:13px 16px;margin:18px 0 4px;font-size:13.5px;color:var(--ink);line-height:1.5;}
+.base-price::before{content:"●";color:var(--brand);font-size:10px;margin-right:9px;vertical-align:middle;}
+.base-price b{color:var(--brand-700);}
+.chosen-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:12px;}
+.datewrap{position:relative;}
+.date-display{position:absolute;left:2px;top:2px;bottom:2px;right:42px;display:flex;align-items:center;padding:0 13px;background:#fff;border-radius:9px;font-family:var(--body);font-size:14px;color:var(--ink);pointer-events:none;}
+.eye-icon{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--line);background:#fff;color:var(--ink-2);flex:none;}
+.eye-icon:hover{border-color:var(--brand);color:var(--brand);}
+.lang-wrap{position:relative;}
+.lang-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--body);font-weight:600;font-size:13px;color:var(--ink);background:#fff;border:1.5px solid var(--line);padding:8px 13px;border-radius:999px;}
+.lang-btn:hover{border-color:var(--ink);}
+.lang-btn .globe{display:block;}
+.lang-btn .cv{color:var(--faint);font-size:10px;}
+.lang-menu{position:absolute;right:0;top:calc(100% + 8px);min-width:184px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 16px 40px -12px rgba(10,13,18,.28);padding:6px;display:none;z-index:60;}
+.lang-menu.open{display:block;}
+.lang-menu button{display:flex;align-items:center;justify-content:space-between;width:100%;font-family:var(--body);font-weight:600;font-size:14px;color:var(--ink);background:none;border:0;padding:10px 12px;border-radius:8px;text-align:left;}
+.lang-menu button:hover{background:var(--bg);}
+.lang-menu button.on{color:var(--brand);}
+.lang-menu button .tick{color:var(--brand);opacity:0;}
+.lang-menu button.on .tick{opacity:1;}
+@media(max-width:560px){.lang-btn #langCur{display:none;}}
+.opt .ot{display:block;font-weight:600;font-size:14px;color:var(--ink);}
+.opt .free{display:inline-block;margin-left:7px;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--brand-700);background:var(--brand-50);padding:2px 7px;border-radius:999px;vertical-align:middle;}
+.opt.on .free{background:#fff;}
+.opt .od{display:block;font-size:12px;color:var(--ink-2);margin-top:2px;line-height:1.4;}
+.included{display:flex;align-items:flex-start;gap:11px;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:13px 16px;margin-bottom:16px;font-size:13px;color:var(--ink-2);line-height:1.5;}
+.included .ic{width:24px;height:24px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:12px;flex:none;}
+.included b{color:var(--ink);}
+
+/* eye / see-it button */
+.eye-btn{display:inline-flex;align-items:center;gap:5px;font-family:var(--body);font-weight:600;font-size:12px;
+  color:var(--brand);background:var(--brand-50);border:0;padding:5px 11px;border-radius:999px;}
+.eye-btn:hover{background:var(--brand);color:#fff;}
+.eye-btn .eye{font-size:11px;}
+
+/* modal */
+.modal-overlay{position:fixed;inset:0;z-index:80;background:rgba(20,18,30,.55);backdrop-filter:blur(3px);
+  display:none;align-items:center;justify-content:center;padding:24px;}
+.modal-overlay.open{display:flex;}
+.modal{background:#fff;border-radius:18px;width:100%;max-width:460px;overflow:hidden;box-shadow:0 30px 70px -20px rgba(10,13,18,.5);}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--line-2);}
+.modal-head b{font-family:var(--disp);font-size:16px;}
+.modal-body{padding:20px;}
+.modal-sub{margin:0 0 16px;font-size:14px;color:var(--ink-2);line-height:1.55;}
+
+/* whatsapp demo */
+.wa-demo{background:var(--bg);border-radius:14px;padding:18px;display:flex;justify-content:center;}
+.wa-page{position:relative;width:260px;height:240px;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow-card);}
+.wa-topbar{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-bottom:1px solid var(--line-2);}
+.wa-logo{font-family:var(--disp);font-weight:700;font-size:10px;letter-spacing:.08em;color:var(--ink);}
+.wa-navdots{display:flex;gap:4px;}.wa-navdots i{width:5px;height:5px;border-radius:50%;background:var(--line);}
+.wa-hero{height:74px;background:linear-gradient(135deg,#3a3550,#181820);display:grid;place-items:center;color:rgba(255,255,255,.65);font-size:11px;letter-spacing:.08em;}
+.wa-lines{padding:12px;display:flex;flex-direction:column;gap:7px;}
+.wa-lines span{height:7px;border-radius:4px;background:var(--line-2);}
+.wa-bubble{position:absolute;right:14px;bottom:64px;max-width:170px;animation:waPop .5s ease-out .3s both;}
+.wa-msg{background:#fff;border:1px solid var(--line);border-radius:12px 12px 12px 4px;padding:9px 11px;font-size:11px;line-height:1.4;color:var(--ink);box-shadow:0 6px 16px -6px rgba(10,13,18,.25);}
+.wa-fab{position:absolute;right:14px;bottom:14px;width:46px;height:46px;border-radius:50%;border:0;background:#25D366;
+  display:grid;place-items:center;box-shadow:0 8px 20px -4px rgba(37,211,102,.6);animation:waPulse 2s ease-in-out infinite;}
+@keyframes waPop{from{opacity:0;transform:translateY(8px) scale(.9);}to{opacity:1;transform:none;}}
+@keyframes waPulse{0%,100%{box-shadow:0 8px 20px -4px rgba(37,211,102,.6);}50%{box-shadow:0 8px 28px 0 rgba(37,211,102,.85);}}
+
+.finish{text-align:center;background:#fff;border:1px solid var(--line);border-radius:16px;padding:34px;margin-top:8px;}
+.finish .tick{width:56px;height:56px;border-radius:50%;background:var(--brand-50);color:var(--brand);display:grid;place-items:center;font-size:26px;margin:0 auto 14px;}
+.finish h2{font-family:var(--disp);font-weight:700;font-size:24px;margin:0 0 6px;}
+.finish p{color:var(--ink-2);margin:0 auto 20px;max-width:46ch;font-size:14px;line-height:1.5;}
+
+/* ===================== PRINT BRIEF ===================== */
+#brief{display:none;}
+@media print{
+  .appbar,.stage,.usebar{display:none!important;}
+  body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  #brief{display:block!important;padding:8px 6px;color:#1a1a22;font-family:var(--body);}
+  #brief .b-head{display:flex;align-items:center;justify-content:space-between;border-bottom:2.5px solid #2B0075;padding-bottom:14px;}
+  #brief .b-logo{height:30px;width:auto;}
+  #brief .b-meta{font-size:11px;letter-spacing:.12em;color:#888;font-weight:600;}
+  #brief h1{font-family:var(--disp);font-size:30px;margin:22px 0 6px;letter-spacing:-.02em;}
+  #brief .b-sub{color:#555;margin:0 0 8px;max-width:62ch;line-height:1.55;font-size:13.5px;}
+  #brief h2{font-family:var(--disp);font-size:13px;text-transform:uppercase;letter-spacing:.1em;color:#4B0EA3;border-bottom:1px solid #eee;padding-bottom:7px;margin:26px 0 12px;}
+  #brief .b-row{display:flex;justify-content:space-between;gap:24px;padding:9px 0;border-bottom:1px solid #f1f1f3;font-size:14px;}
+  #brief .b-row .k{color:#666;}
+  #brief .b-row .v{font-weight:600;text-align:right;}
+  #brief .b-notes{white-space:pre-wrap;font-size:14px;line-height:1.6;background:#f7f6fb;padding:16px;border-radius:10px;border:1px solid #ece8f7;}
+  #brief .b-foot{margin-top:30px;padding-top:12px;border-top:1px solid #eee;font-size:11px;color:#999;letter-spacing:.06em;text-transform:uppercase;}
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== APP BAR ===================== -->
+<header class="appbar">
+  <div class="brand"><img class="logo-img" src="designs/yachtway-logo.png" alt="YachtWay"><span class="brand-tag">Show Window</span></div>
+  <div class="crumbs">
+    <span class="c on" data-crumb="pick"><span class="d">1</span><span data-i18n="crumb_pick">Pick a design</span></span>
+    <span class="sep">›</span>
+    <span class="c" data-crumb="review"><span class="d">2</span><span data-i18n="crumb_review">Review</span></span>
+    <span class="sep">›</span>
+    <span class="c" data-crumb="config"><span class="d">3</span><span data-i18n="crumb_config">Tell us a few things</span></span>
+  </div>
+  <div class="right">
+    <div class="lang-wrap" id="langWrap">
+      <button class="lang-btn" id="langBtn"><svg class="globe" width="16" height="16" viewBox="0 0 19 19" fill="none" aria-hidden="true"><path d="M9.5 19C14.7467 19 19 14.7467 19 9.5C19 4.25329 14.7467 0 9.5 0C4.25329 0 0 4.25329 0 9.5C0 14.7467 4.25329 19 9.5 19ZM9.5 1.35714C10.2003 1.35714 11.0492 2.00043 11.763 3.54689C12.0161 4.09654 12.2367 4.72964 12.4145 5.42857H6.58554C6.76332 4.72964 6.98386 4.09586 7.23696 3.54689C7.95082 2.00043 8.79971 1.35714 9.5 1.35714ZM6.00536 2.97825C5.67286 3.69754 5.39736 4.52404 5.19039 5.42857H2.44625C3.38572 3.80455 4.85547 2.55332 6.60861 1.88507C6.37984 2.23337 6.17795 2.5986 6.00468 2.97757M4.93864 6.78571C4.81166 7.68488 4.74862 8.59192 4.75 9.5C4.75 10.4405 4.81582 11.3525 4.93932 12.2143H1.82061C1.5129 11.3425 1.35616 10.4245 1.35714 9.5C1.35714 8.54864 1.52 7.63461 1.82061 6.78571H4.93864ZM5.18971 13.5714C5.39668 14.476 5.67218 15.3025 6.004 16.0217C6.18246 16.4085 6.384 16.7763 6.60793 17.1143C4.85518 16.446 3.38571 15.195 2.44625 13.5714H5.18971ZM6.58554 13.5714H12.4131C12.2538 14.2172 12.0357 14.8471 11.7617 15.4531C11.0499 16.9996 10.201 17.6429 9.5 17.6429C8.79904 17.6429 7.95082 16.9996 7.23696 15.4531C6.9629 14.8471 6.74485 14.2172 6.58554 13.5714ZM12.6879 12.2143H6.31071C6.1734 11.3161 6.10534 10.4086 6.10714 9.5C6.10714 8.54525 6.17975 7.63257 6.31071 6.78571H12.6893C12.8203 7.63257 12.8929 8.54525 12.8929 9.5C12.8929 10.4547 12.8203 11.3674 12.6893 12.2143M13.8103 13.5714H16.5544C15.6148 15.1952 14.1451 16.4461 12.3921 17.1143C12.616 16.7763 12.8175 16.4085 12.996 16.0217C13.3278 15.3025 13.6033 14.476 13.8103 13.5714ZM17.1801 12.2143H14.0614C14.1849 11.3525 14.2507 10.4405 14.2507 9.5C14.2507 8.5595 14.1849 7.6475 14.0614 6.78571H17.1801C17.4876 7.65758 17.6441 8.57551 17.6429 9.5C17.6429 10.4514 17.48 11.3654 17.1794 12.2143M12.3914 1.88507C14.1445 2.55332 15.6143 3.80455 16.5537 5.42857H13.8089C13.602 4.52404 13.3265 3.69754 12.9946 2.97825C12.8214 2.59927 12.6195 2.23405 12.3907 1.88575" fill="currentColor"></path></svg><span id="langCur">English</span><span class="cv">▾</span></button>
+      <div class="lang-menu" id="langMenu"></div>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== STAGE 1 · PICK ===================== -->
+<section id="pick" class="stage on">
+  <div class="pick">
+    <div class="eyebrow" data-i18n="pick_eyebrow">Your website · three looks</div>
+    <h1 data-i18n="pick_h1">Your website is your storefront.</h1>
+    <p class="sub" data-i18n="pick_sub">It is the first thing buyers judge, and it decides how many of them reach out. Choose the design that represents your business.</p>
+    <h2 class="pick-h2" data-i18n="pick_h2">Choose Your Design</h2>
+    <div class="pick-grid">
+      <div class="pick-item" data-pick="a">
+        <div class="pick-head"><span class="badge">A</span><span class="pname" data-i18n="name_a">Clean &amp; luxe</span></div>
+        <div class="pcard">
+          <div class="thumb"><img src="designs/home-a.png" alt="Design A"></div>
+          <div class="pc-body"><p data-i18n="desc_a">Airy, light, lots of breathing room.</p><span class="rev" data-i18n="review_this">Review this →</span></div>
+        </div>
+      </div>
+      <div class="pick-item" data-pick="b">
+        <div class="pick-head"><span class="badge">B</span><span class="pname" data-i18n="name_b">Bold &amp; editorial</span></div>
+        <div class="pcard">
+          <div class="thumb"><img src="designs/home-b.png" alt="Design B"></div>
+          <div class="pc-body"><p data-i18n="desc_b">Dark, dramatic, big confident type.</p><span class="rev" data-i18n="review_this">Review this →</span></div>
+        </div>
+      </div>
+      <div class="pick-item" data-pick="c">
+        <div class="pick-head"><span class="badge">C</span><span class="pname" data-i18n="name_c">Classic brokerage</span></div>
+        <div class="pcard">
+          <div class="thumb"><img src="designs/home-c.png" alt="Design C"></div>
+          <div class="pc-body"><p data-i18n="desc_c">Events, brands &amp; locations, structured.</p><span class="rev" data-i18n="review_this">Review this →</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="scrollnote" data-i18n="scrollnote">All three share the same Listings and Listing-detail pages; only the home page look changes.</p>
+  </div>
+</section>
+
+<!-- ===================== STAGE 2 · REVIEW ===================== -->
+<section id="review" class="stage">
+  <div class="rvbar">
+    <button class="back" id="backToPick" data-i18n="back_designs">← Back to designs</button>
+    <span class="div"></span>
+    <div class="pagetabs">
+      <button data-page="home" class="on" data-i18n="tab_home">Home</button>
+      <button data-page="catalog" data-i18n="tab_catalog">Boats for Sale</button>
+      <button data-page="listing" data-i18n="tab_listing">Listing Page</button>
+    </div>
+    <span class="spacer"></span>
+    <div class="verseg">
+      <span class="vl" data-i18n="switch_design">Switch design</span>
+      <button data-ver="a" class="on">A</button>
+      <button data-ver="b">B</button>
+      <button data-ver="c">C</button>
+    </div>
+    <span class="shared-note" id="sharedNote" style="display:none;font-size:13px;color:var(--faint);font-weight:500" data-i18n="shared_note">Same page on every design</span>
+  </div>
+
+  <div class="viewport">
+    <div class="frame">
+      <div class="fbar"><div class="dots"><i></i><i></i><i></i></div><div class="url" id="urlText">your-website.com</div></div>
+      <div class="shotwrap"><div class="loadcue" id="loadcue" data-i18n="loading">Loading design…</div><img class="shot" id="shot" alt="Design preview"></div>
+    </div>
+  </div>
+
+  <div class="usebar">
+    <span class="ut" data-i18n-html="usebar">Like <b id="useName"></b>? Choose it and we will set up your site.</span>
+    <button class="btn primary" id="useBottom" data-i18n="use_btn">♥ Use this design →</button>
+  </div>
+</section>
+
+<!-- notes moved into config step -->
+
+<!-- ===================== STAGE 3 · CONFIG ===================== -->
+<section id="config" class="stage">
+  <div class="config">
+    <div class="chead">
+      <h1 data-i18n="chead_h1">Nice choice</h1>
+      <p class="lead" data-i18n="chead_lead">Last step. A few simple questions so we can build your site. Answer what you can, your account manager handles the rest.</p>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:16px">
+        <div style="display:flex;align-items:center;gap:9px">
+          <span class="chosen-tag" id="chosenTag">✓ Design A · Clean luxe</span>
+          <button type="button" class="eye-icon" id="previewChosen" data-i18n-title="preview_design" aria-label="Preview design"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M23.1853 11.6962C23.1525 11.6222 22.3584 9.86062 20.5931 8.09531C18.2409 5.74312 15.27 4.5 12 4.5C8.72999 4.5 5.75905 5.74312 3.40687 8.09531C1.64155 9.86062 0.843741 11.625 0.814679 11.6962C0.772035 11.7922 0.75 11.896 0.75 12.0009C0.75 12.1059 0.772035 12.2097 0.814679 12.3056C0.847491 12.3797 1.64155 14.1403 3.40687 15.9056C5.75905 18.2569 8.72999 19.5 12 19.5C15.27 19.5 18.2409 18.2569 20.5931 15.9056C22.3584 14.1403 23.1525 12.3797 23.1853 12.3056C23.2279 12.2097 23.25 12.1059 23.25 12.0009C23.25 11.896 23.2279 11.7922 23.1853 11.6962ZM12 18C9.11437 18 6.59343 16.9509 4.50655 14.8828C3.65028 14.0313 2.92179 13.0603 2.34374 12C2.92164 10.9396 3.65014 9.9686 4.50655 9.11719C6.59343 7.04906 9.11437 6 12 6C14.8856 6 17.4066 7.04906 19.4934 9.11719C20.3514 9.9684 21.0815 10.9394 21.6609 12C20.985 13.2619 18.0403 18 12 18ZM12 7.5C11.11 7.5 10.2399 7.76392 9.49993 8.25839C8.7599 8.75285 8.18313 9.45566 7.84253 10.2779C7.50194 11.1002 7.41282 12.005 7.58646 12.8779C7.76009 13.7508 8.18867 14.5526 8.81801 15.182C9.44735 15.8113 10.2492 16.2399 11.1221 16.4135C11.995 16.5872 12.8998 16.4981 13.7221 16.1575C14.5443 15.8169 15.2471 15.2401 15.7416 14.5001C16.2361 13.76 16.5 12.89 16.5 12C16.4988 10.8069 16.0242 9.66304 15.1806 8.81939C14.337 7.97575 13.1931 7.50124 12 7.5ZM12 15C11.4066 15 10.8266 14.8241 10.3333 14.4944C9.83993 14.1648 9.45542 13.6962 9.22835 13.1481C9.00129 12.5999 8.94188 11.9967 9.05764 11.4147C9.17339 10.8328 9.45911 10.2982 9.87867 9.87868C10.2982 9.45912 10.8328 9.1734 11.4147 9.05764C11.9967 8.94189 12.5999 9.0013 13.148 9.22836C13.6962 9.45542 14.1648 9.83994 14.4944 10.3333C14.824 10.8266 15 11.4067 15 12C15 12.7956 14.6839 13.5587 14.1213 14.1213C13.5587 14.6839 12.7956 15 12 15Z" fill="currentColor"></path></svg></button>
+        </div>
+        <div class="cur-seg" id="curSeg"><span class="cl" data-i18n="prices_in">Prices in</span><button type="button" data-cur="eur" class="on">EUR €</button><button type="button" data-cur="usd">USD $</button></div>
+      </div>
+      <div class="chosen-actions">
+        <button type="button" class="btn link" id="changeMind" data-i18n="change_mind">Changed your mind? Go back</button>
+      </div>
+    </div>
+    <p class="base-price" id="basePrice"></p>
+    <div class="qbar"><span style="font-size:13px;font-weight:600;color:var(--ink-2)" id="qcount">0 of 8</span><div class="track"><div class="fill" id="qfill"></div></div><span class="pc" id="qpc">0%</span></div>
+
+    <form id="cfgForm" autocomplete="off">
+      <div class="qcard" data-q><div class="qh"><div class="qnum">1</div><div class="qbody"><h3 data-i18n="q1_h">Your company name</h3><p class="q" data-i18n="q1_q">What should we put on the site?</p><input class="field" data-fill data-i18n-ph="q1_ph" placeholder="e.g. Meridian Yachts" id="f_company"></div></div></div>
+
+      <div class="qcard" data-q><div class="qh"><div class="qnum">2</div><div class="qbody"><h3 data-i18n="q2_h">Who is our main contact?</h3><p class="q" data-i18n="q2_q">The person we will work with.</p><input class="field" data-fill data-i18n-ph="q2_ph" placeholder="Contact person's name" id="f_contact"></div></div></div>
+
+      <div class="qcard" data-q><div class="qh"><div class="qnum">3</div><div class="qbody"><h3 data-i18n="q3_h">When do you want it live?</h3><p class="q" data-i18n="q3_q">Pick a date, at least 30 days from today.</p><div class="datewrap"><input class="field" type="date" data-fill id="f_date"><span class="date-display" id="dateDisplay"></span></div></div></div></div>
+
+      <div class="qcard" data-q data-yn><div class="qh"><div class="qnum">4</div><div class="qbody"><h3 data-i18n="q4_h">Are you an authorised dealer?</h3><p class="q" data-i18n="q4_q">Do you officially represent brands?</p>
+        <div class="yn"><button type="button" data-yes data-i18n="yn_yes">Yes</button><button type="button" data-no data-i18n="yn_no">No</button></div>
+        <div class="follow" data-follow><span class="flab" data-i18n="flab_brands">Which brands?</span><div class="chips" id="brandChips"></div><div class="addwrap" style="margin-top:10px"><input class="field" id="brandInput" data-i18n-ph="ph_brand" placeholder="Type a brand, press Enter"></div></div>
+      </div></div></div>
+
+      <div class="qcard" data-q data-yn><div class="qh"><div class="qnum">5</div><div class="qbody"><h3 data-i18n="q5_h">Show live listings on your site?</h3><p class="q" data-i18n="q5_q">Yachts for sale, kept up to date for you.</p>
+        <div class="yn"><button type="button" data-yes data-i18n="yn_yes">Yes</button><button type="button" data-no data-i18n="yn_no">No</button></div>
+        <div class="follow" data-follow><div class="note-cb"><span class="ic">⟳</span><span data-i18n-html="note_feed">We will connect the <b>YachtWay API feed</b>, so your listings update automatically.</span></div></div>
+      </div></div></div>
+
+      <div class="qcard" data-q data-yn><div class="qh"><div class="qnum">6</div><div class="qbody"><h3 data-i18n="q6_h">Would you like a Team page?</h3><p class="q" data-i18n="q6_q">Introduce your people.</p>
+        <div class="yn"><button type="button" data-yes data-i18n="yn_yes">Yes</button><button type="button" data-no data-i18n="yn_no">No</button></div>
+        <div class="follow" data-follow><span class="flab" data-i18n="flab_team">How many team members?</span><div class="stepper"><button type="button" id="teamMinus">–</button><span class="num" id="teamNum">4</span><button type="button" id="teamPlus">+</button></div></div>
+      </div></div></div>
+
+      <div class="qcard" data-q data-yn><div class="qh"><div class="qnum">7</div><div class="qbody"><h3 data-i18n="q7_h">Would you like a Services page?</h3><p class="q" data-i18n="q7_q">List what you offer, like yacht management, aftercare, charters and more.</p>
+        <div class="yn"><button type="button" data-yes data-i18n="yn_yes">Yes</button><button type="button" data-no data-i18n="yn_no">No</button></div>
+        <div class="follow" data-follow><span class="flab" data-i18n="flab_services">Which services?</span><div class="chips" id="svcChips"></div><div class="addwrap" style="margin-top:10px"><input class="field" id="svcInput" data-i18n-ph="ph_service" placeholder="Type a service, press Enter"></div></div>
+      </div></div></div>
+
+      <div class="qcard" data-q data-yn><div class="qh"><div class="qnum">8</div><div class="qbody"><h3 data-i18n="q8_h">Do you have photos &amp; video of your boats?</h3><p class="q" data-i18n="q8_q">High-quality media we can use.</p>
+        <div class="yn"><button type="button" data-yes data-i18n="yn_yes">Yes</button><button type="button" data-no data-i18n="yn_no">No</button></div>
+        <div class="follow" data-follow data-follow-no><div class="note-cb"><span class="ic">!</span><span data-i18n-html="note_studio">Our in-house <b>YachtWay Studio</b> team can create unique, captivating content that brings your website to life and elevates your wider marketing presence.</span></div></div>
+      </div></div></div>
+
+      <div class="qcard" data-q data-multi><div class="qh"><div class="qnum">9</div><div class="qbody"><h3 data-i18n="q9_h">Any extra pages you would like?</h3><p class="q" data-i18n="q9_q">Pick any that fit your business. Paid pages are a one-time setup fee.</p>
+        <div class="included"><span class="ic">✓</span><span data-i18n-html="included_pages"><b>For your convenience, these are always included:</b> Contact Us and About Us pages.</span></div>
+        <div class="optgrid">
+          <button type="button" class="opt" data-opt="Sell Your Boat"><span class="box">✓</span><span><span class="ot"><span class="otl" data-i18n="ot_sell">Sell Your Boat</span><span class="free paid" data-price="49"></span></span><span class="od" data-i18n="od_sell">Owners enter their details and send you a request to list and broker their boat.</span></span></button>
+          <button type="button" class="opt" data-opt="Finance &amp; Pre-qualification"><span class="box">✓</span><span><span class="ot"><span class="otl" data-i18n="ot_finance">Finance &amp; Pre-qualification</span><span class="free" data-i18n="free_add">Free to add</span></span><span class="od" data-i18n="od_finance">Let buyers explore financing and get pre-qualified.</span></span></button>
+          <button type="button" class="opt" data-opt="Charter"><span class="box">✓</span><span><span class="ot"><span class="otl" data-i18n="ot_charter">Charter</span><span class="free paid" data-price="49"></span></span><span class="od" data-i18n="od_charter">Showcase boats available to charter.</span></span></button>
+          <button type="button" class="opt" data-opt="Blog / Articles"><span class="box">✓</span><span><span class="ot"><span class="otl" data-i18n="ot_blog">Blog / Articles</span><span class="free paid" data-price="49"></span></span><span class="od" data-i18n="od_blog">Share shows, launches and stories.</span></span></button>
+        </div>
+        <div class="follow show" style="border-top:0;padding-top:14px"><span class="flab" data-i18n="flab_other_page">Request any other page</span><div class="chips" id="pageChips"></div><div class="addwrap" style="margin-top:10px"><input class="field" id="pageInput" data-i18n-ph="ph_page" placeholder="Type a page you would like, press Enter"></div></div>
+      </div></div></div>
+
+      <div class="qcard" data-q data-yn><div class="qh"><div class="qnum">10</div><div class="qbody"><h3 style="display:flex;align-items:center;gap:9px;flex-wrap:wrap"><span data-i18n="q10_h">Add a WhatsApp button on every page?</span><span class="free paid" data-price="19" data-per="mo"></span><button type="button" class="eye-btn" id="waPreviewBtn" aria-label="See what this looks like"><span class="eye">◉</span> <span data-i18n="eye_see">See it</span></button></h3><p class="q" data-i18n="q10_q">A floating WhatsApp icon on each page, so buyers reach your broker in one tap.</p>
+        <div class="yn"><button type="button" data-yes data-i18n="yn_yes">Yes</button><button type="button" data-no data-i18n="yn_no">No</button></div>
+        <div class="follow" data-follow><div class="note-cb"><span class="ic">◷</span><span data-i18n="note_wa">Tapping it opens a ready-to-send message straight to your broker, from any page.</span></div></div>
+      </div></div></div>
+
+      <div class="qcard" data-q data-multi data-lang><div class="qh"><div class="qnum">11</div><div class="qbody"><h3 data-i18n="q11_h">Which language should your site speak?</h3><p class="q" data-i18n="q11_q">Pick one secondary language. We translate the whole site into it.</p>
+        <div class="included"><span class="ic">✓</span><span data-i18n-html="included_lang"><b>Every site launches in English.</b> Choose one secondary language to add.</span></div>
+        <div class="optgrid">
+          <button type="button" class="opt" data-opt="Español"><span class="box">✓</span><span><span class="ot">Español</span><span class="od">Spanish</span></span></button>
+          <button type="button" class="opt" data-opt="Français"><span class="box">✓</span><span><span class="ot">Français</span><span class="od">French</span></span></button>
+          <button type="button" class="opt" data-opt="Deutsch"><span class="box">✓</span><span><span class="ot">Deutsch</span><span class="od">German</span></span></button>
+          <button type="button" class="opt" data-opt="Italiano"><span class="box">✓</span><span><span class="ot">Italiano</span><span class="od">Italian</span></span></button>
+          <button type="button" class="opt" data-opt="Nederlands"><span class="box">✓</span><span><span class="ot">Nederlands</span><span class="od">Dutch</span></span></button>
+        </div>
+      </div></div></div>
+    </form>
+
+    <div class="qcard"><div class="qh"><div class="qnum" style="font-size:15px">✎</div><div class="qbody"><h3 data-i18n="notes_h">Anything you would change or add?</h3><p class="q" data-i18n="notes_q">Optional. Your notes go into the brief for your account manager.</p><textarea class="field" id="notesText" style="min-height:90px;resize:vertical" data-i18n-ph="notes_ph" placeholder="e.g. Love A's hero, can the listings be 3 across like C?"></textarea></div></div></div>
+
+    <div class="finish">
+      <div class="tick">✓</div>
+      <h2 data-i18n="finish_h">That is everything</h2>
+      <p data-i18n="finish_p">Download your brief as a PDF and email it to your account manager. It includes your chosen design, notes and answers.</p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <button class="btn primary lg" id="downloadBtn" data-i18n="download_btn">⬇ Download brief (PDF)</button>
+        <button class="btn ghost lg" id="backReview" data-i18n="back_review">← Back to the designs</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Design preview modal -->
+<div class="modal-overlay" id="designModal">
+  <div class="modal" style="max-width:780px">
+    <div class="modal-head"><b id="dmTitle">Design</b><button class="btn link" id="dmClose" data-i18n="modal_close">Close</button></div>
+    <div class="modal-body" style="padding:0;max-height:72vh;overflow-y:auto"><img id="dmImg" alt="Chosen design" style="width:100%;display:block"></div>
+    <div style="padding:14px 20px;border-top:1px solid var(--line-2);display:flex;justify-content:flex-end">
+      <button type="button" class="btn ghost" id="dmChange" data-i18n="change_mind">Changed your mind? Go back</button>
+    </div>
+  </div>
+</div>
+
+<!-- WhatsApp preview modal -->
+<div class="modal-overlay" id="waModal">
+  <div class="modal">
+    <div class="modal-head"><b data-i18n="modal_title">WhatsApp button preview</b><button class="btn link" id="waClose" data-i18n="modal_close">Close</button></div>
+    <div class="modal-body">
+      <p class="modal-sub" data-i18n="modal_sub">A small WhatsApp button sits in the corner of every page. Buyers tap it and a chat to your broker opens, ready to send.</p>
+      <div class="wa-demo">
+        <div class="wa-page">
+          <div class="wa-topbar"><span class="wa-logo">YOUR YACHTS</span><span class="wa-navdots"><i></i><i></i><i></i></span></div>
+          <div class="wa-hero"><span data-i18n="wa_hero">Listing page</span></div>
+          <div class="wa-lines"><span style="width:70%"></span><span style="width:45%"></span><span style="width:60%"></span></div>
+          <div class="wa-bubble"><div class="wa-msg" data-i18n="wa_msg">Hi! I am interested in the Riva 110. Is it still available?</div></div>
+          <button class="wa-fab"><svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><path fill="#fff" d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.4.7 4.6 1.8 6.5L3 29l7.2-2.2c1.8 1 3.9 1.6 6 1.6 7 0 12.5-5.5 12.5-12.5S23 3 16 3zm0 22.5c-1.9 0-3.7-.5-5.2-1.4l-.4-.2-4.3 1.3 1.3-4.1-.2-.4c-1-1.6-1.5-3.5-1.5-5.4C5.5 9.7 10.2 5 16 5s10.5 4.7 10.5 10.5S21.8 25.5 16 25.5zm5.8-7.8c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1c-1.9-.9-3.1-1.6-4.3-3.6-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.6s-.7-1.7-1-2.3c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.8.4-.3.4-1.1 1.1-1.1 2.6s1.1 3 1.3 3.2c.2.2 2.2 3.4 5.4 4.7 2 .8 2.8.9 3.8.8.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/></svg></button>
+        </div>
+      </div>
+      <div class="note-cb" style="margin-top:16px"><span class="ic">!</span><span data-i18n="modal_note">The message is pre-filled and goes straight to the company number you give us.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- print-only brief -->
+<div id="brief"></div>
+
+<script src="translations.js"></script>
+<script>
+(function(){
+  const $=(s,r=document)=>r.querySelector(s);
+  const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+  const SRC={
+    home:{a:'designs/home-a.png',b:'designs/home-b.png',c:'designs/home-c.png'},
+    catalog:'designs/catalog.png', listing:'designs/listing.png'
+  };
+  const URLS={home:'',catalog:'/yachts-for-sale',listing:'/listing'};
+  let ver='a', pg='home';
+  const st=(()=>{try{return JSON.parse(localStorage.getItem('dsw2'))||{}}catch(e){return{}}})();
+
+  /* ---- i18n ---- */
+  let lang = st.lang || 'en';
+  let T = (window.I18N&&window.I18N[lang]) || window.I18N.en;
+  let NAMES = {};
+  function buildNames(){ NAMES={a:T.word_design+' A · '+T.name_a, b:T.word_design+' B · '+T.name_b, c:T.word_design+' C · '+T.name_c}; }
+  function tr(k){ return (T&&T[k]!=null)?T[k]:window.I18N.en[k]; }
+  function applyI18n(){
+    T=(window.I18N&&window.I18N[lang])||window.I18N.en;
+    document.documentElement.lang=lang;
+    document.querySelectorAll('[data-i18n]').forEach(el=>{el.textContent=tr(el.dataset.i18n);});
+    document.querySelectorAll('[data-i18n-html]').forEach(el=>{el.innerHTML=tr(el.dataset.i18nHtml);});
+    document.querySelectorAll('[data-i18n-ph]').forEach(el=>{el.placeholder=tr(el.dataset.i18nPh);});
+    document.querySelectorAll('[data-i18n-title]').forEach(el=>{el.title=tr(el.dataset.i18nTitle);});
+    buildNames();
+    // dynamic bits
+    $('#useName').textContent=NAMES[ver];
+    if($('#chosenTag')) $('#chosenTag').textContent='✓ '+NAMES[ver];
+    $('#langCur').textContent=(window.LANGS.find(l=>l[0]===lang)||['','English'])[1];
+    document.querySelectorAll('#langMenu button').forEach(b=>b.classList.toggle('on',b.dataset.l===lang));
+    if(typeof applyCurrency==='function') applyCurrency();
+    if(typeof updateProgress==='function') updateProgress();
+  }
+
+  function save(){localStorage.setItem('dsw2',JSON.stringify({ver,pg,cur,lang,notes:$('#notesText').value}));}
+
+  /* ---- stage nav ---- */
+  function stage(id){
+    $$('.stage').forEach(s=>s.classList.toggle('on',s.id===id));
+    const order={pick:0,review:1,config:2};
+    $$('.crumbs .c').forEach(c=>{
+      const o=order[c.dataset.crumb];
+      c.classList.toggle('on',c.dataset.crumb===id);
+      c.classList.toggle('done',o<order[id]);
+    });
+    window.scrollTo(0,0);
+  }
+
+  /* ---- preview ---- */
+  function render(){
+    const src = pg==='home'?SRC.home[ver]:SRC[pg];
+    const img=$('#shot'), cue=$('#loadcue');
+    cue.style.display='grid'; img.style.opacity='0';
+    img.onload=()=>{cue.style.display='none';img.style.opacity='1';};
+    img.src=src;
+    $('#urlText').textContent='your-website.com'+URLS[pg];
+    $$('.verseg button').forEach(b=>b.classList.toggle('on',b.dataset.ver===ver));
+    $$('.pagetabs button').forEach(b=>b.classList.toggle('on',b.dataset.page===pg));
+    const home=pg==='home';
+    document.querySelector('.verseg').style.display=home?'flex':'none';
+    document.querySelector('#sharedNote').style.display=home?'none':'inline';
+    $('#useName').textContent=NAMES[ver];
+    save();
+  }
+
+  $$('[data-pick]').forEach(c=>c.addEventListener('click',()=>{ver=c.dataset.pick;pg='home';stage('review');render();}));
+  $$('.verseg button').forEach(b=>b.addEventListener('click',()=>{ver=b.dataset.ver;render();window.scrollTo({top:0,behavior:'smooth'});}));
+  $$('.pagetabs button').forEach(b=>b.addEventListener('click',()=>{pg=b.dataset.page;render();window.scrollTo({top:0,behavior:'smooth'});}));
+  $('#backToPick').addEventListener('click',()=>stage('pick'));
+  $('#useBottom').addEventListener('click',()=>goConfig());
+  $('#backReview').addEventListener('click',()=>stage('review'));
+  function goConfig(){$('#chosenTag').textContent='✓ '+NAMES[ver];stage('config');}
+
+  /* ---- notes (in config) ---- */
+  $('#notesText').addEventListener('input',save);
+
+  /* ---- config: progress + yes/no + follow-ups ---- */
+  function updateProgress(){
+    const cards=$$('.qcard[data-q]');
+    const total=cards.length;
+    let done=0;
+    cards.forEach(c=>{
+      let ok=false;
+      const inp=c.querySelector('input[data-fill]');
+      if(inp) ok=inp.value.trim()!=='';
+      if(c.hasAttribute('data-yn')) ok=c.querySelector('.yn button.on')!=null;
+      if(c.hasAttribute('data-multi')) ok=c.querySelector('.opt.on')!=null || (typeof getPages==='function' && getPages().length>0);
+      c.classList.toggle('answered',ok);
+      if(ok)done++;
+    });
+    $('#qcount').textContent=done+' '+tr('of')+' '+total;
+    const pct=Math.round(done/total*100);
+    $('#qfill').style.width=pct+'%'; $('#qpc').textContent=pct+'%';
+  }
+  $$('.qcard[data-multi] .opt').forEach(o=>o.addEventListener('click',()=>{
+    const card=o.closest('.qcard');
+    if(card.hasAttribute('data-lang')){
+      const wasOn=o.classList.contains('on');
+      card.querySelectorAll('.opt').forEach(x=>x.classList.remove('on'));
+      if(!wasOn)o.classList.add('on');   // tap again to clear
+    } else {
+      o.classList.toggle('on');
+    }
+    updateProgress();
+  }));
+  $$('.qcard[data-yn]').forEach(card=>{
+    const yes=card.querySelector('[data-yes]'),no=card.querySelector('[data-no]'),follow=card.querySelector('[data-follow]');
+    const onlyNo=card.querySelector('[data-follow-no]');
+    yes.addEventListener('click',()=>{yes.classList.add('on');no.classList.remove('on');if(follow)follow.classList.toggle('show',!onlyNo);updateProgress();});
+    no.addEventListener('click',()=>{no.classList.add('on');yes.classList.remove('on');if(follow)follow.classList.toggle('show',!!onlyNo);updateProgress();});
+  });
+  $$('input[data-fill]').forEach(i=>i.addEventListener('input',updateProgress));
+
+  /* currency toggle */
+  let cur=st.cur||'eur';
+  const SYM={eur:'€',usd:'$'};
+  function applyCurrency(){
+    $$('.free.paid').forEach(t=>{t.textContent='+ '+SYM[cur]+t.dataset.price+(t.dataset.per?'/'+tr('per_mo'):'');});
+    $$('#curSeg button').forEach(b=>b.classList.toggle('on',b.dataset.cur===cur));
+    const bp=$('#basePrice'); if(bp) bp.innerHTML=tr('base_price').replace('{p}','<b>'+SYM[cur]+'199/'+tr('per_mo')+'</b>');
+    const df=$('#f_date'); if(df) df.lang=(cur==='eur')?'en-GB':'en-US';   // EUR → dd/mm/yyyy, USD → mm/dd/yyyy
+    renderDate();
+  }
+  function fmtDate(v){ if(!v) return '-'; const [y,m,d]=v.split('-'); return (cur==='eur')?`${d}/${m}/${y}`:`${m}/${d}/${y}`; }
+  function renderDate(){ const dd=$('#dateDisplay'); if(!dd) return; const v=$('#f_date').value; dd.textContent=v?fmtDate(v):''; }
+  $$('#curSeg button').forEach(b=>b.addEventListener('click',()=>{cur=b.dataset.cur;applyCurrency();save();}));
+  applyCurrency();
+
+  /* whatsapp preview modal */
+  const waModal=$('#waModal');
+  $('#waPreviewBtn').addEventListener('click',()=>waModal.classList.add('open'));
+  $('#waClose').addEventListener('click',()=>waModal.classList.remove('open'));
+  waModal.addEventListener('click',e=>{if(e.target===waModal)waModal.classList.remove('open');});
+
+  /* chosen-design preview modal */
+  const dModal=$('#designModal');
+  function openDesign(){ $('#dmImg').src=SRC.home[ver]; $('#dmTitle').textContent=NAMES[ver]; dModal.classList.add('open'); }
+  $('#previewChosen').addEventListener('click',openDesign);
+  $('#dmClose').addEventListener('click',()=>dModal.classList.remove('open'));
+  dModal.addEventListener('click',e=>{if(e.target===dModal)dModal.classList.remove('open');});
+  function backToReview(){ dModal.classList.remove('open'); pg='home'; stage('review'); render(); }
+  $('#changeMind').addEventListener('click',backToReview);
+  $('#dmChange').addEventListener('click',backToReview);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')dModal.classList.remove('open');});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')waModal.classList.remove('open');});
+
+  /* date min = today+30 */
+  const d=new Date();d.setDate(d.getDate()+30);
+  $('#f_date').min=d.toISOString().split('T')[0];
+  $('#f_date').value=d.toISOString().split('T')[0];
+  $('#f_date').addEventListener('input',renderDate);
+  renderDate();
+
+  /* team stepper */
+  let team=4;
+  $('#teamMinus').addEventListener('click',()=>{team=Math.max(1,team-1);$('#teamNum').textContent=team;});
+  $('#teamPlus').addEventListener('click',()=>{team=Math.min(40,team+1);$('#teamNum').textContent=team;});
+
+  /* chip inputs */
+  function chipInput(inputId,chipsId,seed){
+    const input=$('#'+inputId),box=$('#'+chipsId);let items=seed.slice();
+    function draw(){box.innerHTML=items.map((t,i)=>`<span class="chip">${t}<b data-i="${i}">✕</b></span>`).join('');
+      $$('b',box).forEach(b=>b.addEventListener('click',()=>{items.splice(+b.dataset.i,1);draw();updateProgress();}));}
+    input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();const v=input.value.trim();if(v){items.push(v);input.value='';draw();updateProgress();}}});
+    draw();return ()=>items;
+  }
+  const getBrands=chipInput('brandInput','brandChips',[]);
+  const getSvc=chipInput('svcInput','svcChips',[]);
+  const getPages=chipInput('pageInput','pageChips',[]);
+  function getExtraPages(){
+    const picked=$$('.qcard[data-multi]:not([data-lang]) .opt.on').map(o=>{
+      const name=o.dataset.opt.replace(/&amp;/g,'&');
+      const paid=o.querySelector('.free.paid');
+      return paid?`${name} (+ ${SYM[cur]}${paid.dataset.price})`:name;
+    });
+    return picked.concat(getPages());
+  }
+
+  /* ---- download brief (print) ---- */
+  const EN=window.I18N.en; const enName=v=>EN.word_design+' '+v.toUpperCase()+' · '+EN['name_'+v];
+  function yn(card){const b=card.querySelector('.yn button.on');return b?(b.hasAttribute('data-yes')?'Yes':'No'):'-';}
+  $('#downloadBtn').addEventListener('click',()=>{
+    const cards=$$('.qcard[data-yn]');
+    const rows=[
+      ['Chosen design',NAMES[ver]],
+      ['Company',$('#f_company').value||'-'],
+      ['Contact person',$('#f_contact').value||'-'],
+      ['Wants live by',fmtDate($('#f_date').value)],
+      ['Plan',`Website ${SYM[cur]}199/mo (incl. live YachtWay feed + database storage)`],
+      ['Authorised dealer',yn(cards[0])],
+      ['Brands',getBrands().join(', ')||'-'],
+      ['Live listings (YachtWay feed)',yn(cards[1])],
+      ['Team page',yn(cards[2])+(yn(cards[2])==='Yes'?` · ${team} members`:'')],
+      ['Services page',yn(cards[3])],
+      ['Services',getSvc().join(', ')||'-'],
+      ['Has own photos/video',yn(cards[4])],
+      ['Extra pages',getExtraPages().join(', ')||'-'],
+      ['Languages',('English'+( $('.qcard[data-lang] .opt.on') ? ' + '+$('.qcard[data-lang] .opt.on').dataset.opt : ' only'))],
+      ['WhatsApp button',yn(cards[5])==='Yes'?`Yes (+ ${SYM[cur]}19/mo)`:yn(cards[5])],
+    ];
+    const notes=$('#notesText').value.trim();
+    $('#brief').innerHTML=`
+      <div class="b-head"><img class="b-logo" src="designs/yachtway-logo.png" alt="YachtWay"><span class="b-meta">WEBSITE BRIEF · ${new Date().toLocaleDateString()}</span></div>
+      <h1>${$('#f_company').value||'Your new website'}</h1>
+      <p class="b-sub">A summary of your chosen direction and preferences, prepared in the YachtWay Show Window. Share this with your account manager and we will take it from here.</p>
+      <h2>Design direction</h2>
+      <div class="b-row"><span class="k">Chosen design</span><span class="v">${enName(ver)}</span></div>
+      <h2>Your answers</h2>
+      ${rows.slice(1).map(r=>`<div class="b-row"><span class="k">${r[0]}</span><span class="v">${r[1]}</span></div>`).join('')}
+      <h2>Notes</h2>
+      <div class="b-notes">${notes?notes.replace(/</g,'&lt;'):'No notes added.'}</div>
+      <p class="b-foot">Prepared with YachtWay · yachtway.com</p>
+    `;
+    window.print();
+  });
+
+  /* ---- language selector ---- */
+  const langMenu=$('#langMenu');
+  langMenu.innerHTML=window.LANGS.map(l=>`<button data-l="${l[0]}">${l[1]}<span class="tick">✓</span></button>`).join('');
+  $('#langBtn').addEventListener('click',e=>{e.stopPropagation();langMenu.classList.toggle('open');});
+  document.addEventListener('click',()=>langMenu.classList.remove('open'));
+  langMenu.addEventListener('click',e=>{const b=e.target.closest('button[data-l]');if(b){lang=b.dataset.l;applyI18n();save();langMenu.classList.remove('open');}});
+
+  /* ---- restore ---- */
+  if(st.notes){$('#notesText').value=st.notes;}
+  applyI18n();
+  updateProgress();
+  render();
+})();
+</script>
+</body>
+</html>
