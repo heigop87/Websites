@@ -312,52 +312,71 @@ img{display:block;max-width:100%;}
 /* ===================== PRINT BRIEF ===================== */
 #brief{display:none;}
 @media print{
-  @page{margin:0;}
-  .appbar,.stage,.usebar,.to-top,.lang-wrap,.notes-fab,.fs-overlay,.modal-overlay{display:none!important;}
-  body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-  #brief *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  @page{size:Letter portrait;margin:0;}
+  .appbar,.stage,.usebar,.to-top,.lang-wrap,.notes-fab,.fs-overlay,.modal-overlay,.app-footer{display:none!important;}
+  html,body{background:#efe9fb !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  #brief *{-webkit-print-color-adjust:exact;print-color-adjust:exact;box-sizing:border-box;}
   #brief{display:block!important;color:#1a1a22;font-family:var(--body);}
 
   /* ---------- COVER ---------- */
-  #brief .cover{position:relative;height:100vh;page-break-after:always;display:flex;flex-direction:column;
-    background:linear-gradient(160deg,#2B0075 0%,#4B0EA3 48%,#6430B0 100%);color:#fff;overflow:hidden;}
-  #brief .cover::after{content:"";position:absolute;right:-160px;top:-160px;width:520px;height:520px;border-radius:50%;
-    background:radial-gradient(circle,rgba(255,255,255,.16),transparent 70%);}
-  #brief .cv-top{display:flex;align-items:center;justify-content:space-between;padding:46px 54px 0;position:relative;z-index:2;}
-  #brief .cv-logo{height:30px;filter:brightness(0) invert(1);}
-  #brief .cv-meta{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.7);font-weight:600;}
-  #brief .cv-head{padding:40px 54px 0;position:relative;z-index:2;}
-  #brief .cv-kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.72);font-weight:700;margin-bottom:14px;}
-  #brief .cv-title{font-family:var(--disp);font-weight:700;font-size:52px;line-height:1.02;letter-spacing:-.02em;margin:0;}
-  #brief .cv-sub{margin:16px 0 0;max-width:54ch;font-size:14px;line-height:1.6;color:rgba(255,255,255,.82);}
-  #brief .cv-badge{display:inline-flex;align-items:center;gap:9px;margin-top:24px;background:rgba(255,255,255,.14);
-    border:1px solid rgba(255,255,255,.28);padding:9px 16px;border-radius:999px;font-weight:600;font-size:13px;}
-  #brief .cv-badge b{font-family:var(--disp);font-weight:700;}
-  #brief .cv-shot{margin:30px 54px;position:relative;z-index:2;flex:none;aspect-ratio:1280/904;border-radius:14px;overflow:hidden;
-    background:#fff;box-shadow:0 18px 50px rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.4);}
-  #brief .cv-bar{display:flex;align-items:center;gap:7px;padding:11px 16px;background:#f4f3f6;border-bottom:1px solid #e7e5ee;}
-  #brief .cv-bar i{width:11px;height:11px;border-radius:50%;background:#d9d6e2;display:block;}
-  #brief .cv-bar .u{flex:1;margin-left:8px;background:#fff;border:1px solid #e7e5ee;border-radius:999px;
-    font-size:11px;color:#999;padding:5px 13px;font-family:var(--body);}
-  #brief .cv-shot img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;}
-  #brief .cv-ph{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:linear-gradient(160deg,#f6f6f7,#ece9f6);}
-  #brief .cv-ph-logo{max-height:96px;max-width:62%;object-fit:contain;}
-  #brief .cv-ph-name{font-family:var(--disp);font-weight:700;font-size:42px;letter-spacing:-.02em;color:#2B0075;text-align:center;padding:0 30px;}
-  #brief .cv-ph-tag{font-size:14px;color:#6430B0;font-weight:600;}
+  #brief .cover{position:relative;height:273mm;overflow:hidden;page-break-after:always;break-after:page;
+    display:flex;flex-direction:column;padding:24mm 20mm;
+    background:linear-gradient(155deg,#ffffff 0%,#f6f3fd 60%,#efe9fb 100%);color:#1a1a22;}
+  #brief .cover::after{content:"";position:absolute;left:-200px;bottom:-220px;width:620px;height:620px;border-radius:50%;
+    background:radial-gradient(circle,rgba(127,86,217,.08),transparent 70%);}
+  #brief .cv-top{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:2;
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#9b8fc4;font-weight:700;}
+  #brief .cv-rule{height:2px;background:#2B0075;margin-top:14px;position:relative;z-index:2;width:54px;}
+  #brief .cv-head{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;justify-content:center;}
+  #brief .cv-kicker{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#6430B0;font-weight:700;margin-bottom:20px;}
+  #brief .cv-company{font-family:var(--disp);font-weight:700;font-size:64px;line-height:.98;letter-spacing:-.03em;margin:0;color:#1a1a22;}
+  #brief .cv-sub{margin:22px 0 0;max-width:46ch;font-size:15px;line-height:1.6;color:#5a5566;}
+  #brief .cv-facts{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+    border-top:1px solid #e6e0f4;margin-top:30px;}
+  #brief .cv-fact{padding:20px 22px 4px 0;border-right:1px solid #ece8f6;}
+  #brief .cv-fact:last-child{border-right:0;}
+  #brief .cv-fact .k{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#9b8fc4;font-weight:700;margin-bottom:9px;}
+  #brief .cv-fact .v{font-family:var(--disp);font-weight:700;font-size:21px;line-height:1.12;letter-spacing:-.01em;color:#2B0075;}
+  #brief .cv-fact .v small{display:block;font-family:var(--body);font-weight:500;font-size:12px;color:#8a8496;margin-top:5px;letter-spacing:0;}
+  #brief .cv-foot-row{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;
+    font-size:11px;letter-spacing:.06em;color:#9b8fc4;margin-top:34px;border-top:1px solid #ece8f6;padding-top:16px;}
 
-  /* ---------- DETAILS ---------- */
-  #brief .sheet{padding:46px 54px 40px;}
-  #brief .s-head{display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid #2B0075;padding-bottom:14px;margin-bottom:6px;}
-  #brief .s-head .t{font-family:var(--disp);font-weight:700;font-size:20px;letter-spacing:-.01em;}
-  #brief .s-head .l{height:22px;}
-  #brief h2{font-family:var(--disp);font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:#4B0EA3;margin:30px 0 4px;font-weight:700;}
-  #brief .grid{display:grid;grid-template-columns:1fr 1fr;gap:0 40px;}
-  #brief .b-row{display:flex;justify-content:space-between;gap:18px;padding:11px 0;border-bottom:1px solid #f0eef6;font-size:13.5px;break-inside:avoid;}
-  #brief .b-row .k{color:#787680;}
-  #brief .b-row .v{font-weight:600;text-align:right;color:#1a1a22;}
-  #brief .b-row.full{grid-column:1/-1;}
-  #brief .b-notes{white-space:pre-wrap;font-size:13.5px;line-height:1.65;background:#f7f6fb;padding:18px 20px;border-radius:12px;border:1px solid #ece8f7;color:#33313c;}
-  #brief .b-foot{margin-top:34px;padding-top:14px;border-top:1px solid #eee;display:flex;justify-content:space-between;font-size:10.5px;color:#aaa;letter-spacing:.08em;text-transform:uppercase;}
+  /* ---------- BENTO SHEET ---------- */
+  #brief .sheet{padding:16mm;height:279mm;overflow:hidden;display:flex;flex-direction:column;background:#fff;}
+  #brief .sh-top{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:5mm;}
+  #brief .sh-top .ttl{font-family:var(--disp);font-weight:700;font-size:24px;letter-spacing:-.02em;color:#1a1a22;}
+  #brief .sh-top .ttl span{display:block;font-family:var(--body);font-weight:600;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#9b8fc4;margin-bottom:4px;}
+  #brief .sh-top .l{height:22px;}
+  #brief .bento{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:minmax(0,1fr);gap:4mm;flex:1;}
+  #brief .card{border:1px solid #e9e5f4;border-radius:16px;padding:6mm;display:flex;flex-direction:column;background:#fff;break-inside:avoid;overflow:hidden;}
+  #brief .card .lab{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#9b8fc4;margin-bottom:8px;}
+  #brief .card .big{font-family:var(--disp);font-weight:700;letter-spacing:-.01em;color:#2B0075;line-height:1.05;}
+  #brief .card .sub{font-size:12px;color:#787680;margin-top:6px;line-height:1.45;}
+
+  /* spans */
+  #brief .c-hero{grid-column:span 4;background:linear-gradient(150deg,#f4f0ff,#ece6fb);border-color:#e0d8f6;}
+  #brief .c-hero .big{font-size:30px;}
+  #brief .c-hero .pill{display:inline-flex;align-self:flex-start;margin-top:auto;background:#2B0075;color:#fff;font-size:11px;font-weight:700;letter-spacing:.04em;padding:7px 13px;border-radius:999px;}
+  #brief .c-plan{grid-column:span 2;background:#f4f0ff;color:#2B0075;border-color:#e0d8f6;}
+  #brief .c-plan .lab{color:#9b8fc4;}
+  #brief .c-plan .big{color:#2B0075;font-size:30px;}
+  #brief .c-plan .sub{color:#787680;}
+  #brief .c-2{grid-column:span 2;}
+  #brief .c-3{grid-column:span 3;}
+  #brief .c-6{grid-column:span 6;}
+  #brief .card .val{font-family:var(--disp);font-weight:700;font-size:18px;color:#1a1a22;line-height:1.15;margin-top:auto;}
+  #brief .card .val.sm{font-size:14px;}
+  #brief .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;}
+  #brief .tag{background:#f3effc;color:#4B0EA3;font-size:11px;font-weight:600;padding:5px 11px;border-radius:8px;}
+  #brief .tag.off{background:#f4f4f6;color:#aaa;}
+  #brief .feat{display:flex;align-items:center;gap:9px;font-size:12.5px;font-weight:600;color:#33313c;padding:5px 0;}
+  #brief .feat .ic{width:18px;height:18px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:10px;font-weight:700;}
+  #brief .feat .ic.on{background:#e7f6ec;color:#1b7f4b;}
+  #brief .feat .ic.no{background:#f4f4f6;color:#bbb;}
+  #brief .feat .meta{margin-left:auto;font-weight:600;color:#9b8fc4;font-size:11px;}
+  #brief .feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 22px;margin-top:6px;}
+  #brief .c-notes .txt{font-size:12px;line-height:1.55;color:#33313c;white-space:pre-wrap;margin-top:6px;overflow:hidden;}
+  #brief .sh-foot{display:flex;justify-content:space-between;font-size:10px;color:#b7b2c6;letter-spacing:.08em;text-transform:uppercase;margin-top:5mm;}
 }
 </style>
 </head>
@@ -618,8 +637,7 @@ img{display:block;max-width:100%;}
 <!-- print-only brief -->
 <div id="brief"></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="translations.js?v=4"></script>
+<script src="translations.js?v=5"></script>
 <script>
 (function(){
   const $=(s,r=document)=>r.querySelector(s);
@@ -881,90 +899,99 @@ img{display:block;max-width:100%;}
   /* ---- download brief (print) ---- */
   const EN=window.I18N.en; const enName=v=>EN.word_design+' '+v.toUpperCase()+' · '+EN['name_'+v];
   function yn(card){const b=card.querySelector('.yn button.on');return b?(b.hasAttribute('data-yes')?'Yes':'No'):'-';}
-  /* capture the chosen design — branded — into a cover image for the PDF */
-  function captureCover(){
-    return new Promise(resolve=>{
-      if(!window.html2canvas){ resolve(null); return; }
-      const ifr=document.createElement('iframe');
-      ifr.style.cssText='position:fixed;left:-10000px;top:0;width:1280px;height:900px;border:0;';
-      ifr.src=DESIGN_HTML[ver];
-      let done=false; const finish=v=>{ if(done)return; done=true; try{ifr.remove();}catch(e){} resolve(v); };
-      ifr.addEventListener('load',()=>{
-        try{ ifr.contentWindow.postMessage({type:'dsw-brand',brand},'*'); }catch(e){}
-        setTimeout(async()=>{
-          try{
-            const doc=ifr.contentDocument;
-            const target=doc.body;
-            const cv=await html2canvas(target,{useCORS:true,backgroundColor:'#ffffff',scale:1,logging:false,width:1280,windowWidth:1280,height:860,windowHeight:860});
-            finish(cv.toDataURL('image/jpeg',0.85));
-          }catch(e){ finish(null); }
-        },1700);
-      });
-      document.body.appendChild(ifr);
-      setTimeout(()=>finish(null),10000);
-    });
-  }
   $('#downloadBtn').addEventListener('click',async()=>{
-    const dl=$('#downloadBtn'); const dlLabel=dl.textContent; dl.disabled=true;
-    const live=await captureCover();
+    const dl=$('#downloadBtn'); dl.disabled=true;
     const cards=$$('.qcard[data-yn]');
     const notes=$('#notesText').value.trim();
-    const company=($('#f_company').value||brand.name||'Your Dealership').replace(/</g,'&lt;');
-    const cell=(k,v)=>`<div class="b-row"><span class="k">${k}</span><span class="v">${v}</span></div>`;
-    const project=[
-      cell('Company',$('#f_company').value||'-'),
-      cell('Contact person',$('#f_contact').value||'-'),
-      cell('Email',$('#f_email').value||'-'),
-      cell('Current website',$('#f_website').value||'-'),
-      cell('Wants live by',fmtDate($('#f_date').value)),
-      cell('Authorised dealer',yn(cards[0])),
+    const esc=s=>(s||'').replace(/</g,'&lt;');
+    const company=esc($('#f_company').value||brand.name||'Your Dealership');
+    const dateStr=new Date().toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'});
+    const langChoice=(()=>{const o=$('.qcard[data-lang] .opt.on');return (o&&o.dataset.opt)?'English + '+o.dataset.opt:'English only';})();
+    const brands=getBrands();
+    const extras=getExtraPages();
+    const teamYes=yn(cards[2])==='Yes';
+    const feat=(label,on,meta)=>`<div class="feat"><span class="ic ${on?'on':'no'}">${on?'✓':'–'}</span><span>${label}</span>${meta?`<span class="meta">${meta}</span>`:''}</div>`;
+    const features=[
+      feat('Live listings · YachtWay feed', yn(cards[1])==='Yes'),
+      feat('Authorised dealer', yn(cards[0])==='Yes'),
+      feat('Team page', teamYes, teamYes?`${team} people`:''),
+      feat('WhatsApp button', yn(cards[3])==='Yes', yn(cards[3])==='Yes'?`${SYM[cur]}19/mo`:''),
+      feat('Contact & About pages', true, 'Included'),
+      feat('Catalog & Listing pages', true, 'Included'),
     ].join('');
-    const content=[
-      cell('Brands',getBrands().join(', ')||'-'),
-      cell('Live listings (YachtWay feed)',yn(cards[1])),
-      cell('Team page',yn(cards[2])+(yn(cards[2])==='Yes'?` · ${team} members`:'')),
-      cell('Languages',(()=>{const o=$('.qcard[data-lang] .opt.on');return (o&&o.dataset.opt)?'English + '+o.dataset.opt:'English only';})()),
-      cell('WhatsApp button',yn(cards[3])==='Yes'?`Yes (+ ${SYM[cur]}19/mo)`:yn(cards[3])),
-      `<div class="b-row full"><span class="k">Extra pages</span><span class="v">${getExtraPages().join(', ')||'-'}</span></div>`,
-    ].join('');
+    const brandTags = brands.length?brands.map(b=>`<span class="tag">${esc(b)}</span>`).join(''):'<span class="tag off">None specified</span>';
+    const extraTags = extras.length?extras.map(p=>`<span class="tag">${esc(p)}</span>`).join(''):'<span class="tag off">None added</span>';
+
     $('#brief').innerHTML=`
       <section class="cover">
-        <div class="cv-top"><img class="cv-logo" src="yachtway-logo.png" alt="YachtWay"><span class="cv-meta">Website Brief · ${new Date().toLocaleDateString()}</span></div>
+        <div class="cv-top"><span>Website Brief</span><span>${dateStr}</span></div>
+        <div class="cv-rule"></div>
         <div class="cv-head">
           <div class="cv-kicker">Prepared in the YachtWay Show Window</div>
-          <h1 class="cv-title">${($('#f_company').value||'Your new website').replace(/</g,'&lt;')}</h1>
-          <p class="cv-sub">A summary of your chosen design direction and preferences. Share this with your account manager and we will take it from here.</p>
-          <span class="cv-badge">Chosen design&nbsp;·&nbsp;<b>${enName(ver)}</b></span>
+          <h1 class="cv-company">${company}</h1>
+          <p class="cv-sub">A summary of your chosen design direction and the features you selected. Share this with your account manager — we will take it from here.</p>
+          <div class="cv-facts">
+            <div class="cv-fact"><div class="k">Chosen design</div><div class="v">${EN['name_'+ver]}<small>Design ${ver.toUpperCase()}</small></div></div>
+            <div class="cv-fact"><div class="k">Go-live target</div><div class="v">${fmtDate($('#f_date').value)}<small>at least 30 days out</small></div></div>
+            <div class="cv-fact"><div class="k">Languages</div><div class="v">${langChoice}</div></div>
+          </div>
         </div>
-        <div class="cv-shot">
-          <div class="cv-bar"><i></i><i></i><i></i><span class="u">your-website.com</span></div>
-          ${live?`<img src="${live}" alt="${enName(ver)} preview">`:`<div class="cv-ph">${brand.logo?`<img class="cv-ph-logo" src="${brand.logo}" alt="logo">`:`<div class="cv-ph-name">${company}</div>`}<div class="cv-ph-tag">${enName(ver)}</div></div>`}
-        </div>
+        <div class="cv-foot-row"><span>${esc($('#f_contact').value||'Contact pending')}${$('#f_email').value?' · '+esc($('#f_email').value):''}</span><span>yachtway.com</span></div>
       </section>
+
       <section class="sheet">
-        <div class="s-head"><span class="t">${($('#f_company').value||'Your new website').replace(/</g,'&lt;')}</span><img class="l" src="yachtway-logo.png" alt="YachtWay"></div>
-        <h2>Design direction</h2>
-        ${cell('Chosen design',enName(ver))}
-        ${cell('Plan',`Website ${SYM[cur]}199/mo · incl. live YachtWay feed + storage`)}
-        <h2>Project details</h2>
-        <div class="grid">${project}</div>
-        <h2>Pages &amp; content</h2>
-        <div class="grid">${content}</div>
-        <h2>Notes</h2>
-        <div class="b-notes">${notes?notes.replace(/</g,'&lt;'):'No notes added.'}</div>
-        <div class="b-foot"><span>Prepared with YachtWay</span><span>yachtway.com</span></div>
+        <div class="sh-top"><div class="ttl"><span>${company}</span>Your website at a glance</div><img class="l" src="yachtway-logo.png" alt="YachtWay"></div>
+        <div class="bento">
+          <div class="card c-hero">
+            <div class="lab">Chosen design</div>
+            <div class="big">${EN['name_'+ver]}</div>
+            <div class="sub">${EN['desc_'+ver]}</div>
+            <span class="pill">Design ${ver.toUpperCase()}</span>
+          </div>
+          <div class="card c-plan">
+            <div class="lab">Your plan</div>
+            <div class="big">${SYM[cur]}199<span style="font-size:14px;font-weight:600">/mo</span></div>
+            <div class="sub">Includes the live YachtWay listings feed, hosting & media storage.</div>
+          </div>
+
+          <div class="card c-2">
+            <div class="lab">Contact</div>
+            <div class="val sm">${esc($('#f_contact').value||'—')}</div>
+            <div class="sub">${esc($('#f_email').value||'No email provided')}</div>
+          </div>
+          <div class="card c-2">
+            <div class="lab">Go-live target</div>
+            <div class="val">${fmtDate($('#f_date').value)}</div>
+            <div class="sub">Current site: ${esc($('#f_website').value||'none')}</div>
+          </div>
+          <div class="card c-2">
+            <div class="lab">Languages</div>
+            <div class="val sm">${langChoice}</div>
+            <div class="sub">Every site launches in English.</div>
+          </div>
+
+          <div class="card c-3">
+            <div class="lab">Features &amp; pages</div>
+            <div class="feat-grid">${features}</div>
+          </div>
+          <div class="card c-3">
+            <div class="lab">Authorised brands</div>
+            <div class="tags">${brandTags}</div>
+            <div class="lab" style="margin-top:14px">Extra pages requested</div>
+            <div class="tags">${extraTags}</div>
+          </div>
+
+          <div class="card c-6 c-notes">
+            <div class="lab">Notes for your account manager</div>
+            <div class="txt">${notes?esc(notes):'No notes added.'}</div>
+          </div>
+        </div>
+        <div class="sh-foot"><span>Prepared in the YachtWay Show Window</span><span>yachtway.com</span></div>
       </section>
     `;
-    const coverImg=$('#brief .cv-shot img');
     let printed=false;
     function doPrint(){ if(printed)return; printed=true; window.print(); $('#downloadBtn').disabled=false; }
-    if(coverImg && !coverImg.complete){
-      coverImg.addEventListener('load',doPrint,{once:true});
-      coverImg.addEventListener('error',doPrint,{once:true});
-      setTimeout(doPrint,3000); // fallback
-    } else {
-      setTimeout(doPrint,80);
-    }
+    setTimeout(doPrint,150);
   });
 
   /* ---- language selector ---- */
