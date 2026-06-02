@@ -24,7 +24,7 @@ img{display:block;max-width:100%;}
 /* ===================== APP BAR ===================== */
 .appbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:18px;
   height:60px;padding:0 22px;background:#fff;border-bottom:1px solid var(--line);}
-.brand{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-weight:600;font-size:15px;white-space:nowrap;}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-weight:600;font-size:15px;white-space:nowrap;cursor:pointer;}
 .brand .seal{width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:700;}
 .logo-img{height:23px;width:auto;display:block;}
 .brand-tag{font-family:var(--body);font-weight:500;font-size:12px;letter-spacing:.02em;color:var(--ink-2);border-left:1px solid var(--line);padding-left:11px;}
@@ -158,7 +158,15 @@ img{display:block;max-width:100%;}
 
 .qcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:16px;}
 .qcard .qh{display:flex;gap:14px;align-items:flex-start;}
-.qnum{flex:none;width:30px;height:30px;border-radius:50%;background:var(--bg);color:var(--ink);font-family:var(--disp);font-weight:700;font-size:14px;display:grid;place-items:center;}
+.qnum{flex:none;width:30px;height:30px;border-radius:50%;background:var(--bg);color:var(--ink);font-family:var(--disp);font-weight:700;font-size:14px;line-height:1;display:flex;align-items:center;justify-content:center;text-align:center;}
+.qnum>svg{display:block;}
+.to-top{position:fixed;right:22px;bottom:22px;z-index:75;width:46px;height:46px;border-radius:12px;
+  background:var(--ink);color:#fff;border:0;display:grid;place-items:center;box-shadow:0 10px 28px -8px rgba(10,13,18,.45);
+  opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .22s,transform .22s,visibility .22s;}
+.to-top.show{opacity:1;visibility:visible;transform:none;}
+.to-top:hover{background:var(--brand);}
+.to-top.lift{bottom:90px;}
+@media(max-width:560px){.to-top{right:14px;bottom:14px;width:42px;height:42px;}.to-top.lift{bottom:82px;}}
 .qcard.answered .qnum{background:var(--brand);color:#fff;}
 .qcard h3{font-family:var(--disp);font-weight:600;font-size:16px;margin:2px 0 3px;}
 .qcard .q{font-size:13px;color:var(--ink-2);margin:0 0 13px;}
@@ -296,7 +304,7 @@ img{display:block;max-width:100%;}
 
 <!-- ===================== APP BAR ===================== -->
 <header class="appbar">
-  <div class="brand"><img class="logo-img" src="yachtway-logo.png" alt="YachtWay"><span class="brand-tag">Show Window</span></div>
+  <div class="brand" id="homeBtn" role="button" tabindex="0"><img class="logo-img" src="yachtway-logo.png" alt="YachtWay"><span class="brand-tag">Show Window</span></div>
   <div class="crumbs">
     <span class="c on" data-crumb="pick"><span class="d">1</span><span data-i18n="crumb_pick">Pick a design</span></span>
     <span class="sep">›</span>
@@ -382,7 +390,7 @@ img{display:block;max-width:100%;}
   <div class="viewport">
     <div class="frame">
       <div class="fbar"><div class="dots"><i></i><i></i><i></i></div><div class="url" id="urlText">your-website.com</div><button class="fs-btn" id="fsBtn" data-i18n-title="fullscreen" aria-label="Fullscreen"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 9V3h6M21 9V3h-6M3 15v6h6M21 15v6h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
-      <div class="shotwrap"><div class="loadcue" id="loadcue" data-i18n="loading">Loading design…</div><img class="shot" id="shot" alt="Design preview"><iframe class="shot-frame" id="shotFrame" title="Design D — interactive"></iframe></div>
+      <div class="shotwrap"><div class="loadcue" id="loadcue" data-i18n="loading">Loading design…</div><img class="shot" id="shot" alt="Design preview"><iframe class="shot-frame" id="shotFrame" title="Design D, interactive"></iframe></div>
     </div>
   </div>
 
@@ -532,6 +540,9 @@ img{display:block;max-width:100%;}
   </div>
 </div>
 
+<!-- back to top -->
+<button class="to-top" id="toTop" aria-label="Back to top"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V6M12 6l-6 6M12 6l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+
 <!-- print-only brief -->
 <div id="brief"></div>
 
@@ -576,6 +587,7 @@ img{display:block;max-width:100%;}
   /* ---- stage nav ---- */
   function stage(id){
     $$('.stage').forEach(s=>s.classList.toggle('on',s.id===id));
+    const tt=$('#toTop'); if(tt){ tt.classList.toggle('lift', id==='review'); if(id==='pick') tt.classList.remove('show'); }
     const order={pick:0,review:1,config:2};
     $$('.crumbs .c').forEach(c=>{
       const o=order[c.dataset.crumb];
@@ -620,6 +632,20 @@ img{display:block;max-width:100%;}
   $$('#listSeg button').forEach(b=>b.addEventListener('click',()=>{listingVar=b.dataset.lv;render();}));
   $$('.pagetabs button').forEach(b=>b.addEventListener('click',()=>{pg=b.dataset.page;render();window.scrollTo({top:0,behavior:'smooth'});}));
   $('#backToPick').addEventListener('click',()=>stage('pick'));
+  /* back to top — appears after 20% scroll, on all stages */
+  const toTop=$('#toTop');
+  function onScroll(){
+    if($('#pick').classList.contains('on')){ toTop.classList.remove('show'); return; }
+    const h=document.documentElement;
+    const max=h.scrollHeight-h.clientHeight;
+    const pct=max>0?h.scrollTop/max:0;
+    toTop.classList.toggle('show',pct>0.2);
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+  onScroll();
+  const homeBtn=$('#homeBtn');
+  if(homeBtn){ homeBtn.addEventListener('click',()=>stage('pick')); homeBtn.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();stage('pick');}}); }
   $('#useBottom').addEventListener('click',()=>goConfig());
   $('#backReview').addEventListener('click',()=>stage('review'));
   function goConfig(){$('#chosenTag').textContent='✓ '+NAMES[ver];stage('config');}
