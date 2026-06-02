@@ -601,11 +601,11 @@ img{display:block;max-width:100%;}
   function render(){
     const isD = ver==='d';
     const img=$('#shot'), cue=$('#loadcue'), frame=$('#shotFrame');
-    // Option D is standalone: only the home page, shown as a live iframe
-    $$('.pagetabs button').forEach(b=>{ if(b.dataset.page!=='home') b.classList.toggle('tab-off', isD); });
-    if(isD) pg='home';
+    // Option D has a standalone live home page; catalog/listing are the shared previews
+    $$('.pagetabs button').forEach(b=>b.classList.remove('tab-off'));
+    const showFrame = isD && pg==='home';
 
-    if(isD){
+    if(showFrame){
       if(!frame.getAttribute('src')) frame.setAttribute('src','design-d.html');
       frame.style.display='block'; img.style.display='none'; cue.style.display='none';
     } else {
@@ -616,13 +616,13 @@ img{display:block;max-width:100%;}
       img.src=src;
       const fo=document.querySelector('#fsOverlay'); if(fo&&fo.classList.contains('open')){const fi=document.querySelector('#fsImg'); fi.src=src; document.querySelector('#fsLabel').textContent='your-website.com'+URLS[pg];}
     }
-    $('#urlText').textContent='your-website.com'+(isD?'':URLS[pg]);
-    $$('.verseg button').forEach(b=>b.classList.toggle('on',b.dataset.ver===ver));
+    $('#urlText').textContent='your-website.com'+(showFrame?'':URLS[pg]);
+    $$('.verseg:not(.listseg) button').forEach(b=>b.classList.toggle('on',b.dataset.ver===ver));
     $$('.pagetabs button').forEach(b=>b.classList.toggle('on',b.dataset.page===pg));
     const home=pg==='home';
     document.querySelector('.verseg:not(.listseg)').style.display=home?'flex':'none';
-    const ls=$('#listSeg'); if(ls){ ls.style.display=(pg==='listing'&&!isD)?'flex':'none'; ls.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.lv===listingVar)); }
-    document.querySelector('#sharedNote').style.display=(home||isD||pg==='listing')?'none':'inline';
+    const ls=$('#listSeg'); if(ls){ ls.style.display=(pg==='listing')?'flex':'none'; ls.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.lv===listingVar)); }
+    document.querySelector('#sharedNote').style.display=(home||pg==='listing')?'none':'inline';
     $('#useName').textContent=NAMES[ver];
     save();
   }
@@ -731,10 +731,10 @@ img{display:block;max-width:100%;}
   /* fullscreen preview */
   const fsOv=$('#fsOverlay');
   $('#fsBtn').addEventListener('click',()=>{
-    const isD=ver==='d';
-    if(isD){ const f=$('#fsFrame'); if(!f.getAttribute('src'))f.setAttribute('src','design-d.html'); f.style.display='block'; $('#fsImg').style.display='none'; }
+    const useFrame = ver==='d' && pg==='home';
+    if(useFrame){ const f=$('#fsFrame'); if(!f.getAttribute('src'))f.setAttribute('src','design-d.html'); f.style.display='block'; $('#fsImg').style.display='none'; }
     else { $('#fsImg').style.display='block'; $('#fsFrame').style.display='none'; $('#fsImg').src=$('#shot').src; }
-    $('#fsLabel').textContent='your-website.com'+(isD?'':URLS[pg]); fsOv.classList.add('open');
+    $('#fsLabel').textContent='your-website.com'+(useFrame?'':URLS[pg]); fsOv.classList.add('open');
   });
   $('#fsClose').addEventListener('click',()=>fsOv.classList.remove('open'));
   document.addEventListener('keydown',e=>{if(e.key==='Escape')waModal.classList.remove('open');});
