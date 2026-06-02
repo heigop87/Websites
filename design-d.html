@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1727,6 +1728,7 @@ const tSub=document.getElementById('testSub');
 const tDots=document.querySelectorAll('.t-dot');
 const miniCards=document.querySelectorAll('.test-mini-card');
 function showTest(idx){
+  if(!tDots.length||!tDots[tIdx]||!tDots[idx]||!miniCards[tIdx])return;
   tDots[tIdx].classList.remove('active');tDots[tIdx].setAttribute('aria-selected','false');
   miniCards[tIdx].classList.remove('active');
   tIdx=idx;
