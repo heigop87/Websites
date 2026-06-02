@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -441,6 +442,7 @@ h3.display{font-size:clamp(1.6rem,2.5vw,2.4rem);font-weight:700}
   .hero__scroll{display:none}
 }
 </style>
+<script id="dsw-guard-early">(function(){function ext(h){h=h||'';return h.charAt(0)!=='#'&&h.trim()!=='';}document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a');if(a&&ext(a.getAttribute('href'))){e.preventDefault();e.stopPropagation();}},true);document.addEventListener('submit',function(e){e.preventDefault();e.stopPropagation();},true);try{window.open=function(){return null;};}catch(e){}})();</script>
 <style id="dsw-hide-logo">.nav__logo svg,.footer__logo svg,.footer__logo-wrap svg{display:none!important}</style>
 </head>
 <body>
@@ -1225,9 +1227,16 @@ document.querySelectorAll('.rv').forEach(el => observer.observe(el));
 <!--dsw-deadend-->
 <script>
 (function(){
-  document.addEventListener('click',function(e){ var a=e.target.closest&&e.target.closest('a'); if(a){ e.preventDefault(); e.stopPropagation(); } },true);
-  document.addEventListener('submit',function(e){ e.preventDefault(); },true);
+  function ext(h){ h=h||''; return h.charAt(0)!=='#' && h.trim()!==''; }
+  function neuter(){
+    document.querySelectorAll('a[href]').forEach(function(a){ if(ext(a.getAttribute('href'))){ a.removeAttribute('href'); a.style.cursor='default'; } });
+    document.querySelectorAll('form[action]').forEach(function(f){ f.removeAttribute('action'); });
+  }
+  document.addEventListener('click',function(e){ var a=e.target.closest&&e.target.closest('a'); if(a && ext(a.getAttribute('href'))){ e.preventDefault(); e.stopPropagation(); } },true);
+  document.addEventListener('submit',function(e){ e.preventDefault(); e.stopPropagation(); },true);
   try{ window.open=function(){return null;}; }catch(e){}
+  if(document.readyState!=='loading') neuter(); else document.addEventListener('DOMContentLoaded',neuter);
+  try{ new MutationObserver(neuter).observe(document.documentElement,{childList:true,subtree:true}); }catch(e){}
 })();
 <\/script>
 </body>
