@@ -283,20 +283,48 @@ img{display:block;max-width:100%;}
 /* ===================== PRINT BRIEF ===================== */
 #brief{display:none;}
 @media print{
-  .appbar,.stage,.usebar{display:none!important;}
+  @page{margin:0;}
+  .appbar,.stage,.usebar,.to-top,.lang-wrap,.notes-fab,.fs-overlay,.modal-overlay{display:none!important;}
   body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-  #brief{display:block!important;padding:8px 6px;color:#1a1a22;font-family:var(--body);}
-  #brief .b-head{display:flex;align-items:center;justify-content:space-between;border-bottom:2.5px solid #2B0075;padding-bottom:14px;}
-  #brief .b-logo{height:30px;width:auto;}
-  #brief .b-meta{font-size:11px;letter-spacing:.12em;color:#888;font-weight:600;}
-  #brief h1{font-family:var(--disp);font-size:30px;margin:22px 0 6px;letter-spacing:-.02em;}
-  #brief .b-sub{color:#555;margin:0 0 8px;max-width:62ch;line-height:1.55;font-size:13.5px;}
-  #brief h2{font-family:var(--disp);font-size:13px;text-transform:uppercase;letter-spacing:.1em;color:#4B0EA3;border-bottom:1px solid #eee;padding-bottom:7px;margin:26px 0 12px;}
-  #brief .b-row{display:flex;justify-content:space-between;gap:24px;padding:9px 0;border-bottom:1px solid #f1f1f3;font-size:14px;}
-  #brief .b-row .k{color:#666;}
-  #brief .b-row .v{font-weight:600;text-align:right;}
-  #brief .b-notes{white-space:pre-wrap;font-size:14px;line-height:1.6;background:#f7f6fb;padding:16px;border-radius:10px;border:1px solid #ece8f7;}
-  #brief .b-foot{margin-top:30px;padding-top:12px;border-top:1px solid #eee;font-size:11px;color:#999;letter-spacing:.06em;text-transform:uppercase;}
+  #brief *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  #brief{display:block!important;color:#1a1a22;font-family:var(--body);}
+
+  /* ---------- COVER ---------- */
+  #brief .cover{position:relative;height:100vh;page-break-after:always;display:flex;flex-direction:column;
+    background:linear-gradient(160deg,#2B0075 0%,#4B0EA3 48%,#6430B0 100%);color:#fff;overflow:hidden;}
+  #brief .cover::after{content:"";position:absolute;right:-160px;top:-160px;width:520px;height:520px;border-radius:50%;
+    background:radial-gradient(circle,rgba(255,255,255,.16),transparent 70%);}
+  #brief .cv-top{display:flex;align-items:center;justify-content:space-between;padding:46px 54px 0;position:relative;z-index:2;}
+  #brief .cv-logo{height:30px;filter:brightness(0) invert(1);}
+  #brief .cv-meta{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.7);font-weight:600;}
+  #brief .cv-head{padding:40px 54px 0;position:relative;z-index:2;}
+  #brief .cv-kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.72);font-weight:700;margin-bottom:14px;}
+  #brief .cv-title{font-family:var(--disp);font-weight:700;font-size:52px;line-height:1.02;letter-spacing:-.02em;margin:0;}
+  #brief .cv-sub{margin:16px 0 0;max-width:54ch;font-size:14px;line-height:1.6;color:rgba(255,255,255,.82);}
+  #brief .cv-badge{display:inline-flex;align-items:center;gap:9px;margin-top:24px;background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.28);padding:9px 16px;border-radius:999px;font-weight:600;font-size:13px;}
+  #brief .cv-badge b{font-family:var(--disp);font-weight:700;}
+  #brief .cv-shot{margin:34px 54px 0;position:relative;z-index:2;flex:1;border-radius:16px 16px 0 0;overflow:hidden;
+    background:#fff;box-shadow:0 -2px 40px rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.4);border-bottom:0;}
+  #brief .cv-bar{display:flex;align-items:center;gap:7px;padding:11px 16px;background:#f4f3f6;border-bottom:1px solid #e7e5ee;}
+  #brief .cv-bar i{width:11px;height:11px;border-radius:50%;background:#d9d6e2;display:block;}
+  #brief .cv-bar .u{flex:1;margin-left:8px;background:#fff;border:1px solid #e7e5ee;border-radius:999px;
+    font-size:11px;color:#999;padding:5px 13px;font-family:var(--body);}
+  #brief .cv-shot img{width:100%;height:auto;display:block;}
+
+  /* ---------- DETAILS ---------- */
+  #brief .sheet{padding:46px 54px 40px;}
+  #brief .s-head{display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid #2B0075;padding-bottom:14px;margin-bottom:6px;}
+  #brief .s-head .t{font-family:var(--disp);font-weight:700;font-size:20px;letter-spacing:-.01em;}
+  #brief .s-head .l{height:22px;}
+  #brief h2{font-family:var(--disp);font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:#4B0EA3;margin:30px 0 4px;font-weight:700;}
+  #brief .grid{display:grid;grid-template-columns:1fr 1fr;gap:0 40px;}
+  #brief .b-row{display:flex;justify-content:space-between;gap:18px;padding:11px 0;border-bottom:1px solid #f0eef6;font-size:13.5px;break-inside:avoid;}
+  #brief .b-row .k{color:#787680;}
+  #brief .b-row .v{font-weight:600;text-align:right;color:#1a1a22;}
+  #brief .b-row.full{grid-column:1/-1;}
+  #brief .b-notes{white-space:pre-wrap;font-size:13.5px;line-height:1.65;background:#f7f6fb;padding:18px 20px;border-radius:12px;border:1px solid #ece8f7;color:#33313c;}
+  #brief .b-foot{margin-top:34px;padding-top:14px;border-top:1px solid #eee;display:flex;justify-content:space-between;font-size:10.5px;color:#aaa;letter-spacing:.08em;text-transform:uppercase;}
 }
 </style>
 </head>
@@ -446,16 +474,6 @@ img{display:block;max-width:100%;}
       <div class="qcard" data-q data-yn><div class="qh"><div class="qnum">6</div><div class="qbody"><h3 data-i18n="q6_h">Would you like a Team page?</h3><p class="q" data-i18n="q6_q">Introduce your people.</p>
         <div class="yn"><button type="button" data-yes data-i18n="yn_yes">Yes</button><button type="button" data-no data-i18n="yn_no">No</button></div>
         <div class="follow" data-follow><span class="flab" data-i18n="flab_team">How many team members?</span><div class="stepper"><button type="button" id="teamMinus">–</button><span class="num" id="teamNum">4</span><button type="button" id="teamPlus">+</button></div></div>
-      </div></div></div>
-
-      <div class="qcard" data-q data-yn><div class="qh"><div class="qnum">7</div><div class="qbody"><h3 data-i18n="q7_h">Would you like a Services page?</h3><p class="q" data-i18n="q7_q">List what you offer, like yacht management, aftercare, charters and more.</p>
-        <div class="yn"><button type="button" data-yes data-i18n="yn_yes">Yes</button><button type="button" data-no data-i18n="yn_no">No</button></div>
-        <div class="follow" data-follow><span class="flab" data-i18n="flab_services">Which services?</span><div class="chips" id="svcChips"></div><div class="addwrap" style="margin-top:10px"><input class="field" id="svcInput" data-i18n-ph="ph_service" placeholder="Type a service, press Enter"></div></div>
-      </div></div></div>
-
-      <div class="qcard" data-q data-yn><div class="qh"><div class="qnum">8</div><div class="qbody"><h3 data-i18n="q8_h">Do you have photos &amp; video of your boats?</h3><p class="q" data-i18n="q8_q">High-quality media we can use.</p>
-        <div class="yn"><button type="button" data-yes data-i18n="yn_yes">Yes</button><button type="button" data-no data-i18n="yn_no">No</button></div>
-        <div class="follow" data-follow data-follow-no><div class="note-cb"><span class="ic">!</span><span data-i18n-html="note_studio">Our in-house <b>YachtWay Studio</b> team can create unique, captivating content that brings your website to life and elevates your wider marketing presence.</span></div></div>
       </div></div></div>
 
       <div class="qcard" data-q data-multi><div class="qh"><div class="qnum">9</div><div class="qbody"><h3 data-i18n="q9_h">Any extra pages you would like?</h3><p class="q" data-i18n="q9_q">Pick any that fit your business. Paid pages are a one-time setup fee.</p>
@@ -756,11 +774,10 @@ img{display:block;max-width:100%;}
     const input=$('#'+inputId),box=$('#'+chipsId);let items=seed.slice();
     function draw(){box.innerHTML=items.map((t,i)=>`<span class="chip">${t}<b data-i="${i}">✕</b></span>`).join('');
       $$('b',box).forEach(b=>b.addEventListener('click',()=>{items.splice(+b.dataset.i,1);draw();updateProgress();}));}
-    input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();const v=input.value.trim();if(v){items.push(v);input.value='';draw();updateProgress();}}});
+    input.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===','){e.preventDefault();const v=input.value.replace(/,/g,'').trim();if(v){items.push(v);input.value='';draw();updateProgress();}}});
     draw();return ()=>items;
   }
   const getBrands=chipInput('brandInput','brandChips',[]);
-  const getSvc=chipInput('svcInput','svcChips',[]);
   const getPages=chipInput('pageInput','pageChips',[]);
   function getExtraPages(){
     const picked=$$('.qcard[data-multi]:not([data-lang]) .opt.on').map(o=>{
@@ -776,39 +793,63 @@ img{display:block;max-width:100%;}
   function yn(card){const b=card.querySelector('.yn button.on');return b?(b.hasAttribute('data-yes')?'Yes':'No'):'-';}
   $('#downloadBtn').addEventListener('click',()=>{
     const cards=$$('.qcard[data-yn]');
-    const rows=[
-      ['Chosen design',NAMES[ver]],
-      ['Company',$('#f_company').value||'-'],
-      ['Contact person',$('#f_contact').value||'-'],
-      ['Email',$('#f_email').value||'-'],
-      ['Current website',$('#f_website').value||'-'],
-      ['Wants live by',fmtDate($('#f_date').value)],
-      ['Plan',`Website ${SYM[cur]}199/mo (incl. live YachtWay feed + database storage)`],
-      ['Authorised dealer',yn(cards[0])],
-      ['Brands',getBrands().join(', ')||'-'],
-      ['Live listings (YachtWay feed)',yn(cards[1])],
-      ['Team page',yn(cards[2])+(yn(cards[2])==='Yes'?` · ${team} members`:'')],
-      ['Services page',yn(cards[3])],
-      ['Services',getSvc().join(', ')||'-'],
-      ['Has own photos/video',yn(cards[4])],
-      ['Extra pages',getExtraPages().join(', ')||'-'],
-      ['Languages',('English'+( $('.qcard[data-lang] .opt.on') ? ' + '+$('.qcard[data-lang] .opt.on').dataset.opt : ' only'))],
-      ['WhatsApp button',yn(cards[5])==='Yes'?`Yes (+ ${SYM[cur]}19/mo)`:yn(cards[5])],
-    ];
     const notes=$('#notesText').value.trim();
+    const shotSrc={a:'home-a.jpg',b:'home-b.jpg',c:'home-c.jpg',d:'home-d-full.jpg'}[ver];
+    const cell=(k,v)=>`<div class="b-row"><span class="k">${k}</span><span class="v">${v}</span></div>`;
+    const project=[
+      cell('Company',$('#f_company').value||'-'),
+      cell('Contact person',$('#f_contact').value||'-'),
+      cell('Email',$('#f_email').value||'-'),
+      cell('Current website',$('#f_website').value||'-'),
+      cell('Wants live by',fmtDate($('#f_date').value)),
+      cell('Authorised dealer',yn(cards[0])),
+    ].join('');
+    const content=[
+      cell('Brands',getBrands().join(', ')||'-'),
+      cell('Live listings (YachtWay feed)',yn(cards[1])),
+      cell('Team page',yn(cards[2])+(yn(cards[2])==='Yes'?` · ${team} members`:'')),
+      cell('Languages','English'+($('.qcard[data-lang] .opt.on')?' + '+$('.qcard[data-lang] .opt.on').dataset.opt:' only')),
+      cell('WhatsApp button',yn(cards[3])==='Yes'?`Yes (+ ${SYM[cur]}19/mo)`:yn(cards[3])),
+      `<div class="b-row full"><span class="k">Extra pages</span><span class="v">${getExtraPages().join(', ')||'-'}</span></div>`,
+    ].join('');
     $('#brief').innerHTML=`
-      <div class="b-head"><img class="b-logo" src="yachtway-logo.png" alt="YachtWay"><span class="b-meta">WEBSITE BRIEF · ${new Date().toLocaleDateString()}</span></div>
-      <h1>${$('#f_company').value||'Your new website'}</h1>
-      <p class="b-sub">A summary of your chosen direction and preferences, prepared in the YachtWay Show Window. Share this with your account manager and we will take it from here.</p>
-      <h2>Design direction</h2>
-      <div class="b-row"><span class="k">Chosen design</span><span class="v">${enName(ver)}</span></div>
-      <h2>Your answers</h2>
-      ${rows.slice(1).map(r=>`<div class="b-row"><span class="k">${r[0]}</span><span class="v">${r[1]}</span></div>`).join('')}
-      <h2>Notes</h2>
-      <div class="b-notes">${notes?notes.replace(/</g,'&lt;'):'No notes added.'}</div>
-      <p class="b-foot">Prepared with YachtWay · yachtway.com</p>
+      <section class="cover">
+        <div class="cv-top"><img class="cv-logo" src="yachtway-logo.png" alt="YachtWay"><span class="cv-meta">Website Brief · ${new Date().toLocaleDateString()}</span></div>
+        <div class="cv-head">
+          <div class="cv-kicker">Prepared in the YachtWay Show Window</div>
+          <h1 class="cv-title">${($('#f_company').value||'Your new website').replace(/</g,'&lt;')}</h1>
+          <p class="cv-sub">A summary of your chosen design direction and preferences. Share this with your account manager and we will take it from here.</p>
+          <span class="cv-badge">Chosen design&nbsp;·&nbsp;<b>${enName(ver)}</b></span>
+        </div>
+        <div class="cv-shot">
+          <div class="cv-bar"><i></i><i></i><i></i><span class="u">your-website.com</span></div>
+          <img src="${shotSrc}" alt="${enName(ver)} preview">
+        </div>
+      </section>
+      <section class="sheet">
+        <div class="s-head"><span class="t">${($('#f_company').value||'Your new website').replace(/</g,'&lt;')}</span><img class="l" src="yachtway-logo.png" alt="YachtWay"></div>
+        <h2>Design direction</h2>
+        ${cell('Chosen design',enName(ver))}
+        ${cell('Plan',`Website ${SYM[cur]}199/mo · incl. live YachtWay feed + storage`)}
+        <h2>Project details</h2>
+        <div class="grid">${project}</div>
+        <h2>Pages &amp; content</h2>
+        <div class="grid">${content}</div>
+        <h2>Notes</h2>
+        <div class="b-notes">${notes?notes.replace(/</g,'&lt;'):'No notes added.'}</div>
+        <div class="b-foot"><span>Prepared with YachtWay</span><span>yachtway.com</span></div>
+      </section>
     `;
-    window.print();
+    const coverImg=$('#brief .cv-shot img');
+    let printed=false;
+    function doPrint(){ if(printed)return; printed=true; window.print(); }
+    if(coverImg && !coverImg.complete){
+      coverImg.addEventListener('load',doPrint,{once:true});
+      coverImg.addEventListener('error',doPrint,{once:true});
+      setTimeout(doPrint,3000); // fallback
+    } else {
+      setTimeout(doPrint,80);
+    }
   });
 
   /* ---- language selector ---- */
@@ -819,7 +860,6 @@ img{display:block;max-width:100%;}
   langMenu.addEventListener('click',e=>{const b=e.target.closest('button[data-l]');if(b){lang=b.dataset.l;applyI18n();save();langMenu.classList.remove('open');}});
 
   /* ---- restore ---- */
-  if(st.notes){$('#notesText').value=st.notes;}
   applyI18n();
   $$('.qcard[data-q]').forEach((c,i)=>{const qn=c.querySelector('.qnum'); if(qn && !qn.querySelector('svg')) qn.textContent=String(i+1);});
   updateProgress();
