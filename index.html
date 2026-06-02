@@ -315,21 +315,21 @@ img{display:block;max-width:100%;}
       <div class="pick-item" data-pick="a">
         <div class="pick-head"><span class="badge">A</span><span class="pname" data-i18n="name_a">Clean &amp; luxe</span></div>
         <div class="pcard">
-          <div class="thumb"><img src="home-a.png" alt="Design A"></div>
+          <div class="thumb"><img src="home-a.jpg" alt="Design A"></div>
           <div class="pc-body"><p data-i18n="desc_a">Airy, light, lots of breathing room.</p><span class="rev" data-i18n="review_this">Review this →</span></div>
         </div>
       </div>
       <div class="pick-item" data-pick="b">
         <div class="pick-head"><span class="badge">B</span><span class="pname" data-i18n="name_b">Bold &amp; editorial</span></div>
         <div class="pcard">
-          <div class="thumb"><img src="home-b.png" alt="Design B"></div>
+          <div class="thumb"><img src="home-b.jpg" alt="Design B"></div>
           <div class="pc-body"><p data-i18n="desc_b">Dark, dramatic, big confident type.</p><span class="rev" data-i18n="review_this">Review this →</span></div>
         </div>
       </div>
       <div class="pick-item" data-pick="c">
         <div class="pick-head"><span class="badge">C</span><span class="pname" data-i18n="name_c">Classic brokerage</span></div>
         <div class="pcard">
-          <div class="thumb"><img src="home-c.png" alt="Design C"></div>
+          <div class="thumb"><img src="home-c.jpg" alt="Design C"></div>
           <div class="pc-body"><p data-i18n="desc_c">Events, brands &amp; locations, structured.</p><span class="rev" data-i18n="review_this">Review this →</span></div>
         </div>
       </div>
@@ -510,14 +510,14 @@ img{display:block;max-width:100%;}
 <!-- print-only brief -->
 <div id="brief"></div>
 
-<script src="translations.js"></script>
+<script src="translations.js?v=3"></script>
 <script>
 (function(){
   const $=(s,r=document)=>r.querySelector(s);
   const $$=(s,r=document)=>[...r.querySelectorAll(s)];
   const SRC={
-    home:{a:'home-a.png',b:'home-b.png',c:'home-c.png'},
-    catalog:'catalog.png', listing:'listing.png'
+    home:{a:'home-a.jpg',b:'home-b.jpg',c:'home-c.jpg'},
+    catalog:'catalog.jpg', listing:'listing.jpg'
   };
   const URLS={home:'',catalog:'/yachts-for-sale',listing:'/listing'};
   let ver='a', pg='home';
@@ -746,6 +746,7 @@ img{display:block;max-width:100%;}
   applyI18n();
   updateProgress();
   render();
+  ['home-a','home-b','home-c','catalog','listing'].forEach(n=>{const im=new Image();im.src=''+n+'.jpg';});
 })();
 </script>
 </body>
