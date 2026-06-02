@@ -38,7 +38,16 @@ img{display:block;max-width:100%;}
 .crumbs .sep{color:var(--line);}
 .appbar .right{margin-left:auto;display:flex;align-items:center;gap:10px;}
 .help{font-size:13px;color:var(--ink-2);font-weight:500;}
-@media(max-width:720px){.crumbs .c span{display:none;}.help{display:none;}}
+@media(max-width:720px){
+  .appbar{gap:10px;padding:0 14px;}
+  .crumbs .c span{display:none;}
+  .crumbs{gap:6px;margin-left:0;}
+  .brand-tag{display:none;}
+  .help{display:none;}
+}
+@media(max-width:560px){
+  .crumbs{display:none;}
+}
 
 /* ===================== BUTTONS ===================== */
 .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--body);font-weight:600;font-size:14px;
@@ -184,6 +193,16 @@ img{display:block;max-width:100%;}
 .base-price b{color:var(--brand-700);}
 .chosen-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:12px;}
 .datewrap{position:relative;}
+.fs-btn{display:grid;place-items:center;width:30px;height:30px;border-radius:7px;border:1px solid var(--line);background:#fff;color:var(--ink-2);flex:none;}
+.fs-btn:hover{border-color:var(--brand);color:var(--brand);}
+.fs-overlay{position:fixed;inset:0;z-index:90;background:rgba(15,14,22,.94);display:none;flex-direction:column;}
+.fs-overlay.open{display:flex;}
+.fs-bar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 18px;color:#fff;flex:none;}
+.fs-label{font-family:var(--body);font-size:13px;color:rgba(255,255,255,.7);}
+.fs-close{font-family:var(--body);font-weight:600;font-size:14px;color:#fff;background:rgba(255,255,255,.14);border:0;padding:9px 18px;border-radius:999px;}
+.fs-close:hover{background:rgba(255,255,255,.26);}
+.fs-scroll{flex:1;overflow-y:auto;display:flex;flex-direction:column;align-items:center;padding:0 0 30px;}
+.fs-scroll img{width:100%;max-width:1100px;height:auto;display:block;flex:none;}
 .date-display{position:absolute;left:2px;top:2px;bottom:2px;right:42px;display:flex;align-items:center;padding:0 13px;background:#fff;border-radius:9px;font-family:var(--body);font-size:14px;color:var(--ink);pointer-events:none;}
 .eye-icon{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--line);background:#fff;color:var(--ink-2);flex:none;}
 .eye-icon:hover{border-color:var(--brand);color:var(--brand);}
@@ -341,14 +360,14 @@ img{display:block;max-width:100%;}
 
   <div class="viewport">
     <div class="frame">
-      <div class="fbar"><div class="dots"><i></i><i></i><i></i></div><div class="url" id="urlText">your-website.com</div></div>
+      <div class="fbar"><div class="dots"><i></i><i></i><i></i></div><div class="url" id="urlText">your-website.com</div><button class="fs-btn" id="fsBtn" data-i18n-title="fullscreen" aria-label="Fullscreen"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 9V3h6M21 9V3h-6M3 15v6h6M21 15v6h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
       <div class="shotwrap"><div class="loadcue" id="loadcue" data-i18n="loading">Loading design…</div><img class="shot" id="shot" alt="Design preview"></div>
     </div>
   </div>
 
   <div class="usebar">
     <span class="ut" data-i18n-html="usebar">Like <b id="useName"></b>? Choose it and we will set up your site.</span>
-    <button class="btn primary" id="useBottom" data-i18n="use_btn">♥ Use this design →</button>
+    <button class="btn primary" id="useBottom"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex:none"><path d="M20.4105 4.60036C19.3916 3.58397 18.0116 3.01241 16.5724 3.01065C15.1333 3.00889 13.7519 3.57709 12.7305 4.59098L11.5043 5.73005L10.2771 4.58723C9.25591 3.56893 7.87205 2.99798 6.42992 3.00001C4.9878 3.00203 3.60554 3.57685 2.58723 4.59802C1.56893 5.61918 0.997983 7.00304 1.00001 8.44517C1.00203 9.88729 1.57685 11.2696 2.59801 12.2879L10.9746 20.7872C11.0444 20.8581 11.1275 20.9144 11.2193 20.9528C11.311 20.9912 11.4095 21.011 11.509 21.011C11.6084 21.011 11.7069 20.9912 11.7986 20.9528C11.8904 20.9144 11.9735 20.8581 12.0433 20.7872L20.4105 12.2879C21.4295 11.2682 22.002 9.88566 22.002 8.44411C22.002 7.00255 21.4295 5.61999 20.4105 4.60036ZM19.3465 11.2341L11.5043 19.1879L3.65739 11.2266C2.91893 10.4881 2.50406 9.48658 2.50406 8.44223C2.50406 7.39789 2.91893 6.39632 3.65739 5.65786C4.39585 4.9194 5.39742 4.50453 6.44176 4.50453C7.48611 4.50453 8.48768 4.9194 9.22614 5.65786L9.24489 5.67661L10.9933 7.30317C11.1321 7.43233 11.3147 7.50413 11.5043 7.50413C11.6939 7.50413 11.8764 7.43233 12.0152 7.30317L13.7636 5.67661L13.7824 5.65786C14.5213 4.91989 15.5232 4.5057 16.5675 4.50641C17.6119 4.50711 18.6132 4.92265 19.3511 5.66161C20.0891 6.40057 20.5033 7.40242 20.5026 8.44676C20.5019 9.4911 20.0863 10.4924 19.3474 11.2304L19.3465 11.2341Z" fill="currentColor"></path></svg> <span data-i18n="use_btn">Use this design →</span></button>
   </div>
 </section>
 
@@ -434,19 +453,28 @@ img{display:block;max-width:100%;}
       </div></div></div>
     </form>
 
-    <div class="qcard"><div class="qh"><div class="qnum" style="font-size:15px">✎</div><div class="qbody"><h3 data-i18n="notes_h">Anything you would change or add?</h3><p class="q" data-i18n="notes_q">Optional. Your notes go into the brief for your account manager.</p><textarea class="field" id="notesText" style="min-height:90px;resize:vertical" data-i18n-ph="notes_ph" placeholder="e.g. Love A's hero, can the listings be 3 across like C?"></textarea></div></div></div>
+    <div class="qcard"><div class="qh"><div class="qnum" style="font-size:15px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.46001 21.24L21.25 6.45L17.55 2.75L2.75999 17.54L2.75 21.25L6.46001 21.24Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path><path d="M15.3496 6.12988L17.8696 8.64987" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div class="qbody"><h3 data-i18n="notes_h">Anything you would change or add?</h3><p class="q" data-i18n="notes_q">Optional. Your notes go into the brief for your account manager.</p><textarea class="field" id="notesText" style="min-height:90px;resize:vertical" data-i18n-ph="notes_ph" placeholder="e.g. Love A's hero, can the listings be 3 across like C?"></textarea></div></div></div>
 
     <div class="finish">
       <div class="tick">✓</div>
       <h2 data-i18n="finish_h">That is everything</h2>
       <p data-i18n="finish_p">Download your brief as a PDF and email it to your account manager. It includes your chosen design, notes and answers.</p>
       <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-        <button class="btn primary lg" id="downloadBtn" data-i18n="download_btn">⬇ Download brief (PDF)</button>
         <button class="btn ghost lg" id="backReview" data-i18n="back_review">← Back to the designs</button>
+        <button class="btn primary lg" id="downloadBtn"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex:none"><path d="M12 3v11m0 0l-4.5-4.5M12 14l4.5-4.5M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span data-i18n="download_btn">Download brief (PDF)</span></button>
       </div>
     </div>
   </div>
 </section>
+
+<!-- Fullscreen preview overlay -->
+<div class="fs-overlay" id="fsOverlay">
+  <div class="fs-bar">
+    <span class="fs-label" id="fsLabel">your-website.com</span>
+    <button class="fs-close" id="fsClose" data-i18n="modal_close">Close</button>
+  </div>
+  <div class="fs-scroll"><img id="fsImg" alt="Design preview fullscreen"></div>
+</div>
 
 <!-- Design preview modal -->
 <div class="modal-overlay" id="designModal">
@@ -539,6 +567,7 @@ img{display:block;max-width:100%;}
     cue.style.display='grid'; img.style.opacity='0';
     img.onload=()=>{cue.style.display='none';img.style.opacity='1';};
     img.src=src;
+    const fo=document.querySelector('#fsOverlay'); if(fo&&fo.classList.contains('open')){const fi=document.querySelector('#fsImg'); fi.src=src; document.querySelector('#fsLabel').textContent='your-website.com'+URLS[pg];}
     $('#urlText').textContent='your-website.com'+URLS[pg];
     $$('.verseg button').forEach(b=>b.classList.toggle('on',b.dataset.ver===ver));
     $$('.pagetabs button').forEach(b=>b.classList.toggle('on',b.dataset.page===pg));
@@ -627,7 +656,12 @@ img{display:block;max-width:100%;}
   function backToReview(){ dModal.classList.remove('open'); pg='home'; stage('review'); render(); }
   $('#changeMind').addEventListener('click',backToReview);
   $('#dmChange').addEventListener('click',backToReview);
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')dModal.classList.remove('open');});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){dModal.classList.remove('open');$('#fsOverlay').classList.remove('open');}});
+
+  /* fullscreen preview */
+  const fsOv=$('#fsOverlay');
+  $('#fsBtn').addEventListener('click',()=>{ $('#fsImg').src=$('#shot').src; $('#fsLabel').textContent='your-website.com'+URLS[pg]; fsOv.classList.add('open'); });
+  $('#fsClose').addEventListener('click',()=>fsOv.classList.remove('open'));
   document.addEventListener('keydown',e=>{if(e.key==='Escape')waModal.classList.remove('open');});
 
   /* date min = today+30 */
