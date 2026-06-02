@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Marine Pointe — Premium Boat Dealer</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1/dist/fonts/geist-sans/style.css">
+<style>
+/* ── Design Tokens ─────────────────────────────────────── */
+:root{
+  --bg:#ffffff;
+  --bg-2:#f6f7f8;
+  --bg-3:#eef0f3;
+  --ink:#0d0e12;
+  --ink-2:#3e404a;
+  --ink-3:#8a8d97;
+  --navy:#0c2461;
+  --navy-l:#1a3a8c;
+  --gold:#b8902a;
+  --border:#e2e4ea;
+  --border-2:#d0d3db;
+  --font-d:'Geist',system-ui,sans-serif;
+  --font-b:'Geist',system-ui,sans-serif;
+  --nav-h:72px;
+  --ease:cubic-bezier(.22,.68,0,1.2);
+}
+
+/* ── Reset ─────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--font-b);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+ul{list-style:none}
+
+/* ── Typography ────────────────────────────────────────── */
+.overline{
+  font-family:var(--font-b);font-size:11px;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
+}
+.display{font-family:var(--font-d);line-height:1.05;letter-spacing:-.02em}
+h1.display{font-size:clamp(3rem,6vw,5.5rem);font-weight:700}
+h2.display{font-size:clamp(2.2rem,4vw,3.8rem);font-weight:700}
+h3.display{font-size:clamp(1.6rem,2.5vw,2.4rem);font-weight:700}
+.body-l{font-size:1.0625rem;line-height:1.75;color:var(--ink-2);font-weight:400}
+.body-s{font-size:.875rem;line-height:1.7;color:var(--ink-3);font-weight:400}
+
+/* ── Buttons ───────────────────────────────────────────── */
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:var(--font-b);font-size:.8125rem;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;
+  padding:.85rem 1.75rem;border-radius:100px;
+  transition:all .25s ease;white-space:nowrap;
+}
+.btn--dark{background:var(--ink);color:#fff}
+.btn--dark:hover{background:var(--navy);transform:translateY(-1px)}
+.btn--outline{background:transparent;color:var(--ink);border:1.5px solid var(--border-2)}
+.btn--outline:hover{border-color:var(--ink);background:var(--ink);color:#fff}
+.btn--outline-white{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.5)}
+.btn--outline-white:hover{background:#fff;color:var(--ink)}
+.btn--navy{background:var(--navy);color:#fff}
+.btn--navy:hover{background:var(--navy-l);transform:translateY(-1px)}
+.btn svg{width:14px;height:14px;flex-shrink:0;transition:transform .2s ease}
+.btn:hover svg{transform:translateX(3px)}
+
+/* ── Nav ───────────────────────────────────────────────── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:var(--nav-h);
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  padding:0 2.5rem;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  transition:box-shadow .3s ease;
+}
+.nav.scrolled{box-shadow:0 2px 24px rgba(0,0,0,.07)}
+.nav__left,.nav__right{display:flex;align-items:center;gap:2rem}
+.nav__right{justify-content:flex-end}
+.nav__link{
+  font-size:.8rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink-3);transition:color .2s ease;
+}
+.nav__link:hover{color:var(--ink)}
+.nav__logo{display:flex;align-items:center;justify-content:center}
+.nav__cta{padding:.6rem 1.4rem;font-size:.75rem}
+
+/* ── Hero ──────────────────────────────────────────────── */
+.hero{
+  position:relative;height:100vh;min-height:640px;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding-bottom:5rem;overflow:hidden;
+}
+.hero__bg{
+  position:absolute;inset:0;
+  background:url('b-hero.jpg') center/cover no-repeat;
+}
+.hero__overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(8,10,18,.72) 0%,rgba(8,10,18,.25) 50%,rgba(8,10,18,.08) 100%);
+}
+.hero__body{
+  position:relative;z-index:2;
+  max-width:1280px;margin:0 auto;width:100%;padding:0 2.5rem;
+}
+.hero__overline{color:rgba(255,255,255,.65);margin-bottom:1.25rem}
+.hero__title{
+  font-family:var(--font-d);font-size:clamp(3.2rem,6.5vw,6rem);
+  font-weight:500;font-weight:700;line-height:1.02;color:#fff;
+  max-width:750px;margin-bottom:2.25rem;
+}
+.hero__actions{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+.hero__scroll{
+  position:absolute;bottom:2.5rem;right:2.5rem;z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  color:rgba(255,255,255,.5);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+}
+.hero__scroll-line{width:1px;height:40px;background:rgba(255,255,255,.3);animation:scrollPulse 2s ease-in-out infinite}
+@keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.3)}}
+
+/* ── Ticker Strip ──────────────────────────────────────── */
+.ticker{
+  background:var(--navy);color:#fff;
+  overflow:hidden;padding:.875rem 0;border-bottom:1px solid var(--border);
+}
+.ticker__track{
+  display:flex;gap:0;white-space:nowrap;
+  animation:tickerRoll 30s linear infinite;
+}
+.ticker__track:hover{animation-play-state:paused}
+.ticker__item{
+  display:inline-flex;align-items:center;gap:1.5rem;
+  font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  padding:0 2rem;
+}
+.ticker__dot{color:rgba(255,255,255,.35);font-size:.5rem}
+@keyframes tickerRoll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── Section wrapper ───────────────────────────────────── */
+.section{padding:7rem 2.5rem}
+.container{max-width:1280px;margin:0 auto;width:100%}
+.section-label{display:flex;align-items:center;gap:.875rem;margin-bottom:1.5rem}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── Intro Split ───────────────────────────────────────── */
+.intro{background:var(--bg)}
+.intro__grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.intro__left{}
+.intro__overline{margin-bottom:1.5rem}
+.intro__heading{margin-bottom:1.75rem}
+.intro__body{margin-bottom:2.5rem}
+.intro__stats{display:flex;gap:3rem;margin-top:2.5rem;padding-top:2.5rem;border-top:1px solid var(--border)}
+.intro__stat-num{
+  font-family:var(--font-d);font-size:2.8rem;font-weight:600;
+  color:var(--ink);line-height:1;
+}
+.intro__stat-label{font-size:.75rem;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase;margin-top:.3rem}
+.intro__right{position:relative}
+.intro__image{
+  width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:4px;
+}
+.intro__badge{
+  position:absolute;bottom:-1.5rem;left:-1.5rem;
+  background:#fff;border:1px solid var(--border);border-radius:4px;
+  padding:1.25rem 1.5rem;box-shadow:0 8px 32px rgba(0,0,0,.08);
+  display:flex;flex-direction:column;gap:.25rem;
+}
+.intro__badge-num{font-family:var(--font-d);font-size:2rem;font-weight:600;color:var(--navy);line-height:1}
+.intro__badge-label{font-size:.75rem;color:var(--ink-3);letter-spacing:.05em;text-transform:uppercase}
+
+/* ── Fleet Grid ────────────────────────────────────────── */
+.fleet{background:var(--bg)}
+.fleet__header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3rem}
+.fleet__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.listing-card{
+  border:1px solid var(--border);border-radius:8px;overflow:hidden;
+  transition:box-shadow .3s ease,transform .3s ease;
+  background:#fff;
+}
+.listing-card:hover{box-shadow:0 12px 48px rgba(0,0,0,.1);transform:translateY(-4px)}
+.listing-card__media{position:relative;overflow:hidden}
+.listing-card__img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .6s var(--ease)}
+.listing-card:hover .listing-card__img{transform:scale(1.05)}
+.listing-card__tag{
+  position:absolute;top:1rem;left:1rem;
+  background:rgba(255,255,255,.9);backdrop-filter:blur(8px);
+  padding:.3rem .75rem;border-radius:100px;
+  font-size:.68rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--ink);
+}
+.listing-card__body{padding:1.5rem}
+.listing-card__name{
+  font-family:var(--font-d);font-size:1.35rem;font-weight:600;
+  color:var(--ink);margin-bottom:.4rem;line-height:1.2;
+}
+.listing-card__specs{
+  display:flex;gap:1.25rem;margin-bottom:1.25rem;
+  border-bottom:1px solid var(--border);padding-bottom:1.25rem;
+}
+.listing-card__spec{display:flex;flex-direction:column;gap:.15rem}
+.listing-card__spec-lbl{font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.listing-card__spec-val{font-size:.875rem;font-weight:500;color:var(--ink)}
+.listing-card__footer{display:flex;align-items:center;justify-content:space-between}
+.listing-card__price{font-family:var(--font-d);font-size:1.5rem;font-weight:600;color:var(--navy)}
+.listing-card__link{
+  display:flex;align-items:center;gap:.4rem;
+  font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink-3);transition:color .2s ease;
+}
+.listing-card__link:hover{color:var(--ink)}
+.listing-card__link svg{transition:transform .2s ease}
+.listing-card:hover .listing-card__link svg{transform:translateX(3px)}
+
+/* ── Full-bleed Image Section ──────────────────────────── */
+.full-bleed{position:relative;height:600px;overflow:hidden;display:flex;align-items:flex-end}
+.full-bleed__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.full-bleed__overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(8,10,18,.8) 0%,rgba(8,10,18,.2) 60%,transparent 100%);
+}
+.full-bleed__body{
+  position:relative;z-index:2;
+  max-width:1280px;margin:0 auto;width:100%;
+  padding:4rem 2.5rem;
+  display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;
+}
+.full-bleed__text{}
+.full-bleed__overline{color:rgba(255,255,255,.55);margin-bottom:1rem}
+.full-bleed__title{
+  font-family:var(--font-d);font-size:clamp(2rem,3.5vw,3.5rem);
+  font-weight:500;font-weight:700;color:#fff;line-height:1.1;
+  max-width:550px;
+}
+
+/* ── Values / About ────────────────────────────────────── */
+.values{background:var(--bg-2)}
+.values__grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
+.values__left{}
+.values__overline{margin-bottom:1.5rem}
+.values__heading{margin-bottom:1.5rem}
+.values__intro{margin-bottom:3rem}
+.values__list{display:flex;flex-direction:column;gap:0}
+.values__item{
+  display:flex;flex-direction:column;gap:.5rem;
+  padding:1.5rem 0;border-bottom:1px solid var(--border);
+}
+.values__item:first-child{border-top:1px solid var(--border)}
+.values__item-head{display:flex;align-items:center;gap:1rem}
+.values__item-num{
+  font-family:var(--font-d);font-size:1.1rem;font-weight:600;color:var(--navy);
+  min-width:2rem;
+}
+.values__item-title{font-size:1rem;font-weight:600;color:var(--ink);letter-spacing:.01em}
+.values__item-body{font-size:.875rem;color:var(--ink-3);line-height:1.7;padding-left:3rem}
+.values__right{position:relative}
+.values__img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:6px}
+.values__img-caption{
+  position:absolute;bottom:-1.5rem;right:-1.5rem;
+  background:var(--navy);color:#fff;
+  padding:1.5rem 1.75rem;border-radius:6px;
+  max-width:220px;
+}
+.values__caption-label{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:.4rem}
+.values__caption-text{font-family:var(--font-d);font-size:1.05rem;font-weight:700;line-height:1.35;color:#fff}
+
+/* ── Services ──────────────────────────────────────────── */
+.services{background:var(--bg)}
+.services__header{text-align:center;max-width:640px;margin:0 auto 4rem}
+.services__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border)}
+.svc-card{
+  background:var(--bg);padding:3rem 2.5rem;
+  transition:background .25s ease;
+}
+.svc-card:hover{background:var(--bg-2)}
+.svc-card__icon{
+  width:48px;height:48px;border-radius:50%;
+  background:var(--bg-3);display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.75rem;color:var(--navy);
+}
+.svc-card__title{
+  font-family:var(--font-d);font-size:1.4rem;font-weight:600;
+  color:var(--ink);margin-bottom:.875rem;
+}
+.svc-card__body{font-size:.875rem;color:var(--ink-3);line-height:1.75}
+.svc-card__link{
+  display:inline-flex;align-items:center;gap:.4rem;
+  margin-top:1.5rem;font-size:.78rem;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--navy);
+  border-bottom:1px solid transparent;transition:border-color .2s ease;
+}
+.svc-card__link:hover{border-color:var(--navy)}
+.svc-card__link svg{transition:transform .2s ease}
+.svc-card:hover .svc-card__link svg{transform:translateX(3px)}
+
+/* ── Testimonials ──────────────────────────────────────── */
+.testimonials{background:var(--ink);color:#fff;overflow:hidden}
+.testimonials__header{text-align:center;margin-bottom:4rem}
+.testimonials__overline{color:rgba(255,255,255,.4);margin-bottom:1rem}
+.testimonials__heading{color:#fff}
+.testimonials__track{position:relative}
+.testimonials__slide{
+  display:none;
+  grid-template-columns:1fr auto;gap:5rem;align-items:center;
+}
+.testimonials__slide.active{display:grid}
+.testimonials__content{}
+.testimonials__stars{display:flex;gap:.3rem;margin-bottom:1.75rem}
+.testimonials__stars svg{width:18px;height:18px;color:#f0c040;fill:#f0c040}
+.testimonials__quote{
+  font-family:var(--font-d);font-size:clamp(1.6rem,3vw,2.8rem);
+  font-weight:500;font-weight:700;line-height:1.2;
+  color:#fff;margin-bottom:2.5rem;
+}
+.testimonials__author{display:flex;flex-direction:column;gap:.25rem}
+.testimonials__name{font-size:.9rem;font-weight:600;color:#fff}
+.testimonials__loc{font-size:.8rem;color:rgba(255,255,255,.45);letter-spacing:.04em}
+.testimonials__photo{
+  width:280px;height:340px;object-fit:cover;border-radius:6px;
+  flex-shrink:0;
+}
+.testimonials__nav{
+  display:flex;align-items:center;gap:1rem;margin-top:3rem;
+}
+.testimonials__arrow{
+  width:44px;height:44px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;cursor:pointer;transition:all .2s ease;
+}
+.testimonials__arrow:hover{background:#fff;color:var(--ink)}
+.testimonials__dots{display:flex;gap:.5rem;margin-left:.5rem}
+.testimonials__dot{
+  width:6px;height:6px;border-radius:50%;
+  background:rgba(255,255,255,.2);border:none;cursor:pointer;
+  transition:all .2s ease;
+}
+.testimonials__dot.active{background:#fff;width:20px;border-radius:3px}
+
+/* ── CTA Banner ────────────────────────────────────────── */
+.cta-banner{
+  position:relative;padding:8rem 2.5rem;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  overflow:hidden;
+}
+.cta-banner__bg{
+  position:absolute;inset:0;
+  background:url('https://marinepointe.com/cdn/shop/files/Marina_Pic.jpg?v=1705519950&width=1920') center/cover no-repeat;
+}
+.cta-banner__overlay{position:absolute;inset:0;background:rgba(8,10,18,.72)}
+.cta-banner__body{position:relative;z-index:2;max-width:640px}
+.cta-banner__overline{color:rgba(255,255,255,.55);margin-bottom:1.25rem}
+.cta-banner__title{
+  font-family:var(--font-d);font-size:clamp(2.4rem,5vw,4.5rem);
+  font-weight:500;font-weight:700;color:#fff;line-height:1.05;
+  margin-bottom:1rem;
+}
+.cta-banner__sub{font-size:.9375rem;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:2.5rem}
+.cta-banner__actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+/* ── Footer ────────────────────────────────────────────── */
+.footer{background:var(--ink);color:#fff;padding:5rem 2.5rem 2.5rem}
+.footer__top{
+  display:grid;grid-template-columns:1.5fr 1fr 1fr 1.5fr;
+  gap:3rem;padding-bottom:4rem;border-bottom:1px solid rgba(255,255,255,.1);
+  margin-bottom:2.5rem;
+}
+.footer__brand{}
+.footer__logo-wrap{margin-bottom:1.25rem}
+.footer__tagline{font-size:.875rem;color:rgba(255,255,255,.45);line-height:1.7;max-width:260px;margin-bottom:1.75rem}
+.footer__socials{display:flex;gap:.75rem}
+.footer__social{
+  width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.15);
+  display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);
+  transition:all .2s ease;
+}
+.footer__social:hover{border-color:#fff;color:#fff}
+.footer__social svg{width:15px;height:15px}
+.footer__col-title{
+  font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.35);margin-bottom:1.25rem;
+}
+.footer__links{display:flex;flex-direction:column;gap:.7rem}
+.footer__link{font-size:.9rem;color:rgba(255,255,255,.6);transition:color .2s ease}
+.footer__link:hover{color:#fff}
+.footer__newsletter{}
+.footer__newsletter-head{
+  font-family:var(--font-d);font-size:1.6rem;font-weight:500;font-weight:700;
+  color:#fff;margin-bottom:.5rem;
+}
+.footer__newsletter-sub{font-size:.875rem;color:rgba(255,255,255,.45);margin-bottom:1.5rem}
+.footer__form{display:flex;gap:.5rem}
+.footer__input{
+  flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);
+  border-radius:100px;padding:.75rem 1.25rem;
+  font-family:var(--font-b);font-size:.875rem;color:#fff;
+  outline:none;transition:border-color .2s ease;
+}
+.footer__input::placeholder{color:rgba(255,255,255,.3)}
+.footer__input:focus{border-color:rgba(255,255,255,.4)}
+.footer__submit{
+  padding:.75rem 1.5rem;border-radius:100px;
+  background:#fff;color:var(--ink);
+  font-family:var(--font-b);font-size:.8rem;font-weight:600;letter-spacing:.04em;
+  border:none;cursor:pointer;transition:background .2s ease;white-space:nowrap;
+}
+.footer__submit:hover{background:var(--bg-3)}
+.footer__bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer__copy{font-size:.8rem;color:rgba(255,255,255,.3)}
+.footer__legal{display:flex;gap:1.5rem}
+.footer__legal a{font-size:.8rem;color:rgba(255,255,255,.3);transition:color .2s ease}
+.footer__legal a:hover{color:rgba(255,255,255,.7)}
+
+/* ── Scroll Reveal ─────────────────────────────────────── */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.rv.visible{opacity:1;transform:none}
+.rv-d1{transition-delay:.1s}
+.rv-d2{transition-delay:.2s}
+.rv-d3{transition-delay:.3s}
+.rv-d4{transition-delay:.4s}
+
+/* ── Responsive ────────────────────────────────────────── */
+@media(max-width:1024px){
+  .intro__grid,.values__grid{grid-template-columns:1fr;gap:3rem}
+  .intro__badge{display:none}
+  .values__img-caption{position:static;margin-top:1rem;max-width:none}
+  .featured__inner{grid-template-columns:1fr}
+  .featured__img{min-height:360px}
+}
+@media(max-width:768px){
+  .nav{grid-template-columns:auto 1fr;padding:0 1.25rem}
+  .nav__left,.nav__right{display:none}
+  .nav__logo{justify-content:flex-start}
+  .nav__cta{display:flex;margin-left:auto}
+  .section{padding:5rem 1.25rem}
+  .fleet__grid{grid-template-columns:1fr}
+  .services__grid{grid-template-columns:1fr}
+  .testimonials__slide{grid-template-columns:1fr}
+  .testimonials__photo{display:none}
+  .footer__top{grid-template-columns:1fr 1fr}
+  .full-bleed__body{flex-direction:column;align-items:flex-start}
+  .hero__scroll{display:none}
+}
+</style>
+<style id="dsw-hide-logo">.nav__logo svg,.footer__logo svg,.footer__logo-wrap svg{display:none!important}</style>
+</head>
+<body>
+
+<!-- ══ NAV ══════════════════════════════════════════════ -->
+<nav class="nav" id="nav">
+  <div class="nav__left">
+    <a href="#fleet" class="nav__link">For Sale</a>
+    <a href="#marina" class="nav__link">Marina</a>
+  </div>
+
+  <a href="#" class="nav__logo" aria-label="Marine Pointe">
+    <svg viewBox="0 0 260 56" width="170" height="37" aria-label="Marine Pointe" xmlns="http://www.w3.org/2000/svg">
+      <defs><style>.mp-t{font-family:'Arial Black','Arial Bold',Arial,sans-serif;font-weight:900;font-size:22px;letter-spacing:.04em;fill:#111469;}</style></defs>
+      <text class="mp-t" x="0" y="28" text-anchor="start">MARINE</text>
+      <g transform="translate(130,17)">
+        <circle cx="0" cy="0" r="16" fill="none" stroke="#111469" stroke-width="2.8"/>
+        <circle cx="0" cy="0" r="5.5" fill="none" stroke="#111469" stroke-width="2.2"/>
+        <circle cx="0" cy="0" r="2" fill="#111469"/>
+        <line x1="0" y1="-5.5" x2="0" y2="-16" stroke="#111469" stroke-width="2" stroke-linecap="round"/>
+        <line x1="3.9" y1="-3.9" x2="11.3" y2="-11.3" stroke="#111469" stroke-width="2" stroke-linecap="round"/>
+        <line x1="5.5" y1="0" x2="16" y2="0" stroke="#111469" stroke-width="2" stroke-linecap="round"/>
+        <line x1="3.9" y1="3.9" x2="11.3" y2="11.3" stroke="#111469" stroke-width="2" stroke-linecap="round"/>
+        <line x1="0" y1="5.5" x2="0" y2="16" stroke="#111469" stroke-width="2" stroke-linecap="round"/>
+        <line x1="-3.9" y1="3.9" x2="-11.3" y2="11.3" stroke="#111469" stroke-width="2" stroke-linecap="round"/>
+        <line x1="-5.5" y1="0" x2="-16" y2="0" stroke="#111469" stroke-width="2" stroke-linecap="round"/>
+        <line x1="-3.9" y1="-3.9" x2="-11.3" y2="-11.3" stroke="#111469" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="0" cy="-18.5" r="2.5" fill="#111469"/>
+        <circle cx="13.1" cy="-13.1" r="2.5" fill="#111469"/>
+        <circle cx="18.5" cy="0" r="2.5" fill="#111469"/>
+        <circle cx="13.1" cy="13.1" r="2.5" fill="#111469"/>
+        <circle cx="0" cy="18.5" r="2.5" fill="#111469"/>
+        <circle cx="-13.1" cy="13.1" r="2.5" fill="#111469"/>
+        <circle cx="-18.5" cy="0" r="2.5" fill="#111469"/>
+        <circle cx="-13.1" cy="-13.1" r="2.5" fill="#111469"/>
+      </g>
+      <text class="mp-t" x="260" y="28" text-anchor="end">POINTE</text>
+      <rect x="3" y="38" width="18" height="13" fill="white" stroke="#ccc" stroke-width=".5"/>
+      <polygon points="3,38 21,38 12,44.5" fill="#111469"/>
+      <polygon points="3,51 21,51 12,44.5" fill="#111469"/>
+      <rect x="24" y="38" width="18" height="13" fill="#f5c518"/>
+      <rect x="24" y="38" width="9" height="6.5" fill="#1a1a1a"/>
+      <rect x="33" y="44.5" width="9" height="6.5" fill="#1a1a1a"/>
+      <rect x="45" y="38" width="18" height="13" fill="#c8102e"/>
+      <rect x="45" y="44.5" width="18" height="6.5" fill="white"/>
+      <rect x="66" y="38" width="18" height="13" fill="#f5c518"/>
+      <rect x="66" y="38" width="18" height="4.3" fill="#111469"/>
+      <rect x="66" y="46.7" width="18" height="4.3" fill="#111469"/>
+      <rect x="87" y="38" width="18" height="13" fill="white" stroke="#ccc" stroke-width=".5"/>
+      <rect x="95" y="38" width="4" height="13" fill="#c8102e"/>
+      <rect x="87" y="43" width="18" height="4" fill="#c8102e"/>
+      <rect x="108" y="38" width="18" height="13" fill="#111469"/>
+      <rect x="114" y="38" width="6" height="13" fill="#c8102e"/>
+      <rect x="129" y="38" width="18" height="13" fill="#c8102e"/>
+      <rect x="129" y="38" width="8" height="13" fill="#111469"/>
+      <rect x="150" y="38" width="18" height="13" fill="#f5c518"/>
+      <rect x="150" y="38" width="18" height="4.3" fill="#1a1a1a"/>
+      <rect x="150" y="46.7" width="18" height="4.3" fill="#111469"/>
+      <rect x="171" y="38" width="18" height="13" fill="#c8102e"/>
+      <polygon points="171,51 189,38 189,51" fill="#f5c518"/>
+      <rect x="192" y="38" width="18" height="13" fill="#111469"/>
+      <polygon points="192,38 210,51 192,51" fill="white"/>
+      <rect x="213" y="38" width="18" height="13" fill="#c8102e"/>
+      <rect x="213" y="38" width="9" height="6.5" fill="white"/>
+      <rect x="234" y="38" width="18" height="13" fill="#111469"/>
+      <rect x="240" y="38" width="6" height="13" fill="white"/>
+    </svg>
+  </a>
+
+  <div class="nav__right">
+    <a href="#services" class="nav__link">Services</a>
+    <a href="#about" class="nav__link">About</a>
+    <a href="https://marinepointe.com/contact" class="btn btn--dark btn--outline nav__cta">Book a Viewing</a>
+  </div>
+</nav>
+
+<!-- ══ HERO ══════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero__bg"></div>
+  <div class="hero__overlay"></div>
+  <div class="hero__body">
+    <p class="overline hero__overline">Premium Boat Dealer — Pompano Beach, Florida</p>
+    <h1 class="hero__title">Find the vessel that moves you.</h1>
+    <div class="hero__actions">
+      <a href="#fleet" class="btn btn--outline-white">
+        Explore Fleet
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
+      <a href="https://marinepointe.com/contact" class="btn btn--outline-white">Book a Viewing</a>
+    </div>
+  </div>
+  <div class="hero__scroll">
+    <div class="hero__scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ══ TICKER ════════════════════════════════════════════ -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__track">
+    <span class="ticker__item">Center Consoles <span class="ticker__dot">●</span></span>
+    <span class="ticker__item">Sport Yachts <span class="ticker__dot">●</span></span>
+    <span class="ticker__item">Full-Service Marina <span class="ticker__dot">●</span></span>
+    <span class="ticker__item">Boat Financing <span class="ticker__dot">●</span></span>
+    <span class="ticker__item">Consignment Sales <span class="ticker__dot">●</span></span>
+    <span class="ticker__item">Marine Parts & Accessories <span class="ticker__dot">●</span></span>
+    <span class="ticker__item">Expert Team <span class="ticker__dot">●</span></span>
+    <span class="ticker__item">Florida's Premier Dealer <span class="ticker__dot">●</span></span>
+    <span class="ticker__item">Center Consoles <span class="ticker__dot">●</span></span>
+    <span class="ticker__item">Sport Yachts <span class="ticker__dot">●</span></span>
+    <span class="ticker__item">Full-Service Marina <span class="ticker__dot">●</span></span>
+    <span class="ticker__item">Boat Financing <span class="ticker__dot">●</span></span>
+    <span class="ticker__item">Consignment Sales <span class="ticker__dot">●</span></span>
+    <span class="ticker__item">Marine Parts & Accessories <span class="ticker__dot">●</span></span>
+    <span class="ticker__item">Expert Team <span class="ticker__dot">●</span></span>
+    <span class="ticker__item">Florida's Premier Dealer <span class="ticker__dot">●</span></span>
+  </div>
+</div>
+
+<!-- ══ FLEET GRID ═════════════════════════════════════════ -->
+<section class="section fleet" id="fleet">
+  <div class="container">
+    <div class="fleet__header rv">
+      <div>
+        <p class="overline" style="margin-bottom:.75rem">Current Inventory</p>
+        <h2 class="display" style="font-size:clamp(1.8rem,3vw,2.8rem);letter-spacing:-.02em">Available Vessels</h2>
+      </div>
+      <a href="https://marinepointe.com/collections/all" class="btn btn--outline">
+        All Listings
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
+    </div>
+    <div class="fleet__grid">
+
+      <article class="listing-card rv rv-d1">
+        <div class="listing-card__media">
+          <img class="listing-card__img" src="https://marinepointe.com/cdn/shop/files/Hanover-Yachts-Listing-on-YachtWay-6.jpg?v=1752512473&width=820" alt="2025 SeaWell 290CC" loading="lazy">
+          <span class="listing-card__tag">Center Console</span>
+        </div>
+        <div class="listing-card__body">
+          <div class="listing-card__name">2025 SeaWell 290CC</div>
+          <div class="listing-card__specs">
+            <div class="listing-card__spec">
+              <span class="listing-card__spec-lbl">Year</span>
+              <span class="listing-card__spec-val">2025</span>
+            </div>
+            <div class="listing-card__spec">
+              <span class="listing-card__spec-lbl">Length</span>
+              <span class="listing-card__spec-val">29 ft</span>
+            </div>
+            <div class="listing-card__spec">
+              <span class="listing-card__spec-lbl">Condition</span>
+              <span class="listing-card__spec-val">Pre-owned</span>
+            </div>
+          </div>
+          <div class="listing-card__footer">
+            <span class="listing-card__price">$129,000</span>
+            <a href="https://marinepointe.com/products/2024-seawell-290cc" class="listing-card__link">
+              View More
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="listing-card rv rv-d2">
+        <div class="listing-card__media">
+          <img class="listing-card__img" src="https://marinepointe.com/cdn/shop/files/Hanover-Yachts-Listing-on-YachtWay-6.jpg?v=1752512473&width=820" alt="2023 BRABUS Shadow 900 ST" loading="lazy">
+          <span class="listing-card__tag">Sport</span>
+        </div>
+        <div class="listing-card__body">
+          <div class="listing-card__name">2023 BRABUS Shadow 900 ST</div>
+          <div class="listing-card__specs">
+            <div class="listing-card__spec">
+              <span class="listing-card__spec-lbl">Year</span>
+              <span class="listing-card__spec-val">2023</span>
+            </div>
+            <div class="listing-card__spec">
+              <span class="listing-card__spec-lbl">Length</span>
+              <span class="listing-card__spec-val">29 ft</span>
+            </div>
+            <div class="listing-card__spec">
+              <span class="listing-card__spec-lbl">Condition</span>
+              <span class="listing-card__spec-val">Pre-owned</span>
+            </div>
+          </div>
+          <div class="listing-card__footer">
+            <span class="listing-card__price">$455,000</span>
+            <a href="https://marinepointe.com/products/2023-brabus-shadow-900-st" class="listing-card__link">
+              View More
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="listing-card rv rv-d3">
+        <div class="listing-card__media">
+          <img class="listing-card__img" src="https://marinepointe.com/cdn/shop/files/Hanover-Yachts-Listing-on-YachtWay-12.jpg?v=1752512473&width=820" alt="2010 Edgewater 318CC" loading="lazy">
+          <span class="listing-card__tag">Center Console</span>
+        </div>
+        <div class="listing-card__body">
+          <div class="listing-card__name">2010 Edgewater 318CC</div>
+          <div class="listing-card__specs">
+            <div class="listing-card__spec">
+              <span class="listing-card__spec-lbl">Year</span>
+              <span class="listing-card__spec-val">2010</span>
+            </div>
+            <div class="listing-card__spec">
+              <span class="listing-card__spec-lbl">Length</span>
+              <span class="listing-card__spec-val">32 ft</span>
+            </div>
+            <div class="listing-card__spec">
+              <span class="listing-card__spec-lbl">Condition</span>
+              <span class="listing-card__spec-val">Pre-owned</span>
+            </div>
+          </div>
+          <div class="listing-card__footer">
+            <span class="listing-card__price">$139,000</span>
+            <a href="https://marinepointe.com/products/2010-edgewater-318cc" class="listing-card__link">
+              View More
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="listing-card rv rv-d1">
+        <div class="listing-card__media">
+          <img class="listing-card__img" src="https://marinepointe.com/cdn/shop/files/Marina_Pic.jpg?v=1705519950&width=1920" alt="2019 Boston Whaler 350 Realm" loading="lazy">
+          <span class="listing-card__tag">Sport Cruiser</span>
+        </div>
+        <div class="listing-card__body">
+          <div class="listing-card__name">2019 Boston Whaler 350 Realm</div>
+          <div class="listing-card__specs">
+            <div class="listing-card__spec">
+              <span class="listing-card__spec-lbl">Year</span>
+              <span class="listing-card__spec-val">2019</span>
+            </div>
+            <div class="listing-card__spec">
+              <span class="listing-card__spec-lbl">Length</span>
+              <span class="listing-card__spec-val">35 ft</span>
+            </div>
+            <div class="listing-card__spec">
+              <span class="listing-card__spec-lbl">Condition</span>
+              <span class="listing-card__spec-val">Pre-owned</span>
+            </div>
+          </div>
+          <div class="listing-card__footer">
+            <span class="listing-card__price">$450,000</span>
+            <a href="https://marinepointe.com/products/2019-boston-whaler-350-realm" class="listing-card__link">
+              View More
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="listing-card rv rv-d2">
+        <div class="listing-card__media">
+          <img class="listing-card__img" src="https://marinepointe.com/cdn/shop/files/Hanover-Yachts-Listing-on-YachtWay-6.jpg?v=1752512473&width=820" alt="2020 Regal LS4" loading="lazy">
+          <span class="listing-card__tag">Bowrider</span>
+        </div>
+        <div class="listing-card__body">
+          <div class="listing-card__name">2020 Regal LS4</div>
+          <div class="listing-card__specs">
+            <div class="listing-card__spec">
+              <span class="listing-card__spec-lbl">Year</span>
+              <span class="listing-card__spec-val">2020</span>
+            </div>
+            <div class="listing-card__spec">
+              <span class="listing-card__spec-lbl">Length</span>
+              <span class="listing-card__spec-val">24 ft</span>
+            </div>
+            <div class="listing-card__spec">
+              <span class="listing-card__spec-lbl">Condition</span>
+              <span class="listing-card__spec-val">Pre-owned</span>
+            </div>
+          </div>
+          <div class="listing-card__footer">
+            <span class="listing-card__price">$77,500</span>
+            <a href="https://marinepointe.com/products/2020-regal-ls4" class="listing-card__link">
+              View More
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="listing-card rv rv-d3">
+        <div class="listing-card__media">
+          <img class="listing-card__img" src="https://marinepointe.com/cdn/shop/files/Hanover-Yachts-Listing-on-YachtWay-12.jpg?v=1752512473&width=820" alt="2023 Beneteau Flyer 9 SUNdeck" loading="lazy">
+          <span class="listing-card__tag">Sport</span>
+        </div>
+        <div class="listing-card__body">
+          <div class="listing-card__name">2023 Beneteau Flyer 9 SUNdeck</div>
+          <div class="listing-card__specs">
+            <div class="listing-card__spec">
+              <span class="listing-card__spec-lbl">Year</span>
+              <span class="listing-card__spec-val">2023</span>
+            </div>
+            <div class="listing-card__spec">
+              <span class="listing-card__spec-lbl">Length</span>
+              <span class="listing-card__spec-val">30 ft</span>
+            </div>
+            <div class="listing-card__spec">
+              <span class="listing-card__spec-lbl">Condition</span>
+              <span class="listing-card__spec-val">Pre-owned</span>
+            </div>
+          </div>
+          <div class="listing-card__footer">
+            <span class="listing-card__price">$169,000</span>
+            <a href="https://marinepointe.com/products/2023-beneteau-flyer-9-sundeck" class="listing-card__link">
+              View More
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+    <div style="text-align:center;margin-top:2.5rem" class="rv">
+      <a href="https://marinepointe.com/collections/all" class="btn btn--outline">
+        View All Listings
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ INTRO ═════════════════════════════════════════════ -->
+<section class="section intro" id="about">
+  <div class="container">
+    <div class="intro__grid">
+      <div class="intro__left rv">
+        <p class="overline intro__overline">About Marine Pointe</p>
+        <h2 class="display intro__heading">We curate the finest vessels on Florida's coastline.</h2>
+        <p class="body-l intro__body">Marine Pointe is more than a dealership — it's your gateway to life on the water. Based in Pompano Beach, we've spent years connecting passionate boaters with exceptional vessels, backed by a full-service marina and a team that lives and breathes the sea.</p>
+        <a href="https://marinepointe.com/contact" class="btn btn--outline">
+          Book a Viewing
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+        <div class="intro__stats">
+          <div>
+            <div class="intro__stat-num">15+</div>
+            <div class="intro__stat-label">Years of Service</div>
+          </div>
+          <div>
+            <div class="intro__stat-num">500+</div>
+            <div class="intro__stat-label">Vessels Sold</div>
+          </div>
+          <div>
+            <div class="intro__stat-num">4.9★</div>
+            <div class="intro__stat-label">Client Rating</div>
+          </div>
+        </div>
+      </div>
+      <div class="intro__right rv rv-d2">
+        <img
+          class="intro__image"
+          src="https://marinepointe.com/cdn/shop/files/Marina_Pic.jpg?v=1705519950&width=1920"
+          alt="Marine Pointe Marina"
+          loading="lazy"
+        >
+        <div class="intro__badge">
+          <div class="intro__badge-num">2009</div>
+          <div class="intro__badge-label">Est. Pompano Beach</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FULL-BLEED MARINA ══════════════════════════════════ -->
+<div class="full-bleed" id="marina">
+  <img class="full-bleed__img" src="https://marinepointe.com/cdn/shop/files/Marina_Pic.jpg?v=1705519950&width=1920" alt="Marine Pointe Full-Service Marina" loading="lazy">
+  <div class="full-bleed__overlay"></div>
+  <div class="full-bleed__body">
+    <div class="full-bleed__text">
+      <p class="overline full-bleed__overline">Full-Service Marina</p>
+      <h2 class="full-bleed__title">A home port worthy of your vessel.</h2>
+    </div>
+    <a href="https://marinepointe.com/pages/marina" class="btn btn--outline-white">
+      Marina Details
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- ══ VALUES ════════════════════════════════════════════ -->
+<section class="section values" id="services">
+  <div class="container">
+    <div class="values__grid">
+      <div class="values__left">
+        <p class="overline values__overline rv">Why Choose Marine Pointe</p>
+        <h2 class="display values__heading rv rv-d1">We deliver exceptional experiences on the water.</h2>
+        <p class="body-l values__intro rv rv-d2">Our values shape every transaction, every interaction, and every vessel we bring to market.</p>
+        <div class="values__list">
+          <div class="values__item rv rv-d1">
+            <div class="values__item-head">
+              <span class="values__item-num">01</span>
+              <span class="values__item-title">Premium Curated Inventory</span>
+            </div>
+            <div class="values__item-body">Every vessel is personally inspected and selected — new and pre-owned boats that meet our exacting standards for condition, performance, and value.</div>
+          </div>
+          <div class="values__item rv rv-d2">
+            <div class="values__item-head">
+              <span class="values__item-num">02</span>
+              <span class="values__item-title">Expert Team, Genuine Passion</span>
+            </div>
+            <div class="values__item-body">Our staff are boaters first. We bring deep knowledge and real enthusiasm to every conversation — no pressure, just honest guidance to find your perfect match.</div>
+          </div>
+          <div class="values__item rv rv-d3">
+            <div class="values__item-head">
+              <span class="values__item-num">03</span>
+              <span class="values__item-title">Full-Service Support</span>
+            </div>
+            <div class="values__item-body">From financing and consignment to our on-site marina and parts department, we're with you long after the sale. One destination for everything on the water.</div>
+          </div>
+        </div>
+      </div>
+      <div class="values__right rv rv-d2">
+        <img
+          class="values__img"
+          src="https://marinepointe.com/cdn/shop/files/Hanover-Yachts-Listing-on-YachtWay-6.jpg?v=1752512473&width=820"
+          alt="Marine Pointe team"
+          loading="lazy"
+        >
+        <div class="values__img-caption">
+          <div class="values__caption-label">Based in</div>
+          <div class="values__caption-text">Pompano Beach, Florida — serving South Florida since 2009</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SERVICES GRID ══════════════════════════════════════ -->
+<section class="section services" style="padding-top:2rem;padding-bottom:6rem">
+  <div class="container">
+    <div class="services__header rv">
+      <p class="overline" style="margin-bottom:.875rem">What We Offer</p>
+      <h2 class="display" style="margin-bottom:1rem">Everything you need, in one place.</h2>
+      <p class="body-l">From first vessel to ongoing support, Marine Pointe is your complete marine partner.</p>
+    </div>
+    <div class="services__grid rv rv-d1">
+
+      <div class="svc-card">
+        <div class="svc-card__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17l4-8 4 4 4-6 4 10"/><path d="M3 21h18"/></svg>
+        </div>
+        <div class="svc-card__title">Boat Sales</div>
+        <p class="svc-card__body">New and pre-owned center consoles, sport boats, cruisers, and offshore fishing vessels — all inspected and ready for sea trials.</p>
+        <a href="https://marinepointe.com/collections/all" class="svc-card__link">
+          Browse Inventory
+          <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-card__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/></svg>
+        </div>
+        <div class="svc-card__title">Full-Service Marina</div>
+        <p class="svc-card__body">Wet slips, dry storage, fueling, and expert mechanical service at our full-service Pompano Beach facility. Your boat is in good hands.</p>
+        <a href="https://marinepointe.com/pages/marina" class="svc-card__link">
+          Marina Info
+          <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-card__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="svc-card__title">Consignment Sales</div>
+        <p class="svc-card__body">Ready to sell? List your vessel with Marine Pointe. We handle the marketing, showings, and paperwork — you get maximum value with zero hassle.</p>
+        <a href="https://marinepointe.com/pages/consignment" class="svc-card__link">
+          Learn More
+          <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-card__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+        </div>
+        <div class="svc-card__title">Boat Financing</div>
+        <p class="svc-card__body">Competitive marine financing through trusted lenders. We'll help you find a payment plan that fits your budget so you can get on the water sooner.</p>
+        <a href="https://marinepointe.com/pages/financing" class="svc-card__link">
+          Financing Options
+          <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-card__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <div class="svc-card__title">Marine Parts & Service</div>
+        <p class="svc-card__body">OEM and aftermarket parts, accessories, and certified mechanical service. Keep your vessel performing at its peak with our in-house service department.</p>
+        <a href="https://marinepointe.com/collections/parts" class="svc-card__link">
+          Shop Parts
+          <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-card__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="svc-card__title">Private Viewings</div>
+        <p class="svc-card__body">Schedule a private sea trial or dock-side viewing at your convenience. Our team will prepare the vessel and walk you through every feature personally.</p>
+        <a href="https://marinepointe.com/contact" class="svc-card__link">
+          Book a Viewing
+          <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS ═══════════════════════════════════════ -->
+<section class="section testimonials" id="testimonials">
+  <div class="container">
+    <div class="testimonials__header rv">
+      <p class="overline testimonials__overline">Client Stories</p>
+      <h2 class="display testimonials__heading" style="color:#fff;font-size:clamp(1.8rem,3vw,2.6rem);margin-top:.75rem">Real stories from people who found their perfect vessel.</h2>
+    </div>
+
+    <div class="testimonials__track rv rv-d1">
+
+      <div class="testimonials__slide active" id="slide-0">
+        <div class="testimonials__content">
+          <div class="testimonials__stars">
+            <svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.26H18l-5.19 3.73 2.39 6.26L10 13.52l-5.19 3.73 2.39-6.26L2 7.26h5.61z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.26H18l-5.19 3.73 2.39 6.26L10 13.52l-5.19 3.73 2.39-6.26L2 7.26h5.61z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.26H18l-5.19 3.73 2.39 6.26L10 13.52l-5.19 3.73 2.39-6.26L2 7.26h5.61z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.26H18l-5.19 3.73 2.39 6.26L10 13.52l-5.19 3.73 2.39-6.26L2 7.26h5.61z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.26H18l-5.19 3.73 2.39 6.26L10 13.52l-5.19 3.73 2.39-6.26L2 7.26h5.61z"/></svg>
+          </div>
+          <p class="testimonials__quote">"The team at Marine Pointe made the whole process effortless. They found exactly what I was looking for and the sea trial was flawless. Couldn't be happier."</p>
+          <div class="testimonials__author">
+            <span class="testimonials__name">Michael R.</span>
+            <span class="testimonials__loc">Fort Lauderdale, FL</span>
+          </div>
+        </div>
+        <img class="testimonials__photo" src="https://marinepointe.com/cdn/shop/files/Hanover-Yachts-Listing-on-YachtWay-6.jpg?v=1752512473&width=820" alt="Boston Whaler 350" loading="lazy">
+      </div>
+
+      <div class="testimonials__slide" id="slide-1">
+        <div class="testimonials__content">
+          <div class="testimonials__stars">
+            <svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.26H18l-5.19 3.73 2.39 6.26L10 13.52l-5.19 3.73 2.39-6.26L2 7.26h5.61z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.26H18l-5.19 3.73 2.39 6.26L10 13.52l-5.19 3.73 2.39-6.26L2 7.26h5.61z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.26H18l-5.19 3.73 2.39 6.26L10 13.52l-5.19 3.73 2.39-6.26L2 7.26h5.61z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.26H18l-5.19 3.73 2.39 6.26L10 13.52l-5.19 3.73 2.39-6.26L2 7.26h5.61z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.26H18l-5.19 3.73 2.39 6.26L10 13.52l-5.19 3.73 2.39-6.26L2 7.26h5.61z"/></svg>
+          </div>
+          <p class="testimonials__quote">"I listed my Yellowfin with Marine Pointe on a Wednesday. It sold by Saturday. Their marketing reach and network of serious buyers is unlike anything I've seen."</p>
+          <div class="testimonials__author">
+            <span class="testimonials__name">Sandra K.</span>
+            <span class="testimonials__loc">Boca Raton, FL</span>
+          </div>
+        </div>
+        <img class="testimonials__photo" src="https://marinepointe.com/cdn/shop/files/Hanover-Yachts-Listing-on-YachtWay-12.jpg?v=1752512473&width=820" alt="Yellowfin 36" loading="lazy">
+      </div>
+
+      <div class="testimonials__slide" id="slide-2">
+        <div class="testimonials__content">
+          <div class="testimonials__stars">
+            <svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.26H18l-5.19 3.73 2.39 6.26L10 13.52l-5.19 3.73 2.39-6.26L2 7.26h5.61z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.26H18l-5.19 3.73 2.39 6.26L10 13.52l-5.19 3.73 2.39-6.26L2 7.26h5.61z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.26H18l-5.19 3.73 2.39 6.26L10 13.52l-5.19 3.73 2.39-6.26L2 7.26h5.61z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.26H18l-5.19 3.73 2.39 6.26L10 13.52l-5.19 3.73 2.39-6.26L2 7.26h5.61z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M10 1l2.39 6.26H18l-5.19 3.73 2.39 6.26L10 13.52l-5.19 3.73 2.39-6.26L2 7.26h5.61z"/></svg>
+          </div>
+          <p class="testimonials__quote">"We keep our Cruisers Yacht in their marina and the service team is phenomenal. It's the kind of place where everybody knows your boat — and treats it like their own."</p>
+          <div class="testimonials__author">
+            <span class="testimonials__name">James & Carol T.</span>
+            <span class="testimonials__loc">Palm Beach, FL</span>
+          </div>
+        </div>
+        <img class="testimonials__photo" src="https://marinepointe.com/cdn/shop/files/Marina_Pic.jpg?v=1705519950&width=1920" alt="Yacht at coast" loading="lazy">
+      </div>
+    </div>
+
+    <div class="testimonials__nav rv rv-d2">
+      <button class="testimonials__arrow" id="tPrev" aria-label="Previous">
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 8H3M7 4l-4 4 4 4"/></svg>
+      </button>
+      <button class="testimonials__arrow" id="tNext" aria-label="Next">
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </button>
+      <div class="testimonials__dots">
+        <button class="testimonials__dot active" data-index="0"></button>
+        <button class="testimonials__dot" data-index="1"></button>
+        <button class="testimonials__dot" data-index="2"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA BANNER ════════════════════════════════════════ -->
+<div class="cta-banner">
+  <div class="cta-banner__bg"></div>
+  <div class="cta-banner__overlay"></div>
+  <div class="cta-banner__body">
+    <p class="overline cta-banner__overline">Ready to Make Waves?</p>
+    <h2 class="cta-banner__title">Your perfect day on the water is just a call away.</h2>
+    <p class="cta-banner__sub">Whether you're buying, selling, or just starting to explore — our team is here to guide you every step of the way.</p>
+    <div class="cta-banner__actions">
+      <a href="https://marinepointe.com/collections/all" class="btn btn--outline-white">
+        Browse Inventory
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
+      <a href="https://marinepointe.com/contact" class="btn btn--outline-white">Contact Us</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FOOTER ════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+
+      <div class="footer__brand">
+        <div class="footer__logo-wrap">
+          <!-- White translucent logo for dark footer -->
+          <svg viewBox="0 0 260 40" width="160" height="25" xmlns="http://www.w3.org/2000/svg">
+            <defs><style>.fp-t{font-family:'Arial Black','Arial Bold',Arial,sans-serif;font-weight:900;font-size:22px;letter-spacing:.04em;fill:rgba(255,255,255,.75);}</style></defs>
+            <text class="fp-t" x="0" y="28" text-anchor="start">MARINE</text>
+            <g transform="translate(130,17)">
+              <circle cx="0" cy="0" r="16" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="2.8"/>
+              <circle cx="0" cy="0" r="5.5" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="2.2"/>
+              <circle cx="0" cy="0" r="2" fill="rgba(255,255,255,.75)"/>
+              <line x1="0" y1="-5.5" x2="0" y2="-16" stroke="rgba(255,255,255,.65)" stroke-width="2" stroke-linecap="round"/>
+              <line x1="3.9" y1="-3.9" x2="11.3" y2="-11.3" stroke="rgba(255,255,255,.65)" stroke-width="2" stroke-linecap="round"/>
+              <line x1="5.5" y1="0" x2="16" y2="0" stroke="rgba(255,255,255,.65)" stroke-width="2" stroke-linecap="round"/>
+              <line x1="3.9" y1="3.9" x2="11.3" y2="11.3" stroke="rgba(255,255,255,.65)" stroke-width="2" stroke-linecap="round"/>
+              <line x1="0" y1="5.5" x2="0" y2="16" stroke="rgba(255,255,255,.65)" stroke-width="2" stroke-linecap="round"/>
+              <line x1="-3.9" y1="3.9" x2="-11.3" y2="11.3" stroke="rgba(255,255,255,.65)" stroke-width="2" stroke-linecap="round"/>
+              <line x1="-5.5" y1="0" x2="-16" y2="0" stroke="rgba(255,255,255,.65)" stroke-width="2" stroke-linecap="round"/>
+              <line x1="-3.9" y1="-3.9" x2="-11.3" y2="-11.3" stroke="rgba(255,255,255,.65)" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="0" cy="-18.5" r="2.5" fill="rgba(255,255,255,.65)"/>
+              <circle cx="13.1" cy="-13.1" r="2.5" fill="rgba(255,255,255,.65)"/>
+              <circle cx="18.5" cy="0" r="2.5" fill="rgba(255,255,255,.65)"/>
+              <circle cx="13.1" cy="13.1" r="2.5" fill="rgba(255,255,255,.65)"/>
+              <circle cx="0" cy="18.5" r="2.5" fill="rgba(255,255,255,.65)"/>
+              <circle cx="-13.1" cy="13.1" r="2.5" fill="rgba(255,255,255,.65)"/>
+              <circle cx="-18.5" cy="0" r="2.5" fill="rgba(255,255,255,.65)"/>
+              <circle cx="-13.1" cy="-13.1" r="2.5" fill="rgba(255,255,255,.65)"/>
+            </g>
+            <text class="fp-t" x="260" y="28" text-anchor="end">POINTE</text>
+          </svg>
+        </div>
+        <p class="footer__tagline">Florida's premier boat dealer and full-service marina, based in Pompano Beach since 2009.</p>
+        <div class="footer__socials">
+          <a href="https://www.instagram.com/marinepointeboats" class="footer__social" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://www.facebook.com/marinepointeboats" class="footer__social" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <a href="https://www.youtube.com/@marinepointe" class="footer__social" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <p class="footer__col-title">Company</p>
+        <ul class="footer__links">
+          <li><a href="https://marinepointe.com/pages/about" class="footer__link">About Us</a></li>
+          <li><a href="https://marinepointe.com/pages/marina" class="footer__link">Our Marina</a></li>
+          <li><a href="https://marinepointe.com/pages/team" class="footer__link">Our Team</a></li>
+          <li><a href="https://marinepointe.com/pages/consignment" class="footer__link">Consignment</a></li>
+          <li><a href="https://marinepointe.com/contact" class="footer__link">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="footer__col-title">Inventory</p>
+        <ul class="footer__links">
+          <li><a href="https://marinepointe.com/collections/center-consoles" class="footer__link">Center Consoles</a></li>
+          <li><a href="https://marinepointe.com/collections/sport-boats" class="footer__link">Sport Boats</a></li>
+          <li><a href="https://marinepointe.com/collections/cruisers" class="footer__link">Cruisers</a></li>
+          <li><a href="https://marinepointe.com/collections/offshore" class="footer__link">Offshore Fishing</a></li>
+          <li><a href="https://marinepointe.com/collections/all" class="footer__link">All Listings</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__newsletter">
+        <p class="footer__col-title">Stay in the Loop</p>
+        <p class="footer__newsletter-head">New listings, first.</p>
+        <p class="footer__newsletter-sub">Join our list to get new inventory alerts and exclusive offers before they go public.</p>
+        <div class="footer__form">
+          <input type="email" placeholder="Your email address" class="footer__input" aria-label="Email address">
+          <button class="footer__submit">Subscribe</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <p class="footer__copy">© 2025 Marine Pointe. All Rights Reserved.</p>
+      <div class="footer__legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ══ SCRIPTS ═══════════════════════════════════════════ -->
+<script>
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+// Testimonials slider
+let current = 0;
+const slides = document.querySelectorAll('.testimonials__slide');
+const dots = document.querySelectorAll('.testimonials__dot');
+const total = slides.length;
+
+function goTo(idx) {
+  slides[current].classList.remove('active');
+  dots[current].classList.remove('active');
+  current = (idx + total) % total;
+  slides[current].classList.add('active');
+  dots[current].classList.add('active');
+}
+
+document.getElementById('tPrev').addEventListener('click', () => goTo(current - 1));
+document.getElementById('tNext').addEventListener('click', () => goTo(current + 1));
+dots.forEach(dot => dot.addEventListener('click', () => goTo(+dot.dataset.index)));
+
+// Auto-advance
+let autoplay = setInterval(() => goTo(current + 1), 5500);
+document.querySelector('.testimonials').addEventListener('mouseenter', () => clearInterval(autoplay));
+document.querySelector('.testimonials').addEventListener('mouseleave', () => {
+  autoplay = setInterval(() => goTo(current + 1), 5500);
+});
+
+// Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.rv').forEach(el => observer.observe(el));
+</script>
+
+<script>
+(function(){
+  function apply(){
+    var b; try{b=JSON.parse(localStorage.getItem('dsw_brand')||'null');}catch(e){}
+    b=b||{};var ph=b.ph||'Your Dealer Logo';
+    function fill(el,light){
+      if(!el) return; el.innerHTML='';
+      if(b.logo){
+        var img=document.createElement('img'); img.src=b.logo; img.alt=b.name||'Logo';
+        img.style.cssText='height:'+(light?28:36)+'px;width:auto;max-width:200px;display:block;object-fit:contain;'+(light?'filter:brightness(0) invert(1);opacity:.92;':'');
+        el.appendChild(img);
+      } else {
+        var s=document.createElement('span');var isPh=!b.name;s.textContent=b.name||ph;
+        s.style.cssText='font-family:inherit;font-weight:800;font-size:20px;letter-spacing:.01em;line-height:1;white-space:nowrap;'+(light?'color:#fff;opacity:.9;':'color:inherit;')+(isPh?'opacity:.62;':'');
+        el.appendChild(s);
+      }
+    }
+    document.querySelectorAll('.nav__logo').forEach(function(e){fill(e,false);});
+    document.querySelectorAll('.footer__logo,.footer__logo-wrap').forEach(function(e){fill(e,true);});
+    if(b.name){try{document.title=b.name;}catch(e){}}
+  }
+  if(document.readyState!=='loading') apply(); else document.addEventListener('DOMContentLoaded',apply);
+  window.addEventListener('message',function(ev){ if(ev.data&&ev.data.type==='dsw-brand'){ try{localStorage.setItem('dsw_brand',JSON.stringify(ev.data.brand||{}));}catch(e){} apply(); } });
+})();
+</script>
+<!--dsw-deadend-->
+<script>
+(function(){
+  document.addEventListener('click',function(e){ var a=e.target.closest&&e.target.closest('a'); if(a){ e.preventDefault(); e.stopPropagation(); } },true);
+  document.addEventListener('submit',function(e){ e.preventDefault(); },true);
+  try{ window.open=function(){return null;}; }catch(e){}
+})();
+<\/script>
+</body>
+</html>
