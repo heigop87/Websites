@@ -12,7 +12,7 @@ window.I18N = {
     scrollnote:"All three share the same Listings and Listing-detail pages; only the home page look changes.",
     back_designs:"← Back to designs", tab_home:"Home", tab_catalog:"Boats for Sale", tab_listing:"Listing Page",
     switch_design:"Switch design", shared_note:"Same page on every design", loading:"Loading design…",
-    usebar:"Like <b id='useName'></b>? Choose it and we will set up your site.", use_btn:"♥ Use this design →",
+    usebar:"Like <b id='useName'></b>? Choose it and we will set up your site.", use_btn:"Use this design →",
     chead_h1:"Nice choice",
     chead_lead:"Last step. A few simple questions so we can build your site. Answer what you can, your account manager handles the rest.",
     prices_in:"Prices in", of:"of", word_design:"Design",
@@ -43,11 +43,11 @@ window.I18N = {
     notes_h:"Anything you would change or add?", notes_q:"Optional. Your notes go into the brief for your account manager.",
     notes_ph:"e.g. Love A's hero, can the listings be 3 across like C?",
     finish_h:"That is everything", finish_p:"Download your brief as a PDF and email it to your account manager. It includes your chosen design, notes and answers.",
-    download_btn:"⬇ Download brief (PDF)", back_review:"← Back to the designs",
+    download_btn:"Download brief (PDF)", back_review:"← Back to the designs",
     modal_title:"WhatsApp button preview", modal_close:"Close",
     modal_sub:"A small WhatsApp button sits in the corner of every page. Buyers tap it and a chat to your broker opens, ready to send.",
     wa_hero:"Listing page", wa_msg:"Hi! I am interested in the Riva 110. Is it still available?",
-    modal_note:"The message is pre-filled and goes straight to the company number you give us.", per_mo:"mo", preview_design:"Preview design", change_mind:"Changed your mind? Go back"
+    modal_note:"The message is pre-filled and goes straight to the company number you give us.", per_mo:"mo", fullscreen:"View fullscreen", preview_design:"Preview design", change_mind:"Changed your mind? Go back"
   },
   es: {
     crumb_pick:"Elige un diseño", crumb_review:"Revisar", crumb_config:"Cuéntanos algunas cosas",
@@ -59,7 +59,7 @@ window.I18N = {
     scrollnote:"Los tres comparten las mismas páginas de Listados y de detalle; solo cambia el aspecto de la página de inicio.",
     back_designs:"← Volver a los diseños", tab_home:"Inicio", tab_catalog:"Barcos en venta", tab_listing:"Página de listado",
     switch_design:"Cambiar diseño", shared_note:"La misma página en todos los diseños", loading:"Cargando diseño…",
-    usebar:"¿Te gusta <b id='useName'></b>? Elígelo y configuraremos tu sitio web.", use_btn:"♥ Usar este diseño →",
+    usebar:"¿Te gusta <b id='useName'></b>? Elígelo y configuraremos tu sitio web.", use_btn:"Usar este diseño →",
     chead_h1:"Buena elección",
     chead_lead:"Último paso. Unas preguntas sencillas para poder crear tu sitio. Responde lo que puedas; tu gestor de cuenta se encarga del resto.",
     prices_in:"Precios en", of:"de", word_design:"Diseño",
@@ -90,11 +90,11 @@ window.I18N = {
     notes_h:"¿Algo que cambiarías o añadirías?", notes_q:"Opcional. Tus notas se incluyen en el resumen para tu gestor de cuenta.",
     notes_ph:"p. ej. Me encanta el hero de A, ¿pueden ir los listados de 3 en 3 como en C?",
     finish_h:"Eso es todo", finish_p:"Descarga tu resumen en PDF y envíalo por correo a tu gestor de cuenta. Incluye el diseño elegido, las notas y las respuestas.",
-    download_btn:"⬇ Descargar resumen (PDF)", back_review:"← Volver a los diseños",
+    download_btn:"Descargar resumen (PDF)", back_review:"← Volver a los diseños",
     modal_title:"Vista previa del botón de WhatsApp", modal_close:"Cerrar",
     modal_sub:"Un pequeño botón de WhatsApp en la esquina de cada página. Los compradores lo tocan y se abre un chat con tu bróker, listo para enviar.",
     wa_hero:"Página de listado", wa_msg:"¡Hola! Me interesa el Riva 110. ¿Sigue disponible?",
-    modal_note:"El mensaje viene precargado y va directo al número de empresa que nos indiques.", per_mo:"mes", preview_design:"Previsualizar diseño", change_mind:"¿Cambiaste de opinión? Volver"
+    modal_note:"El mensaje viene precargado y va directo al número de empresa que nos indiques.", per_mo:"mes", fullscreen:"Ver en pantalla completa", preview_design:"Previsualizar diseño", change_mind:"¿Cambiaste de opinión? Volver"
   },
   fr: {
     crumb_pick:"Choisissez un design", crumb_review:"Aperçu", crumb_config:"Dites-nous en quelques mots",
@@ -106,7 +106,7 @@ window.I18N = {
     scrollnote:"Les trois partagent les mêmes pages d'annonces et de détail ; seule l'apparence de la page d'accueil change.",
     back_designs:"← Retour aux designs", tab_home:"Accueil", tab_catalog:"Bateaux à vendre", tab_listing:"Page d'annonce",
     switch_design:"Changer de design", shared_note:"La même page sur tous les designs", loading:"Chargement du design…",
-    usebar:"Vous aimez <b id='useName'></b> ? Choisissez-le et nous créerons votre site.", use_btn:"♥ Utiliser ce design →",
+    usebar:"Vous aimez <b id='useName'></b> ? Choisissez-le et nous créerons votre site.", use_btn:"Utiliser ce design →",
     chead_h1:"Bon choix",
     chead_lead:"Dernière étape. Quelques questions simples pour créer votre site. Répondez à ce que vous pouvez, votre gestionnaire de compte s'occupe du reste.",
     prices_in:"Prix en", of:"sur", word_design:"Design",
@@ -137,11 +137,11 @@ window.I18N = {
     notes_h:"Quelque chose à changer ou à ajouter ?", notes_q:"Facultatif. Vos notes figurent dans le brief pour votre gestionnaire de compte.",
     notes_ph:"p. ex. J'adore le hero de A, les annonces peuvent-elles être sur 3 colonnes comme C ?",
     finish_h:"C'est tout", finish_p:"Téléchargez votre brief en PDF et envoyez-le par e-mail à votre gestionnaire de compte. Il contient le design choisi, les notes et les réponses.",
-    download_btn:"⬇ Télécharger le brief (PDF)", back_review:"← Retour aux designs",
+    download_btn:"Télécharger le brief (PDF)", back_review:"← Retour aux designs",
     modal_title:"Aperçu du bouton WhatsApp", modal_close:"Fermer",
     modal_sub:"Un petit bouton WhatsApp se place dans le coin de chaque page. Les acheteurs le touchent et un chat avec votre courtier s'ouvre, prêt à envoyer.",
     wa_hero:"Page d'annonce", wa_msg:"Bonjour ! Le Riva 110 m'intéresse. Est-il toujours disponible ?",
-    modal_note:"Le message est prérempli et va directement au numéro de l'entreprise que vous nous indiquez.", per_mo:"mois", preview_design:"Aperçu du design", change_mind:"Vous avez changé d'avis ? Revenir"
+    modal_note:"Le message est prérempli et va directement au numéro de l'entreprise que vous nous indiquez.", per_mo:"mois", fullscreen:"Voir en plein écran", preview_design:"Aperçu du design", change_mind:"Vous avez changé d'avis ? Revenir"
   },
   de: {
     crumb_pick:"Design wählen", crumb_review:"Ansehen", crumb_config:"Erzählen Sie uns ein paar Dinge",
@@ -153,7 +153,7 @@ window.I18N = {
     scrollnote:"Alle drei teilen sich dieselben Angebots- und Detailseiten; nur der Look der Startseite ändert sich.",
     back_designs:"← Zurück zu den Designs", tab_home:"Start", tab_catalog:"Boote zu verkaufen", tab_listing:"Angebotsseite",
     switch_design:"Design wechseln", shared_note:"Dieselbe Seite bei jedem Design", loading:"Design wird geladen…",
-    usebar:"Gefällt Ihnen <b id='useName'></b>? Wählen Sie es und wir richten Ihre Website ein.", use_btn:"♥ Dieses Design verwenden →",
+    usebar:"Gefällt Ihnen <b id='useName'></b>? Wählen Sie es und wir richten Ihre Website ein.", use_btn:"Dieses Design verwenden →",
     chead_h1:"Gute Wahl",
     chead_lead:"Letzter Schritt. Ein paar einfache Fragen, damit wir Ihre Website erstellen können. Beantworten Sie, was Sie können, um den Rest kümmert sich Ihr Kundenbetreuer.",
     prices_in:"Preise in", of:"von", word_design:"Design",
@@ -184,11 +184,11 @@ window.I18N = {
     notes_h:"Möchten Sie etwas ändern oder ergänzen?", notes_q:"Optional. Ihre Notizen kommen in das Briefing für Ihren Kundenbetreuer.",
     notes_ph:"z. B. Das Hero von A gefällt mir, können die Angebote 3-spaltig sein wie bei C?",
     finish_h:"Das war's", finish_p:"Laden Sie Ihr Briefing als PDF herunter und senden Sie es per E-Mail an Ihren Kundenbetreuer. Es enthält Ihr gewähltes Design, Notizen und Antworten.",
-    download_btn:"⬇ Briefing herunterladen (PDF)", back_review:"← Zurück zu den Designs",
+    download_btn:"Briefing herunterladen (PDF)", back_review:"← Zurück zu den Designs",
     modal_title:"Vorschau des WhatsApp-Buttons", modal_close:"Schließen",
     modal_sub:"Ein kleiner WhatsApp-Button sitzt in der Ecke jeder Seite. Käufer tippen darauf und ein Chat mit Ihrem Makler öffnet sich, versandbereit.",
     wa_hero:"Angebotsseite", wa_msg:"Hallo! Ich interessiere mich für die Riva 110. Ist sie noch verfügbar?",
-    modal_note:"Die Nachricht ist vorausgefüllt und geht direkt an die Firmennummer, die Sie uns angeben.", per_mo:"Mon.", preview_design:"Design ansehen", change_mind:"Meinung geändert? Zurück"
+    modal_note:"Die Nachricht ist vorausgefüllt und geht direkt an die Firmennummer, die Sie uns angeben.", per_mo:"Mon.", fullscreen:"Vollbild anzeigen", preview_design:"Design ansehen", change_mind:"Meinung geändert? Zurück"
   },
   it: {
     crumb_pick:"Scegli un design", crumb_review:"Anteprima", crumb_config:"Raccontaci alcune cose",
@@ -200,7 +200,7 @@ window.I18N = {
     scrollnote:"Tutti e tre condividono le stesse pagine Annunci e di dettaglio; cambia solo l'aspetto della home page.",
     back_designs:"← Torna ai design", tab_home:"Home", tab_catalog:"Barche in vendita", tab_listing:"Pagina annuncio",
     switch_design:"Cambia design", shared_note:"La stessa pagina in ogni design", loading:"Caricamento del design…",
-    usebar:"Ti piace <b id='useName'></b>? Scegli questo e configureremo il tuo sito.", use_btn:"♥ Usa questo design →",
+    usebar:"Ti piace <b id='useName'></b>? Scegli questo e configureremo il tuo sito.", use_btn:"Usa questo design →",
     chead_h1:"Ottima scelta",
     chead_lead:"Ultimo passo. Poche semplici domande per creare il tuo sito. Rispondi a ciò che puoi, al resto pensa il tuo account manager.",
     prices_in:"Prezzi in", of:"di", word_design:"Design",
@@ -231,11 +231,11 @@ window.I18N = {
     notes_h:"Qualcosa da cambiare o aggiungere?", notes_q:"Facoltativo. Le tue note finiscono nel brief per il tuo account manager.",
     notes_ph:"es. Adoro l'hero di A, gli annunci possono essere su 3 colonne come in C?",
     finish_h:"È tutto", finish_p:"Scarica il tuo brief in PDF e invialo via e-mail al tuo account manager. Include il design scelto, le note e le risposte.",
-    download_btn:"⬇ Scarica il brief (PDF)", back_review:"← Torna ai design",
+    download_btn:"Scarica il brief (PDF)", back_review:"← Torna ai design",
     modal_title:"Anteprima del pulsante WhatsApp", modal_close:"Chiudi",
     modal_sub:"Un piccolo pulsante WhatsApp nell'angolo di ogni pagina. Gli acquirenti lo toccano e si apre una chat con il tuo broker, pronta da inviare.",
     wa_hero:"Pagina annuncio", wa_msg:"Ciao! Sono interessato al Riva 110. È ancora disponibile?",
-    modal_note:"Il messaggio è precompilato e va direttamente al numero aziendale che ci indichi.", per_mo:"mese", preview_design:"Anteprima del design", change_mind:"Cambiato idea? Torna indietro"
+    modal_note:"Il messaggio è precompilato e va direttamente al numero aziendale che ci indichi.", per_mo:"mese", fullscreen:"Vedi a schermo intero", preview_design:"Anteprima del design", change_mind:"Cambiato idea? Torna indietro"
   },
   nl: {
     crumb_pick:"Kies een ontwerp", crumb_review:"Bekijken", crumb_config:"Vertel ons een paar dingen",
@@ -247,7 +247,7 @@ window.I18N = {
     scrollnote:"Alle drie delen dezelfde Aanbiedingen- en detailpagina's; alleen de look van de homepagina verandert.",
     back_designs:"← Terug naar ontwerpen", tab_home:"Home", tab_catalog:"Boten te koop", tab_listing:"Aanbiedingspagina",
     switch_design:"Ontwerp wisselen", shared_note:"Dezelfde pagina bij elk ontwerp", loading:"Ontwerp laden…",
-    usebar:"Vindt u <b id='useName'></b> mooi? Kies het en wij zetten uw website op.", use_btn:"♥ Dit ontwerp gebruiken →",
+    usebar:"Vindt u <b id='useName'></b> mooi? Kies het en wij zetten uw website op.", use_btn:"Dit ontwerp gebruiken →",
     chead_h1:"Goede keuze",
     chead_lead:"Laatste stap. Een paar eenvoudige vragen zodat we uw site kunnen bouwen. Beantwoord wat u kunt, uw accountmanager regelt de rest.",
     prices_in:"Prijzen in", of:"van", word_design:"Ontwerp",
@@ -278,11 +278,11 @@ window.I18N = {
     notes_h:"Iets dat u zou wijzigen of toevoegen?", notes_q:"Optioneel. Uw notities komen in de brief voor uw accountmanager.",
     notes_ph:"bijv. De hero van A is top, kunnen de aanbiedingen 3 op een rij zoals C?",
     finish_h:"Dat is alles", finish_p:"Download uw brief als pdf en e-mail deze naar uw accountmanager. Het bevat uw gekozen ontwerp, notities en antwoorden.",
-    download_btn:"⬇ Brief downloaden (pdf)", back_review:"← Terug naar de ontwerpen",
+    download_btn:"Brief downloaden (pdf)", back_review:"← Terug naar de ontwerpen",
     modal_title:"Voorbeeld WhatsApp-knop", modal_close:"Sluiten",
     modal_sub:"Een kleine WhatsApp-knop in de hoek van elke pagina. Kopers tikken erop en een chat met uw makelaar opent, klaar om te verzenden.",
     wa_hero:"Aanbiedingspagina", wa_msg:"Hallo! Ik heb interesse in de Riva 110. Is hij nog beschikbaar?",
-    modal_note:"Het bericht is vooraf ingevuld en gaat rechtstreeks naar het bedrijfsnummer dat u ons geeft.", per_mo:"mnd", preview_design:"Ontwerp bekijken", change_mind:"Toch een ander? Ga terug"
+    modal_note:"Het bericht is vooraf ingevuld en gaat rechtstreeks naar het bedrijfsnummer dat u ons geeft.", per_mo:"mnd", fullscreen:"Volledig scherm", preview_design:"Ontwerp bekijken", change_mind:"Toch een ander? Ga terug"
   }
 };
 window.LANGS = [["en","English"],["es","Español"],["fr","Français"],["de","Deutsch"],["it","Italiano"],["nl","Nederlands"]];
